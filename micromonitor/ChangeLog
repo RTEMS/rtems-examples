@@ -1,0 +1,7 @@
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ChangeLog, README, diagnostics/README, diagnostics/cfg.h,
+	diagnostics/cli.h, diagnostics/cstart.c, diagnostics/main.c,
+	diagnostics/makefile, diagnostics/monlib.c, diagnostics/monlib.h,
+	diagnostics/tfs.h, umon/Makefile, umon/README, umon/test.c: New files.
+

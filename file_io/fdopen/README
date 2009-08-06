@@ -1,0 +1,139 @@
+#
+#  README for fdopen() test
+#
+
+Resolution: Fixed
+
+This test failed because fcntl() did not yet support the F_GETFL
+control operation.  This code was added (along with F_SETFL) and
+the test began to work.
+
+-----------------------
+
+This is the original email that the test came from:
+
+From janovetz@tempest.ece.uiuc.edu Sat Mar  6 10:34:11 1999
+Date: Thu, 4 Mar 1999 19:37:37 -0600
+From: Jake Janovetz <janovetz@tempest.ece.uiuc.edu>
+To: rtems-snapshots@oarcorp.com
+Subject: More on fdopen()
+
+Hello all...
+
+Sorry to beat a dead horse (to me, it's still living), but I
+still can't get the fdopen stuff to work...  Since I cannot
+find a reference to fdopen() under the rtems source tree,
+I presume its only incarnation in 'newlib'.  The
+newlib-1.8.1 19990302 patch does not seem to have a reference
+to fdopen, so I don't see anything modified there.
+
+I'd like to know where the fdopen fix resides, so I know I 
+have it.
+
+Finally, I'm including a simple test for fdopen().  If some
+merciful soul can run this (Eric has already verified that his
+version works -- I'm hoping that maybe a patch didn't make it
+into 0302), I would appreciate it.
+
+    Cheers,
+    Jake
+
+-- 
+   janovetz@uiuc.edu    | Once you have flown, you will walk the earth with
+ University of Illinois | your eyes turned skyward, for there you have been,
+                        | there you long to return.     -- da Vinci
+        PP-ASEL         | http://www.ews.uiuc.edu/~janovetz/index.html
+
+
+
+
+#include <bsp.h>
+#include <fcntl.h>
+
+#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
+#define CONFIGURE_EXECUTIVE_RAM_SIZE              (2048*1024)
+#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES          4 
+#define CONFIGURE_MAXIMUM_SEMAPHORES              20
+#define CONFIGURE_MAXIMUM_TASKS                   20
+#define CONFIGURE_MAXIMUM_TIMERS                  20
+#define CONFIGURE_MAXIMUM_PERIODS                 1
+#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS  10
+#define CONFIGURE_INIT_TASK_STACK_SIZE            (32*1024)
+#define CONFIGURE_INIT_TASK_PRIORITY              90
+#define CONFIGURE_INIT_TASK_INITIAL_MODES         (RTEMS_PREEMPT | \
+                                                   RTEMS_NO_TIMESLICE | \
+                                                   RTEMS_NO_ASR | \
+                                                   RTEMS_INTERRUPT_LEVEL(0))
+#define CONFIGURE_MICROSECONDS_PER_TICK           10486
+#define CONFIGURE_INIT
+rtems_task Init(rtems_task_argument argument);
+
+#define CONFIGURE_HAS_OWN_DEVICE_DRIVER_TABLE
+rtems_driver_address_table Device_drivers[] = {
+   CONSOLE_DRIVER_TABLE_ENTRY,
+   CLOCK_DRIVER_TABLE_ENTRY,
+};
+
+#include <rtems/confdefs.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <rtems.h>
+#include <rtems/error.h>
+#include <rtems/libio.h>
+#include "m68360.h"
+#include <stdlib.h>
+#include <errno.h>
+
+
+rtems_task
+Init(rtems_task_argument ignored)
+{
+   int fd;
+   FILE *fp;
+   char str[256];
+
+
+   /***********************************************************************
+    * Print the boot-up message.
+    **********************************************************************/
+   printf("\n\n");
+   printf("%s\n", _RTEMS_version);
+
+   printf("Here we go!\n");
+   fp = fopen("test", "w");
+   fprintf(fp, "Hello world!!!\n");
+   fclose(fp);
+
+   fp = fopen("test", "r");
+   fgets(str, 200, fp);
+   printf("read: %s\n", str);
+   fclose(fp);
+
+   fd = open("test", O_RDONLY);
+   if (fd == -1)
+   {
+      printf("Starting on the wrong foot....\n");
+   }
+   fp = fdopen(fd, "r");
+   if (fp == NULL)
+   {
+      printf("Crap, man!  Nothing ever goes my way!\n");
+      close(fd);
+   }
+   else
+   {
+      printf("Soon, I will be able to take over the world!\n");
+      fgets(str, 200, fp);
+      printf("%s\n", str);
+      fclose(fp);
+   }
+
+   while (1)
+   {
+      rtems_task_wake_after(100);
+   }
+
+
+   exit(0);
+}

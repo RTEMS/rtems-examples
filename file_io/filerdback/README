@@ -1,0 +1,18 @@
+#
+#  README for simple example application
+#
+
+In this directory, you will find a simple RTEMS application and a Makefile.
+It can be built by setting the environment variable "RTEMS_MAKEFILE_PATH"
+and invoking make.
+
+Here are a couple of example ways to do this using the erc32 BSP:
+
+    RTEMS_MAKEFILE_PATH=/home/joel/gnat-3.10p/sparc-rtems/rtems/erc32 gmake 
+
+The resulting application end up in o-erc32/test.exe.
+
+An alterative way to do this is to set the environment variable separately:
+
+  export RTEMS_MAKEFILE_PATH=/home/joel/gnat-3.10p/sparc-rtems/rtems/erc32
+  gmake

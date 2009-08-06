@@ -1,0 +1,8 @@
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ChangeLog, Makefile, fdopen/.cvsignore, fdopen/Makefile,
+	fdopen/README, fdopen/test.c, filerdback/.cvsignore,
+	filerdback/Makefile, filerdback/README, filerdback/test.c,
+	repeated_opens/.cvsignore, repeated_opens/Makefile,
+	repeated_opens/README, repeated_opens/test.c: New files.
+

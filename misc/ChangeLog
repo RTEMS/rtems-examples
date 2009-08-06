@@ -1,4 +1,8 @@
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* minimum/test.c: Remove warning.
+
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog: New file.
 

@@ -1,5 +1,9 @@
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* Makefile: Fix typo.
+
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog, Makefile: Merge programs from examples.
 
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>

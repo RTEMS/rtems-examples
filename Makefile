@@ -9,7 +9,7 @@ include $(RTEMS_ROOT)/make/directory.cfg
 SUBDIRS=classic_api posix_api hello led misc ticker file_io
 
 # Monitor Specific Examples
-SUBDIR += uboot
+SUBDIRS += uboot
 
 # Language Specific Examples
-SUBDIR += cxx
+SUBDIRS += cxx

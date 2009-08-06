@@ -1,0 +1,6 @@
+#
+#  README for POSIX Scheduling information test
+#
+
+Prints some POSIX scheduling information and reports compliancy on
+some issues.

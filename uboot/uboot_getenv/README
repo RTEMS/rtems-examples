@@ -1,0 +1,7 @@
+#
+#  README for U-Boot getenv() demo
+#
+
+Some boards on which RTEMS runs have U-Boot.  If the BSP supports
+it, then you may obtain environment variables which U-Boot has stored
+in Flash.

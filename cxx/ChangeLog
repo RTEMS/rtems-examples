@@ -1,5 +1,9 @@
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* cxx_throw/.cvsignore: New file.
+
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog, Makefile, cxx_throw/MAIL, cxx_throw/Makefile,
 	cxx_throw/init.cc, libcpp/Makefile, libcpp/README, libcpp/foo.cc,
 	libcpp/foo.h, libcpp/foo1.cpp: New files.

@@ -1,0 +1,24 @@
+#
+#  $Id$
+#
+
+CXXFLAGS=-Wall
+LDFLAGS=-lpthread
+
+PROGRAMS=example
+
+OBJECTS=main.o menu.o test.o
+
+all: $(PROGRAMS)
+
+main.o: main.cc
+menu.o: menu.cc
+test.o: test.cc
+
+example: $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+clean:
+	rm -f core* $(PROGRAMS) *.o
+
+install:

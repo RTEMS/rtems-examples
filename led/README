@@ -1,0 +1,29 @@
+#
+#  $Id$
+#
+
+This is a set of example RTEMS programs.  Most of these programs are
+demonstrations various ways to use inter-task communication to 
+turn and LED on and off at a fixed rate.
+
+You must edit led.h so it knows how to turn an LED on and off on your
+target hardware.
+
+The example programs form a logical sequence in the following order:
+
+hello_world_c
+posix_hello_world
+ticker
+delay
+ratemon1
+ratemon2
+timeout_event
+event_server
+sem_server
+msg_server
+timer
+cpuuse
+posix_delay_nanosleep
+posix_delay_sleep
+posix_mutex_server
+

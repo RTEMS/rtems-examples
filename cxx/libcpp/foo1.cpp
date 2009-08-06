@@ -1,8 +1,11 @@
+//
+//  $Id$
+//
 
 #include "foo.h"
 
-ostream& operator << ( ostream & strm, const foo &f, const foo &f1 )
+std::ostream& operator << ( std::ostream & strm, const foo *f )
 {
-  strm << f.i ;
-  return strm ;
+  strm << f->i;
+  return strm;
 }

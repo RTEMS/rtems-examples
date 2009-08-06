@@ -1,3 +1,7 @@
+//
+// $Id$
+//
+
 #ifndef _foo_h
 #define _foo_h
 
@@ -10,8 +14,8 @@ public	:
   foo() : i(0) {} ;
   foo( const int i0 ) : i(i0) {};
 
-  friend ostream& operator << (ostream&,const foo&);
-  friend ostream& operator << (ostream&,const foo&, const foo&);
+  friend std::ostream& operator << (std::ostream&,const foo&);
+  friend std::ostream& operator << (std::ostream&,const foo*);
 };
 
 #endif

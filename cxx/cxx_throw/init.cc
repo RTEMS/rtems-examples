@@ -5,10 +5,6 @@
  *  clock is required for the test, it should also be set to a known
  *  value by this function.
  *
- *  Input parameters:  NONE
- *
- *  Output parameters:  NONE
- *
  *  COPYRIGHT (c) 1994 by Division Incorporated
  *  Based in part on OAR works.
  *
@@ -25,11 +21,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef RTEMS_TEST_IO_STREAM
-#include <iostream.h>
+  #include <iostream>
 #endif
 
 extern "C" {
-extern rtems_task main_task(rtems_task_argument);
+  extern rtems_task main_task(rtems_task_argument);
 }
 
 static int num_inst = 0;
@@ -114,7 +110,7 @@ cdtest(void)
     B bleak;
 
 #ifdef RTEMS_TEST_IO_STREAM
-    cout << "Testing a C++ I/O stream" << endl;
+    std::cout << "Testing a C++ I/O stream" << std::endl;
 #else
     printf("IO Stream not tested\n");
 #endif
@@ -133,13 +129,13 @@ cdtest(void)
  printf( "catch got called, exception handling worked !!!\n" );
 }
 
-//
-// main equivalent
-//      It can not be called 'main' since the bsp owns that name
-//      in many implementations in order to get global constructors
-//      run.
-//
 
+
+extern "C" {
+  rtems_task Init(
+    rtems_task_argument arg
+  );
+};
 
 rtems_task Init(
   rtems_task_argument
@@ -158,7 +154,8 @@ rtems_task Init(
 
 #include <bsp.h>
 
-#define CONFIGURE_TEST_NEEDS_CONSOLE_DRIVER
+#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
+#define CONFIGURE_APPLICATION_DOES_NOT_NEED_CLOCK_DRIVER
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 

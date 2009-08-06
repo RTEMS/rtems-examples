@@ -1,5 +1,9 @@
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* uboot_getenv/.cvsignore: New file.
+
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog, Makefile, uboot_getenv/Makefile, uboot_getenv/README,
 	uboot_getenv/test.c: New files.
 

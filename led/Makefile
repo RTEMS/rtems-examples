@@ -7,7 +7,7 @@ include $(RTEMS_CUSTOM)
 include $(RTEMS_ROOT)/make/directory.cfg
 
 SUBDIRS=delay event_server msg_server sem_server ratemon1 ratemon2 \
-  timeout_event
+  timeout_event timer
 
 # If the POSIX API isn't enabled, we can't build these
 ifeq ($(RTEMS_HAS_POSIX_API),yes)

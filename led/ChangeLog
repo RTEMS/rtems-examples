@@ -1,5 +1,9 @@
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* Makefile: Add timer test.
+
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* complex1/.main.cc.swp: Removed.
 
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>

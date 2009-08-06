@@ -1,5 +1,10 @@
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* psx_example_1/.cvsignore, psx_example_2/.cvsignore,
+	psx_example_3/.cvsignore, psx_sched_report/.cvsignore: New files.
+
+2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog, Makefile, psx_example_1/Makefile, psx_example_1/test1.c,
 	psx_example_2/Makefile, psx_example_2/test2.c,
 	psx_example_3/Makefile, psx_example_3/test3.c,

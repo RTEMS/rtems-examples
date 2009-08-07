@@ -1,0 +1,7 @@
+#
+# $Id$
+#
+
+Some BSPs are invoked from environments which can provide boot
+arguments.  This program accesses the boot string provided
+by the BSP.

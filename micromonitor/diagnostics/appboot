@@ -1,0 +1,12 @@
+# TOP:
+set DIAGNOSTICS_RESULT        # clear this variable
+diagnostics
+if $DIAGNOSTICS_RESULT sne PASS goto FIX_ME_NOW
+echo "Diagnostics passed, running RTEMS Application
+ether off
+rtemsapp                      # RTEMS app does not exit
+goto TOP
+
+# FIX_ME_NOW:
+echo "Diagnostics failed, please call FIX-A-BOARD"
+goto TOP                      # repeat

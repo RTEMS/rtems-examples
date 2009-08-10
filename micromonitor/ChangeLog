@@ -1,3 +1,8 @@
+2009-08-10	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* diagnostics/README: Add uMon script.
+	* diagnostics/appboot: New file.
+
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* ChangeLog, README, diagnostics/README, diagnostics/cfg.h,

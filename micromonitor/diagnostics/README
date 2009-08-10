@@ -12,5 +12,4 @@ MicroMonitor environment variable DIAGNOSTICS_RESULT is set to
 that value.  This environment variable may be queried by MicroMonitor
 scripts and the RTEMS application.
 
-
-XXX insert script here
+The file appboot in this directory is the MicroMonitor script that does this.

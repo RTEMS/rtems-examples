@@ -39,7 +39,6 @@ rtems_task Init(
 
 /**************** START OF CONFIGURATION INFORMATION ****************/
 
-#define CONFIGURE_INIT
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
@@ -47,6 +46,7 @@ rtems_task Init(
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
+#define CONFIGURE_INIT
 #include <rtems/confdefs.h>
 
 /****************  END OF CONFIGURATION INFORMATION  ****************/

@@ -1,3 +1,10 @@
+2009-09-24	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Add example for extracting values from RTEMS Application
+	Makefile infrastructure.
+	* extract_example/.cvsignore, extract_example/Makefile,
+	extract_example/README: New files.
+
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Add new program to demonstrate use of BSP command line

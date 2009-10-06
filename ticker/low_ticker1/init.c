@@ -73,7 +73,19 @@ rtems_task Init(
 #define CONFIGURE_DISABLE_NEWLIB_REENTRANCY
 #define CONFIGURE_TERMIOS_DISABLED
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 0
-#define CONFIGURE_MINIMUM_TASK_STACK_SIZE 512
+
+/*
+ *  Reduce the stack as far as we think is safe on this architecture.
+ *  On small CPUs, the recommended minimum may already be less than
+ *  512 bytes so do not increase it.  But on at least the SPARC, we
+ *  need more than 512 bytes of stack space.
+ */
+#if defined(__sparc__)
+  #define CONFIGURE_MINIMUM_TASK_STACK_SIZE 1024
+#elif (CPU_STACK_MINIMUM_SIZE > 512)
+  #define CONFIGURE_MINIMUM_TASK_STACK_SIZE 512
+#endif
+
 #define CONFIGURE_MAXIMUM_PRIORITY 15
 #define CONFIGURE_DISABLE_CLASSIC_API_NOTEPADS
 #define CONFIGURE_IDLE_TASK_BODY Init

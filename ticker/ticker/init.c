@@ -99,8 +99,6 @@ rtems_task Init(
 
 #define CONFIGURE_EXTRA_TASK_STACKS       (4 * RTEMS_MINIMUM_STACK_SIZE)
 
-#define CONFIGURE_MICROSECONDS_PER_TICK 1
-
 #include <rtems/confdefs.h>
 
 /****************  END OF CONFIGURATION INFORMATION  ****************/

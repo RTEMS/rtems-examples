@@ -1,3 +1,9 @@
+2009-10-12	Glenn Humphrey <glenn.humphrey@OARcorp.com>
+
+	* Makefile, timer/init.c: Split the timer example into two examples
+	and cleaned up resource usage.
+	* timer_server/Makefile, timer_server/init.c: New files.
+
 2009-09-24	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* delay/init.c, ratemon1/init.c: Clean up configuration.

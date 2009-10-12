@@ -39,7 +39,7 @@ rtems_timer_service_routine Timer_Routine( rtems_id id, void *ignored )
     LED_OFF();
 #endif
 
-  status = rtems_timer_fire_after(
+  status = rtems_timer_server_fire_after(
     id,
     2 * rtems_clock_get_ticks_per_second(),
     Timer_Routine,
@@ -53,9 +53,18 @@ rtems_task Init(
 {
   rtems_status_code status;
 
-  puts( "\n\n*** LED BLINKER -- timer ***" );
+  puts( "\n\n*** LED BLINKER -- timer_server ***" );
 
   LED_INIT();
+
+  status = rtems_timer_initiate_server(
+    1, 
+    RTEMS_MINIMUM_STACK_SIZE * 2,
+    RTEMS_DEFAULT_ATTRIBUTES
+  );
+
+  if ( status != RTEMS_SUCCESSFUL )
+    fputs( "timer create server failed\n", stderr );
 
   status = rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '1' ), &Timer1);
   if ( status != RTEMS_SUCCESSFUL )
@@ -104,7 +113,7 @@ rtems_task Init(
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
-#define CONFIGURE_MAXIMUM_TASKS         1
+#define CONFIGURE_MAXIMUM_TASKS         2
 #define CONFIGURE_MAXIMUM_TIMERS        2
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE

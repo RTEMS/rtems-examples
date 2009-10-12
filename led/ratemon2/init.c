@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <bsp.h>
 
-#include "../../testmacros.h"
 #include "../led.h"
 
 rtems_task Init(
@@ -38,12 +37,12 @@ rtems_task Init(
     &period_id2
   );
 
-  ticks = get_ticks_per_second();
+  ticks = rtems_clock_get_ticks_per_second();
 
   status = rtems_rate_monotonic_period( period_id1, 2 * ticks );
   LED_ON();
 
-  (void) rtems_task_wake_after( 1 * get_ticks_per_second() );
+  (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
   status = rtems_rate_monotonic_period( period_id2, 2 * ticks );
   LED_OFF();
 
@@ -64,7 +63,7 @@ rtems_task Init(
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
-#define CONFIGURE_MAXIMUM_TASKS             4
+#define CONFIGURE_MAXIMUM_TASKS             1
 #define CONFIGURE_MAXIMUM_PERIODS           2
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE

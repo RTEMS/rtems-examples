@@ -13,15 +13,8 @@
 #include <bsp.h>
 #include <assert.h>
 
-#include "../../testmacros.h"
 #include "../led.h"
 
-/*
- *  Keep the names and IDs in global variables so another task can use them.
- */
-
-rtems_id   Task_id[ 4 ];         /* array of task ids */
-rtems_name Task_name[ 4 ];       /* array of task names */
 rtems_id   Sem_id;
 
 rtems_task Test_task(
@@ -30,9 +23,9 @@ rtems_task Test_task(
 {
   rtems_status_code status;
 
-  LED_INIT();
-
   for ( ; ; ) {
+
+    /* Semaphore not available, ensured to block */
     status = rtems_semaphore_obtain(
       Sem_id,
       RTEMS_DEFAULT_OPTIONS,
@@ -43,9 +36,10 @@ rtems_task Test_task(
 
     LED_OFF();
 
-    status = rtems_task_wake_after( get_ticks_per_second() );
+    status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
     assert( status == RTEMS_SUCCESSFUL );
 
+    /* Transfers semaphore to Init task */
     status = rtems_semaphore_release( Sem_id );
     if ( status != RTEMS_SUCCESSFUL )
       fputs( "Task - release did not work\n", stderr );
@@ -57,14 +51,18 @@ rtems_task Init(
 )
 {
   rtems_status_code status;
+  rtems_id          task_id;
+  rtems_name        task_name;
 
   puts( "\n\n*** LED BLINKER -- semaphore ping/pong ***" );
 
-  Task_name[ 1 ] = rtems_build_name( 'T', 'A', '1', ' ' );
+  LED_INIT();
+
+  task_name = rtems_build_name( 'T', 'A', '1', ' ' );
 
   status = rtems_semaphore_create(
     rtems_build_name( 'S', 'E', 'M', ' ' ),
-    0,
+    0,  /* created locked */
     RTEMS_DEFAULT_ATTRIBUTES,
     0,
     &Sem_id
@@ -72,24 +70,26 @@ rtems_task Init(
   assert( status == RTEMS_SUCCESSFUL );
 
   status = rtems_task_create(
-    Task_name[ 1 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
-    RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 1 ]
+    task_name, 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
+    RTEMS_DEFAULT_ATTRIBUTES, &task_id
   );
   assert( status == RTEMS_SUCCESSFUL );
 
-  status = rtems_task_start( Task_id[ 1 ], Test_task, 1 );
+  status = rtems_task_start( task_id, Test_task, 1 );
   assert( status == RTEMS_SUCCESSFUL );
 
   while (1) {
 
     LED_ON();
-    status = rtems_task_wake_after( get_ticks_per_second() );
+    status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
     assert( status == RTEMS_SUCCESSFUL );
 
+    /* Transfers semaphore to TA1 */
     status = rtems_semaphore_release( Sem_id );
     if ( status != RTEMS_SUCCESSFUL )
       fputs( "init - release did not work\n", stderr );
 
+    /* Semaphore not available, ensured to block */
     status = rtems_semaphore_obtain(
       Sem_id,
       RTEMS_DEFAULT_OPTIONS,
@@ -110,7 +110,7 @@ rtems_task Init(
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
-#define CONFIGURE_MAXIMUM_TASKS         4
+#define CONFIGURE_MAXIMUM_TASKS         2
 #define CONFIGURE_MAXIMUM_SEMAPHORES    1
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE

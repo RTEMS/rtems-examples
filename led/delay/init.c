@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <bsp.h>
 
-#include "../../testmacros.h"
 #include "../led.h"
 
 rtems_task Init(
@@ -27,9 +26,9 @@ rtems_task Init(
 
   while (1) {
 
-    (void) rtems_task_wake_after( 1 * get_ticks_per_second() );
+    (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
     LED_ON();
-    (void) rtems_task_wake_after( 1 * get_ticks_per_second() );
+    (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
     LED_OFF();
 
   }

@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <bsp.h>
 
-#include "../../testmacros.h"
 #include "../led.h"
 
 rtems_task Init(
@@ -34,7 +33,7 @@ rtems_task Init(
   );
 
   count = 0;
-  ticks = get_ticks_per_second();
+  ticks = rtems_clock_get_ticks_per_second();
 
   while (1) {
     status = rtems_rate_monotonic_period( period_id, ticks );

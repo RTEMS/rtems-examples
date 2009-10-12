@@ -1,5 +1,12 @@
 2009-10-12	Glenn Humphrey <glenn.humphrey@OARcorp.com>
 
+	* delay/init.c, event_server/init.c, msg_server/init.c,
+	ratemon1/init.c, ratemon2/init.c, sem_server/init.c,
+	timeout_event/init.c: Cleaned up unused variables and standardized
+	for inclusion into RTEMS class materials.
+
+2009-10-12	Glenn Humphrey <glenn.humphrey@OARcorp.com>
+
 	* Makefile, timer/init.c: Split the timer example into two examples
 	and cleaned up resource usage.
 	* timer_server/Makefile, timer_server/init.c: New files.

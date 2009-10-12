@@ -13,15 +13,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "../../testmacros.h"
 #include "../led.h"
-
-/*
- *  Keep the names and IDs in global variables so another task can use them.
- */
-
-rtems_id   Task_id[ 4 ];         /* array of task ids */
-rtems_name Task_name[ 4 ];       /* array of task names */
 
 rtems_task Init(
   rtems_task_argument argument
@@ -38,7 +30,7 @@ rtems_task Init(
   while (1) {
 
     status = rtems_event_receive( RTEMS_EVENT_1,
-      RTEMS_DEFAULT_OPTIONS, get_ticks_per_second(), &events );
+      RTEMS_DEFAULT_OPTIONS, rtems_clock_get_ticks_per_second(), &events );
     if ( status != RTEMS_TIMEOUT )
       fputs( "receive did not timeout\n", stderr );
 
@@ -58,7 +50,7 @@ rtems_task Init(
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
-#define CONFIGURE_MAXIMUM_TASKS             4
+#define CONFIGURE_MAXIMUM_TASKS             1
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 

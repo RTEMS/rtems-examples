@@ -1,3 +1,8 @@
+2009-10-14	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* applib/Makefile, applib/file_1.c, applib/private.h,
+	applib/userLib.h: New files.
+
 2009-09-24	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Add example for extracting values from RTEMS Application

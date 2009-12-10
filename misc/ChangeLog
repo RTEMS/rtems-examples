@@ -1,3 +1,11 @@
+2009-12-10	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Add adamain test. This is a strictly C version of the
+	startup code for a GNAT Ada application. If this does not run, then
+	Ada code has no prayer of running.
+	* adamain/.cvsignore, adamain/Makefile, adamain/README,
+	adamain/adacode.c, adamain/rtems_init.c: New files.
+
 2009-10-14	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* applib/Makefile, applib/file_1.c, applib/private.h,

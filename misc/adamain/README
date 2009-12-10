@@ -1,0 +1,9 @@
+#
+#  $Id$
+#
+
+This directory contains a copy of the standard rtems_init.c which is
+used to start Ada applications compiled with GNAT/RTEMS.  This test
+exists solely to have a way to test this code without having to
+have Ada code.  That introduces another variable.
+ 

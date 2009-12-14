@@ -1,0 +1,9 @@
+#
+#  $Id$
+#
+
+This directory contains a collection of programs designed
+to demonstrate how to use gdb in various ways.  Most of them
+contain deliberate bugs. :)
+
+--joel

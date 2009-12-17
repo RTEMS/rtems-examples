@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -32,15 +32,14 @@ rtems_task Init(
     &period_id
   );
 
-  count = 0;
   ticks = rtems_clock_get_ticks_per_second();
 
-  while (1) {
+  for (count=0; ; count++) {
     status = rtems_rate_monotonic_period( period_id, ticks );
-    if ( (++count % 2) == 0 )
-      LED_ON();
-    else
+    if ( (count % 2) == 0 )
       LED_OFF();
+    else
+      LED_ON();
   }
 
   status = rtems_task_delete( RTEMS_SELF );

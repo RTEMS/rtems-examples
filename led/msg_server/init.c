@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -35,9 +35,9 @@ rtems_task Test_task(
     );
 
     if ( (count % 2) == 0 ) {
-      LED_ON();
-    } else {
       LED_OFF();
+    } else {
+      LED_ON();
     }
   }
 }
@@ -71,9 +71,9 @@ rtems_task Init(
     RTEMS_DEFAULT_ATTRIBUTES,
     &Queue_id
   );
-  while (1) {
 
-    count++;
+  for (count=0; ; count++) {
+
     /* fprintf( stderr, "send 0x%d\n", count ); */
     status = rtems_message_queue_send( Queue_id, &count, sizeof(uint32_t) );
     if ( status != RTEMS_SUCCESSFUL )

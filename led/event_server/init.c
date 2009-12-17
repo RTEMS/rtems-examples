@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -32,9 +32,9 @@ rtems_task Test_task(
     );
 
     if ( events == RTEMS_EVENT_1 ) {
-      LED_ON();
-    } else if ( events == RTEMS_EVENT_2 ) {
       LED_OFF();
+    } else if ( events == RTEMS_EVENT_2 ) {
+      LED_ON();
     } else {
       fprintf( stderr, "Incorrect event set 0x%08" PRIx32 "\n", events );
     }
@@ -65,9 +65,9 @@ rtems_task Init(
 
   status = rtems_task_start( task_id, Test_task, 1 );
 
-  while (1) {
+  for (count=0; ; count++) {
 
-    events = ( (count++ % 2) == 0 ) ?  RTEMS_EVENT_1 : RTEMS_EVENT_2;
+    events = ( (count % 2) == 0 ) ?  RTEMS_EVENT_1 : RTEMS_EVENT_2;
     status = rtems_event_send( task_id, events );
     if ( status != RTEMS_SUCCESSFUL )
       fputs( "send did not work\n", stderr );

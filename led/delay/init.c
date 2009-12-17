@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -27,9 +27,9 @@ rtems_task Init(
   while (1) {
 
     (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
-    LED_ON();
-    (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
     LED_OFF();
+    (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
+    LED_ON();
 
   }
 

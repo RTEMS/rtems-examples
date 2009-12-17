@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -27,17 +27,17 @@ rtems_task Init(
 
   LED_INIT();
 
-  while (1) {
+  for (count=0; ; count++) {
 
     status = rtems_event_receive( RTEMS_EVENT_1,
       RTEMS_DEFAULT_OPTIONS, rtems_clock_get_ticks_per_second(), &events );
     if ( status != RTEMS_TIMEOUT )
       fputs( "receive did not timeout\n", stderr );
 
-    if ( (count++ % 2) == 0 )
-      LED_ON();
-    else
+    if ( (count % 2) == 0 )
       LED_OFF();
+    else
+      LED_ON();
 
   }
 

@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -40,18 +40,18 @@ rtems_task Init(
   ticks = rtems_clock_get_ticks_per_second();
 
   status = rtems_rate_monotonic_period( period_id1, 2 * ticks );
-  LED_ON();
+  LED_OFF();
 
   (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
   status = rtems_rate_monotonic_period( period_id2, 2 * ticks );
-  LED_OFF();
+  LED_ON();
 
   while (1) {
     status = rtems_rate_monotonic_period( period_id1, 2 * ticks );
-    LED_ON();
+    LED_OFF();
 
     status = rtems_rate_monotonic_period( period_id2, 2 * ticks );
-    LED_OFF();
+    LED_ON();
   }
 
   status = rtems_task_delete( RTEMS_SELF );

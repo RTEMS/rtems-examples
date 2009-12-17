@@ -21,21 +21,19 @@ void *Server(
 
   LED_INIT();
 
-  sleep( 1 );
-
   for ( ; ; ) {
+
     status = pthread_mutex_lock( &Mutex );
-    if ( status )
+    if (status)
       fprintf( stderr, "Server - lock did not work (%d)\n", status );
 
-    LED_OFF();
+    LED_ON();
 
     status = sleep( 1 );
 
     status = pthread_mutex_unlock( &Mutex );
-    if ( status )
+    if (status)
       fprintf( stderr, "Server - unlock did not work (%d)\n", status );
-
 
   }
   return NULL;
@@ -74,23 +72,19 @@ void *POSIX_Init(
   if (status) 
     fprintf( stderr, "Main -- first lock did not work (%d)\n", status );
 
-  if ( status )
-    fprintf( stderr, "Main - lock did not work (%d)\n", status );
-
   for ( ; ; ) {
-    LED_ON();
+
+    LED_OFF();
 
     status = sleep( 1 );
 
     status = pthread_mutex_unlock( &Mutex );
-    if ( status )
+    if (status)
       fprintf( stderr, "Main - unlock did not work (%d)\n", status );
 
     status = pthread_mutex_lock( &Mutex );
-    if ( status )
+    if (status)
       fprintf( stderr, "Main - lock did not work (%d)\n", status );
-
-
 
   }
   exit( 0 );

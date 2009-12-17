@@ -25,9 +25,9 @@ void *POSIX_Init(
   while (1) {
 
     (void) nanosleep( &delay, NULL );
-    LED_ON();
-    (void) nanosleep( &delay, NULL );
     LED_OFF();
+    (void) nanosleep( &delay, NULL );
+    LED_ON();
 
   }
   exit( 0 );

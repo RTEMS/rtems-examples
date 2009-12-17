@@ -1,3 +1,13 @@
+2009-12-17	Glenn Humphrey <glenn.humphrey@OARcorp.com>
+
+	* delay/init.c, event_server/init.c, msg_server/init.c,
+	posix_cond_server/test.c, posix_delay_nanosleep/test.c,
+	posix_delay_sleep/test.c, posix_mutex_server/test.c, ratemon1/init.c,
+	ratemon2/init.c, ratemon_cond_server/test.c, sem_server/init.c,
+	timeout_event/init.c: Cleaned up the led examples to produce similiar
+	output.
+	* timer_server/.cvsignore: New file.
+
 2009-10-12	Glenn Humphrey <glenn.humphrey@OARcorp.com>
 
 	* delay/init.c, event_server/init.c, msg_server/init.c,

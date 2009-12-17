@@ -1,5 +1,5 @@
 /*
- *  COPYRIGHT (c) 1989-2007.
+ *  COPYRIGHT (c) 1989-2009.
  *  On-Line Applications Research Corporation (OAR).
  *
  *  The license and distribution terms for this file may be
@@ -34,7 +34,7 @@ rtems_task Test_task(
     if ( status != RTEMS_SUCCESSFUL )
       fputs( "Task - obtain did not work\n", stderr );
 
-    LED_OFF();
+    LED_ON();
 
     status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
     assert( status == RTEMS_SUCCESSFUL );
@@ -80,7 +80,7 @@ rtems_task Init(
 
   while (1) {
 
-    LED_ON();
+    LED_OFF();
     status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
     assert( status == RTEMS_SUCCESSFUL );
 

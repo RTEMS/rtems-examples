@@ -27,13 +27,13 @@ void *Server(
   if ( status )
     fprintf( stderr, "Server - lock did not work (%d)\n", status );
 
-  for ( ; ; ) {
+  for (count=0; ; count++) {
 
     status = pthread_cond_wait( &Condition, &Mutex );
     if ( status )
       fprintf( stderr, "Server - condition wait did not work (%d)\n", status );
 
-    if ((++count % 2) == 0)
+    if ((count % 2) == 0)
       LED_OFF();
     else
       LED_ON();
@@ -46,7 +46,7 @@ void *POSIX_Init(
 )
 {
   pthread_t thread_id;
-  int status;
+  int       status;
 
   puts( "\n\n*** LED BLINKER -- sleep with pthread condition variables ***" );
 

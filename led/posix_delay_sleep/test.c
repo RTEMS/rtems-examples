@@ -21,9 +21,9 @@ void *POSIX_Init(
   while (1) {
 
     (void) sleep( 1 );
-    LED_ON();
-    (void) sleep( 1 );
     LED_OFF();
+    (void) sleep( 1 );
+    LED_ON();
 
   }
   exit( 0 );

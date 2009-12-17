@@ -1,5 +1,10 @@
 2009-12-17	Glenn Humphrey <glenn.humphrey@OARcorp.com>
 
+	* timer/init.c, timer_server/init.c: Simplified examples to insure
+	consistent behavior for all cases.
+
+2009-12-17	Glenn Humphrey <glenn.humphrey@OARcorp.com>
+
 	* delay/init.c, event_server/init.c, msg_server/init.c,
 	posix_cond_server/test.c, posix_delay_nanosleep/test.c,
 	posix_delay_sleep/test.c, posix_mutex_server/test.c, ratemon1/init.c,

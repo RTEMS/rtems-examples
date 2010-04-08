@@ -1,3 +1,8 @@
+2010-04-08	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* Makefile: Do not build adamain automatically until there is a way to
+	know if the Ada support was built.
+
 2009-12-10	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Add adamain test. This is a strictly C version of the

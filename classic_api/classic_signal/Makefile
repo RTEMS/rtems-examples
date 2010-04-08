@@ -6,7 +6,7 @@
 #  RTEMS_MAKEFILE_PATH is typically set in an environment variable
 #
 
-PGM=${ARCH}/hello.exe
+PGM=${ARCH}/classic_signal.exe
 
 # optional managers required
 MANAGERS=all

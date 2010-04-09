@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#include <unistd.h>
 
 char *bufr = "Happy days are here again.  Happy days are here again.1Happy "
 "days are here again.2Happy days are here again.3Happy days are here again."

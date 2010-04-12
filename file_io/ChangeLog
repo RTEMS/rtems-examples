@@ -1,3 +1,7 @@
+2010-04-12	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* fdopen/test.c: Add include of unistd.h for close().
+
 2010-04-09	Joel Sherrill <joel.sherrilL@OARcorp.com>
 
 	* filerdback/test.c: Add CVS Id.

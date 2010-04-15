@@ -15,6 +15,7 @@ rtems_task Init(
   printk( "\n\n*** x86 DISPLAY CPU CAPABILITIES TEST ***\n" );
   printCpuInfo();
   printk( "\n\n*** END OF x86 DISPLAY CPU CAPABILITIES TEST ***\n" );
+
   exit( 0 );
 }
 

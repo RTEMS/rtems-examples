@@ -1,3 +1,7 @@
+2010-04-15	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* x86_display_cpu/Makefile, x86_display_cpu/test.c: Clean up.
+
 2010-04-14	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* x86_display_cpu/.cvsignore, x86_display_cpu/Makefile,

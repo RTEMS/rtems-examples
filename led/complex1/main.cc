@@ -30,7 +30,9 @@ int main(
 )
 #endif
 {
+#if !defined(BSP_SMALL_MEMORY)
   doTest();
+#endif
   exit( 0 );
 }
 

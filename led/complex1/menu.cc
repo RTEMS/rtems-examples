@@ -5,6 +5,9 @@
  *  $Id$
  */
 
+#include <bsp.h>
+#if !defined(BSP_SMALL_MEMORY)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -194,3 +197,4 @@ void Test_menu_run(
   }
 }
 
+#endif

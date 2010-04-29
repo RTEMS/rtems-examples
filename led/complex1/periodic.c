@@ -2,6 +2,9 @@
  *  $Id$
  */
 
+#include <bsp.h>
+#if !defined(BSP_SMALL_MEMORY)
+
 #if defined(__rtems__)
 #include <rtems.h>
 #include <stdio.h>
@@ -116,4 +119,5 @@ void PeriodicThreads_Stop(void)
   PeriodicThreads_initialized = FALSE;
 }
 
+#endif
 #endif

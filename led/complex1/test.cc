@@ -2,6 +2,9 @@
 //  $Id$
 //
 
+#include <bsp.h>
+#if !defined(BSP_SMALL_MEMORY)
+
 #include <stdio.h>
 #include "ledServer.h"
 #include "menu.h"
@@ -236,3 +239,4 @@ void doTest(void)
   delete led;
 }
 
+#endif

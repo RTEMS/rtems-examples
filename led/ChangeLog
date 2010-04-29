@@ -1,5 +1,10 @@
 2010-04-29	Joel Sherrill <joel.sherrilL@OARcorp.com>
 
+	* complex1/main.cc, complex1/menu.cc, complex1/periodic.c,
+	complex1/test.cc: Turn off test when BSP_SMALL_MEMORY defined.
+
+2010-04-29	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
 	* complex1/Makefile: Use make-cxx-exe.
 
 2010-04-06	Joel Sherrill <joel.sherrill@oarcorp.com>

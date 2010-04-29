@@ -15,11 +15,14 @@
  *  $Id$
  */
 
-#define RTEMS_TEST_IO_STREAM
+#include <bsp.h>
 
 #include <rtems.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#if !defined(BSP_SMALL_MEMORY)
+#define RTEMS_TEST_IO_STREAM
 #ifdef RTEMS_TEST_IO_STREAM
   #include <iostream>
 #endif
@@ -128,6 +131,7 @@ cdtest(void)
  }
  printf( "catch got called, exception handling worked !!!\n" );
 }
+#endif
 
 
 
@@ -143,7 +147,9 @@ rtems_task Init(
 {
     printf( "\n\n*** CONSTRUCTOR/DESTRUCTOR TEST ***\n" );
 
+#if !defined(BSP_SMALL_MEMORY)
     cdtest();
+#endif
 
     printf( "*** END OF CONSTRUCTOR/DESTRUCTOR TEST ***\n\n\n" );
 

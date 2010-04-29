@@ -1,3 +1,7 @@
+2010-04-29	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* cxx_throw/init.cc: Turn off test when BSP_SMALL_MEMORY defined.
+
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* cxx_throw/init.cc, libcpp/Makefile, libcpp/README, libcpp/foo.cc,

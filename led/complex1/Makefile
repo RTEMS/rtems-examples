@@ -30,4 +30,4 @@ OBJS= $(COBJS) $(CXXOBJS) $(ASOBJS)
 all:    ${ARCH} $(PGM)
 
 $(PGM): $(OBJS)
-	$(make-exe)
+	$(make-cxx-exe)

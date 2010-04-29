@@ -1,3 +1,7 @@
+2010-04-29	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* complex1/Makefile: Use make-cxx-exe.
+
 2010-04-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* posix_delay_sleep/test.c: Add unistd.h

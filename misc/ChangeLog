@@ -1,5 +1,11 @@
 2010-05-05	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* qemu_vfat/Makefile, qemu_vfat/README, qemu_vfat/init.c: Now includes
+	a start_test example which parses arguments.
+	* qemu_vfat/start_test.c: New file.
+
+2010-05-05	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* qemu_vfat/.cvsignore, qemu_vfat/Makefile, qemu_vfat/README,
 	qemu_vfat/init.c, qemu_vfat/system.h: New files.
 

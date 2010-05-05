@@ -12,7 +12,7 @@ PGM=${ARCH}/qemu_vfat.exe
 MANAGERS=all
 
 # C source names
-CSRCS = init.c
+CSRCS = init.c start_test.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc

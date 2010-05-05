@@ -30,9 +30,10 @@
  * with the "rtems_fsmount" function.
  * See cpukit/libmisc/fsmount for definition of fields
  */
+#define MOUNT_POINT "/mnt/test"
 fstab_t fs_table[] = {
   {
-    "/dev/hda1", "/mnt/test",
+    "/dev/hda1", MOUNT_POINT,
     &msdos_ops, RTEMS_FILESYSTEM_READ_WRITE,
     FSMOUNT_MNT_OK | FSMOUNT_MNTPNT_CRTERR | FSMOUNT_MNT_FAILED,
     0
@@ -148,6 +149,7 @@ Init (rtems_task_argument ignored)
   fileio_start_shell ();
 #endif
 #if defined(USE_START_TEST)
+  chdir( MOUNT_POINT );
   start_test ();
 #endif
   puts( "*** END OF QEMU VFAT AND SHELL TEST ***" );

@@ -17,3 +17,4 @@ executable exercised with different arguments or input files.
 With this setup, you can copy those test support files into 
 the host directory and the RTEMS "main" will use those in
 support of the testing.
+

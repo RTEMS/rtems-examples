@@ -1,3 +1,8 @@
+2010-05-05	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* qemu_vfat/.cvsignore, qemu_vfat/Makefile, qemu_vfat/README,
+	qemu_vfat/init.c, qemu_vfat/system.h: New files.
+
 2010-04-15	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* x86_display_cpu/Makefile, x86_display_cpu/test.c: Clean up.

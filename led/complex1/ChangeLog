@@ -1,3 +1,8 @@
+2010-05-11	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* main.cc: Do not configure as much when disabling the test for small
+	memory targets.
+
 2008-11-26	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* main.cc: Rework to avoid new GCC error:

@@ -1,0 +1,7 @@
+2010-12-17	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ChangeLog, schedsim_priority/Makefile, schedsim_priority/README,
+	schedsim_priority/config.c, schedsim_priority/printheir_executing.c,
+	schedsim_priority/schedsim.cc,
+	schedsim_priority/wrap_thread_dispatch.c: New files.
+

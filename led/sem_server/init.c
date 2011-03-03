@@ -58,8 +58,6 @@ rtems_task Init(
 
   LED_INIT();
 
-  task_name = rtems_build_name( 'T', 'A', '1', ' ' );
-
   status = rtems_semaphore_create(
     rtems_build_name( 'S', 'E', 'M', ' ' ),
     0,  /* created locked */
@@ -68,6 +66,8 @@ rtems_task Init(
     &Sem_id
   );
   assert( status == RTEMS_SUCCESSFUL );
+
+  task_name = rtems_build_name( 'T', 'A', '1', ' ' );
 
   status = rtems_task_create(
     task_name, 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
@@ -105,8 +105,6 @@ rtems_task Init(
 }
 
 /**************** START OF CONFIGURATION INFORMATION ****************/
-
-#define CONFIGURE_INIT
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
@@ -117,6 +115,6 @@ rtems_task Init(
 
 #define CONFIGURE_EXTRA_TASK_STACKS         (3 * RTEMS_MINIMUM_STACK_SIZE)
 
+#define CONFIGURE_INIT
 #include <rtems/confdefs.h>
-
 /****************  END OF CONFIGURATION INFORMATION  ****************/

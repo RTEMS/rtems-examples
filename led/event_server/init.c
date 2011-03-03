@@ -41,7 +41,6 @@ rtems_task Test_task(
   }
 }
 
-
 rtems_task Init(
   rtems_task_argument argument
 )

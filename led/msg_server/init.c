@@ -55,6 +55,14 @@ rtems_task Init(
 
   LED_INIT();
 
+  status = rtems_message_queue_create(
+    rtems_build_name( 'Q', '1', ' ', ' ' ),
+    1,
+    sizeof(uint32_t),
+    RTEMS_DEFAULT_ATTRIBUTES,
+    &Queue_id
+  );
+
   task_name = rtems_build_name( 'T', 'A', '1', ' ' );
 
   status = rtems_task_create(
@@ -63,14 +71,6 @@ rtems_task Init(
   );
 
   status = rtems_task_start( task_id, Test_task, 1 );
-
-  status = rtems_message_queue_create(
-    rtems_build_name( 'Q', '1', ' ', ' ' ),
-    1,
-    sizeof(uint32_t),
-    RTEMS_DEFAULT_ATTRIBUTES,
-    &Queue_id
-  );
 
   for (count=0; ; count++) {
 

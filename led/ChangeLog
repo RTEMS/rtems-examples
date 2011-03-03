@@ -1,3 +1,8 @@
+2011-03-03	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* event_server/init.c, msg_server/init.c, sem_server/init.c,
+	timer/init.c, timer_server/init.c: Example clean up.
+
 2010-04-29	Joel Sherrill <joel.sherrilL@OARcorp.com>
 
 	* complex1/main.cc, complex1/menu.cc, complex1/periodic.c,

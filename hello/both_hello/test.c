@@ -3,7 +3,6 @@
  */
 
 #include <bsp.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -37,7 +36,5 @@ void *POSIX_Init(
 #define CONFIGURE_MAXIMUM_POSIX_THREADS 1
 
 #define CONFIGURE_INIT
-
 #include <rtems/confdefs.h>
-
 /* end of file */

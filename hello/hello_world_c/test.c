@@ -5,7 +5,6 @@
  */
 
 #include <bsp.h>
-
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -29,7 +28,5 @@ rtems_task Init(
 #define CONFIGURE_MAXIMUM_TASKS 1
 
 #define CONFIGURE_INIT
-
 #include <rtems/confdefs.h>
-
 /* end of file */

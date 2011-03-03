@@ -1,3 +1,8 @@
+2011-03-03	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* both_hello/test.c, hello_world_c/test.c, posix_hello_world/test.c:
+	Example clean up.
+
 2010-04-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* both_hello/test.c: Add unistd.h

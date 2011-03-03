@@ -3,7 +3,6 @@
  */
 
 #include <bsp.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,11 +23,8 @@ void *POSIX_Init(
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 
 #define CONFIGURE_POSIX_INIT_THREAD_TABLE
-
 #define CONFIGURE_MAXIMUM_POSIX_THREADS 1
 
 #define CONFIGURE_INIT
-
 #include <rtems/confdefs.h>
-
 /* end of file */

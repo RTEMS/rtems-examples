@@ -1,3 +1,10 @@
+2011-03-03	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	PR 1749/bsps
+	* Makefile: Add new test program for wrapping clock tick.
+	* nanosecond_tick_wrap/.cvsignore, nanosecond_tick_wrap/Makefile,
+	nanosecond_tick_wrap/README, nanosecond_tick_wrap/init.c: New files.
+
 2010-05-05	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* qemu_vfat/Makefile, qemu_vfat/README, qemu_vfat/init.c: Now includes

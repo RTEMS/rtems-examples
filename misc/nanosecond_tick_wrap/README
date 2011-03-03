@@ -1,0 +1,32 @@
+#
+#  $Id$
+#
+
+PR 1748 [1] points out a general problem that many BSPs could have in their
+nanoseconds since last tick handler.  This problem occurs when:
+
++ We are in the middle of getting TOD or Update AND
++ Clock tick counter goes to 0 
+ 
+Then the nanoseconds since last tick handler needs to account for either
+a clock interrupt pending (if the counter resets) or the counter wrapping
+below 0.  The following illustrates the interrupt pending method:
+
+iuint32_t bsp_clock_nanoseconds_since_last_tick(void)
+{
+  uint32_t clicks;
+  uint32_t usecs;
+
+  clicks = HARDWARE_COUNTER;
+
+  usecs = TO_USECS(clicks);
+  if ( Is_interrupt_pending( CLOCK_VECTOR ) )
+    usecs += rtems_configuration_get_microseconds_per_tick();
+  return usecs * 1000;
+}
+
+
+References
+==========
+
+[1] https://www.rtems.org/bugzilla/show_bug.cgi?id=1748

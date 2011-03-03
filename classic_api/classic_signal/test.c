@@ -51,7 +51,7 @@ rtems_task Init(
   rtems_interval        start;
   rtems_interval        now;
 
-  puts( "\n\n*** SIGNAL FROM TST TEST ***" );
+  puts( "\n\n*** SIGNAL FROM TSR TEST ***" );
 
   main_task = rtems_task_self();
 
@@ -96,7 +96,6 @@ rtems_task Init(
 }
 
 /* configuration information */
-
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
@@ -106,5 +105,4 @@ rtems_task Init(
 #define CONFIGURE_MAXIMUM_TIMERS            1
 
 #define CONFIGURE_INIT
-
 #include <rtems/confdefs.h>

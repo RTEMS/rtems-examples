@@ -1,3 +1,7 @@
+2011-03-03	Joel Sherrill <joel.sherrilL@OARcorp.com>
+
+	* classic_signal/test.c: Example clean up.
+
 2010-04-08	Joel Sherrill <joel.sherrilL@OARcorp.com>
 
 	* classic_signal/Makefile: Change executable name from hello.

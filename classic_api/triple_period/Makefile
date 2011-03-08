@@ -17,7 +17,7 @@ OBJS=$(COBJS)
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
-include $(RTEMS_ROOT)/make/leaf.cfg
+include $(PROJECT_ROOT)/make/leaf.cfg
 
 all:	${ARCH} $(PGM)
 

@@ -1,3 +1,9 @@
+2011-03-08	Ralf Corsépius <ralf.corsepius@rtems.org>
+
+	* classic_api/triple_period/Makefile: 
+	include $(PROJECT_ROOT)/make/leaf.cfg
+	(Consistency with other Makefiles).
+
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Fix typo.

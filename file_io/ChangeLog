@@ -1,3 +1,10 @@
+2011-03-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Add new example of untar to load initial contents of IMFS.
+	* crc/.cvsignore, crc/LICENSE, crc/Makefile, crc/README, crc/crc.h,
+	crc/crc_32.c, crc/init.c, crc/sniptype.h, crc/rootfs/image.img: New
+	files.
+
 2010-04-12	Joel Sherrill <joel.sherrilL@OARcorp.com>
 
 	* fdopen/test.c: Add include of unistd.h for close().

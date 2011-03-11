@@ -1,0 +1,9 @@
+#
+#  $Id$
+#
+
+This is a simple example which illustrates how to use the
+In-Memory File System (IMFS) in conjunction with "untar" to
+load the initial contents.
+
+Thanks to Gedare Bloom for the code this is based upon.

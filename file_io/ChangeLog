@@ -1,5 +1,10 @@
 2011-03-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* fat_ramdisk/.cvsignore, fat_ramdisk/Makefile, fat_ramdisk/README,
+	fat_ramdisk/init.c, fat_ramdisk/rootfs/shell-init: New files.
+
+2011-03-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* Makefile: Add new example of untar to load initial contents of IMFS.
 	* crc/.cvsignore, crc/LICENSE, crc/Makefile, crc/README, crc/crc.h,
 	crc/crc_32.c, crc/init.c, crc/sniptype.h, crc/rootfs/image.img: New

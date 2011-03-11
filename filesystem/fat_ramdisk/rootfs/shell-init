@@ -1,0 +1,3 @@
+mkdos /dev/ramdisk0
+mkdir /rd
+mount -t msdos /dev/ramdisk0 /rd

@@ -28,6 +28,8 @@ all:    ${ARCH} $(OBJS) $(PGM)
 
 $(ARCH)/init.o: init.c stamp-fs-image
 
+$(ARCH)/FilesystemImage.o: stamp-fs-image FilesystemImage.c FilesystemImage.h
+
 FilesystemImage: $(ARCH) rootfs/shell-init
 	cd rootfs ; \
 	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .

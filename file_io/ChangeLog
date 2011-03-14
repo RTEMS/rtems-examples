@@ -1,3 +1,7 @@
+2011-03-14	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* crc/Makefile, fat_ramdisk/Makefile: Fix Makefiles.
+
 2011-03-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* fat_ramdisk/.cvsignore, fat_ramdisk/Makefile, fat_ramdisk/README,

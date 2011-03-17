@@ -1,0 +1,10 @@
+sprintf(buffer,"**System used for compilation:\n");
+output_string(buffer);
+sprintf(buffer,"**Linux rokka-laptop 2.6.32-29-generic #58-Ubuntu SMP Fri Feb 11 20:52:10 UTC 20\n");
+output_string(buffer);
+sprintf(buffer,"**C compiler: gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5) \n");
+output_string(buffer);
+sprintf(buffer,"**libc: \n");
+output_string(buffer);
+sprintf(buffer,"**Date of compilation: Wed Mar 16 02:20:48 EET 2011\n");
+output_string(buffer);

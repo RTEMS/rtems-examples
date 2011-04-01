@@ -4,7 +4,7 @@
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
-include $(RTEMS_ROOT)/make/directory.cfg
+include $(RTEMS_SHARE)/make/directory.cfg
 
 SUBDIRS=delay event_server msg_server sem_server ratemon1 ratemon2 \
   timeout_event timer timer_server

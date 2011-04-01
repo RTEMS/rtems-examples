@@ -1,3 +1,7 @@
+2011-04-01	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Update to account for movement of .cfg files.
+
 2009-08-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* uboot_getenv/.cvsignore: New file.

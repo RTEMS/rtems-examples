@@ -4,6 +4,6 @@
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
-include $(RTEMS_ROOT)/make/directory.cfg
+include $(RTEMS_SHARE)/make/directory.cfg
 
 SUBDIRS=nbench

@@ -1,3 +1,8 @@
+2011-04-01	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile, libcpp/Makefile: Update to account for movement of .cfg
+	files.
+
 2010-04-29	Joel Sherrill <joel.sherrilL@OARcorp.com>
 
 	* cxx_throw/init.cc: Turn off test when BSP_SMALL_MEMORY defined.

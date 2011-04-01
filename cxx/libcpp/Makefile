@@ -25,7 +25,7 @@ OBJS=$(C_O_FILES) $(CC_O_FILES) $(CPP_O_FILES)
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
-include $(PROJECT_ROOT)/make/lib.cfg
+include $(RTEMS_SHARE)/make/lib.cfg
 
 #
 # Extra rules for other variations on C++ file name extensions

@@ -1,0 +1,4 @@
+rtems_init
+task_create joel 1
+task_priority joel 0
+task_priority joel 5

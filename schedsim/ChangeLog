@@ -1,3 +1,10 @@
+2011-04-08	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* schedsim_priority/Makefile, schedsim_priority/config.c: update and
+	add example script.
+	* schedsim_priority/.cvsignore, schedsim_priority/example_script: New
+	files.
+
 2010-12-17	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* ChangeLog, schedsim_priority/Makefile, schedsim_priority/README,

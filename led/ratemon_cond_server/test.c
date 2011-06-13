@@ -73,7 +73,7 @@ rtems_task Init(
   if ( rt_status )
     fprintf( stderr, "Period - did not work (%d)\n", rt_status );
 
-  ticks = get_ticks_per_second();
+  ticks = rtems_clock_get_ticks_per_second();
 
   for ( ; ; ) {
 

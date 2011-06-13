@@ -27,11 +27,12 @@ rtems_task Test_task(
       rtems_shutdown_executive( 0 );
     }
     printk( "TA%d %s%02d:%02d:%02d   %02d/%02d/%04d\n",
-      task_index, " - rtems_clock_get - ", 
+      task_index, " - rtems_clock_get_tod - ", 
       (int) time.hour, (int) time.minute, (int) time.second,
       (int) time.month, (int) time.day, (int) time.year );
     status = rtems_task_wake_after(
-      task_index * 5 * rtems_clock_get_ticks_per_second() );
+      task_index * 5 * rtems_clock_get_ticks_per_second()
+    );
   }
 }
 

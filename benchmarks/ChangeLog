@@ -1,3 +1,8 @@
+2011-06-13	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* nbench/nbench-byte-2.2.3/sysspec.c: Eliminate use of obsolete
+	rtems_clock_get().
+
 2011-04-01	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Update to account for movement of .cfg files.

@@ -849,8 +849,6 @@ return((unsigned long)(tickamount/1000000));
 
 #ifdef CLOCKWCPS
 /* Everybody else */
-//int tickspersec;
-//rtems_clock_get(RTEMS_CLOCK_GET_TICKS_PER_SECOND, &tickspersec);
 return((unsigned long)(tickamount/10000));
 #endif
 
@@ -880,9 +878,6 @@ return((double)tickamount/(double)1000000);
 
 #ifdef CLOCKWCPS
 /* Everybody else */
-//int tickspersec;
-//rtems_clock_get(RTEMS_CLOCK_GET_TICKS_PER_SECOND, &tickspersec);
-
 return((double)tickamount/(double)1000);
 #endif
 

@@ -1,3 +1,8 @@
+2011-06-13	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* classic_signal/test.c, triple_period/init.c, triple_period/system.h,
+	triple_period/tasks.c: Eliminate use of obsolete rtems_clock_get().
+
 2011-04-01	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Update to account for movement of .cfg files.

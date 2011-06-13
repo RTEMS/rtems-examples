@@ -64,8 +64,7 @@ rtems_task Init(
   /*
    *  Get starting time
    */
-  status = rtems_clock_get( RTEMS_CLOCK_GET_TICKS_SINCE_BOOT, &start );
-  assert( status == RTEMS_SUCCESSFUL );
+  start = rtems_clock_get_ticks_since_boot();
 
   status = rtems_signal_catch( signal_handler, RTEMS_DEFAULT_MODES );
   assert( status == RTEMS_SUCCESSFUL );
@@ -80,8 +79,7 @@ rtems_task Init(
   assert( status == RTEMS_SUCCESSFUL );
 
   while (1) {
-    status = rtems_clock_get( RTEMS_CLOCK_GET_TICKS_SINCE_BOOT, &now );
-    assert( status == RTEMS_SUCCESSFUL );
+    now = rtems_clock_get_ticks_since_boot();
     if ( (now-start) > 100 ) {
       puts( "Signal from ISR did not get processed\n" );
       exit( 0 );

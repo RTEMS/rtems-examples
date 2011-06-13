@@ -33,9 +33,9 @@ rtems_task Init(
   puts( "*** This demo shows three different ways of running periodic tasks ***" );
   puts( "*** It also demonstrates the CPU usage and Rate Monotonic statitistics utilities ***" );
 
-  rtems_clock_get( RTEMS_CLOCK_GET_TICKS_PER_SECOND, &ticks_per_second );
+  ticks_per_second = rtems_clock_get_ticks_per_second();
   printf("\nTicks per second in your system: %" PRIu32 "\n", ticks_per_second);
-  rtems_clock_get( RTEMS_CLOCK_GET_TICKS_SINCE_BOOT, &ticks_since_boot );
+  ticks_since_boot = rtems_clock_get_ticks_since_boot();
   printf("Ticks since boot: %" PRIu32 "\n\n", ticks_since_boot);
 
   time.year   = 1988;

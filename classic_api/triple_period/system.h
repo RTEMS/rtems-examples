@@ -109,17 +109,6 @@ extern rtems_name Task_name[ 4 ];       /* array of task names */
   } while (0)
 
 /*
- *  static inline routine to make obtaining ticks per second easier.
- */
-
-static inline uint32_t get_ticks_per_second( void )
-{
-  rtems_interval ticks_per_second;
-  (void) rtems_clock_get( RTEMS_CLOCK_GET_TICKS_PER_SECOND, &ticks_per_second );  return ticks_per_second;
-}
-
-
-/*
  *  This allows us to view the "Test_task" instantiations as a set
  *  of numbered tasks by eliminating the number of application
  *  tasks created.

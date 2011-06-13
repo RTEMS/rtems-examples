@@ -43,7 +43,7 @@ rtems_task Task_Absolute_Period(
   rtems_cpu_usage_reset();
 
   while( 1 ) {
-    status = rtems_clock_get( RTEMS_CLOCK_GET_TOD, &time );
+    status = rtems_clock_get_tod( &time );
     count++;
 
     // sets end criteria for demo application (60 seconds)
@@ -57,8 +57,8 @@ rtems_task Task_Absolute_Period(
       "absolute time (rtems_task_wake_when)\n",
       PERIOD_TASK_ABSOLUTE
     );
-    print_time( " - rtems_clock_get - ", &time, "\n" );
-    rtems_clock_get( RTEMS_CLOCK_GET_TICKS_SINCE_BOOT, &ticks_since_boot );
+    print_time( " - rtems_clock_get_tod - ", &time, "\n" );
+    ticks_since_boot = rtems_clock_get_ticks_since_boot();
     printf(" - Ticks since boot: %" PRIu32 "\n", ticks_since_boot);
 
     rtems_time_of_day time;
@@ -101,12 +101,12 @@ rtems_task Task_Rate_Monotonic_Period(
   count = 0;
 
   while( 1 ) {
-    status = rtems_clock_get( RTEMS_CLOCK_GET_TOD, &time );
+    status = rtems_clock_get_tod( &time );
     count++;
 
     printf( "\n\nTask 2 - activating every %d second using rate monotonic manager to schedule (rtems_rate_monotonic_period)\n", PERIOD_TASK_RATE_MONOTONIC);
-    print_time( " - rtems_clock_get - ", &time, "\n" );
-    rtems_clock_get( RTEMS_CLOCK_GET_TICKS_SINCE_BOOT, &ticks_since_boot );
+    print_time( " - rtems_clock_get_tod - ", &time, "\n" );
+    ticks_since_boot = rtems_clock_get_ticks_since_boot();
     printf(" - Ticks since boot: %" PRIu32 "\n", ticks_since_boot);
 
     if( TRUE != is_RM_created ) {
@@ -117,8 +117,11 @@ rtems_task Task_Rate_Monotonic_Period(
 	printf("RM failed with status: %d\n", status);
 	exit(1);
       }
-      // Initiate RM periode
-      status = rtems_rate_monotonic_period( RM_period, get_ticks_per_second() * PERIOD_TASK_RATE_MONOTONIC ); // Every N2 seconds
+      // Initiate RM period -- every N2 seconds
+      status = rtems_rate_monotonic_period(
+        RM_period,
+        rtems_clock_get_ticks_per_second() * PERIOD_TASK_RATE_MONOTONIC
+      );
       if( RTEMS_SUCCESSFUL != status ) {
 	printf("RM failed with status: %d\n", status);
 	exit(1);
@@ -126,8 +129,11 @@ rtems_task Task_Rate_Monotonic_Period(
 
       is_RM_created = TRUE;
     }
-    // Block until RM period has expired
-    status = rtems_rate_monotonic_period( RM_period, get_ticks_per_second() * PERIOD_TASK_RATE_MONOTONIC ); // Every N2 seconds
+    // Block until RM period has expired -- every N2 seconds
+    status = rtems_rate_monotonic_period(
+      RM_period,
+      rtems_clock_get_ticks_per_second() * PERIOD_TASK_RATE_MONOTONIC
+    );
     if( RTEMS_SUCCESSFUL != status ) {
       if( RTEMS_TIMEOUT != status ) {
 	printf("RM missed period!\n");
@@ -157,14 +163,22 @@ rtems_task Task_Relative_Period(
   uint32_t          ticks_since_boot;
 
   while( 1 ) {
-    status = rtems_clock_get( RTEMS_CLOCK_GET_TOD, &time );
+    status = rtems_clock_get_tod( &time );
 
-    printf( "\n\nTask 3 - activating after every %d second using relative time (rtems_task_wake_after)\n", PERIOD_TASK_RELATIVE);
-    print_time( " - rtems_clock_get - ", &time, "\n" );
-    rtems_clock_get( RTEMS_CLOCK_GET_TICKS_SINCE_BOOT, &ticks_since_boot );
-    printf(" - Ticks since boot: %" PRIu32 "\n", ticks_since_boot);   // Note how the ticks are drifting with this method
+    printf(
+      "\n\nTask 3 - activating after every %d second using relative "
+        "time (rtems_task_wake_after)\n",
+      PERIOD_TASK_RELATIVE
+    );
+    print_time( " - rtems_clock_get_tod - ", &time, "\n" );
+    ticks_since_boot = rtems_clock_get_ticks_since_boot();
+    // Note how the ticks are drifting with this method
+    printf(" - Ticks since boot: %" PRIu32 "\n", ticks_since_boot);
 
-    status = rtems_task_wake_after( get_ticks_per_second() * PERIOD_TASK_RELATIVE ); // Every N3 seconds
+    // Every N3 seconds
+    status = rtems_task_wake_after(
+      rtems_clock_get_ticks_per_second() * PERIOD_TASK_RELATIVE
+    );
   }
 }
 

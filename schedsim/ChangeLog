@@ -1,3 +1,8 @@
+2011-06-28	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* schedsim_priority/.cvsignore, schedsim_priority/Makefile: Update a
+	bit.
+
 2011-04-08	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* schedsim_priority/Makefile, schedsim_priority/config.c: update and

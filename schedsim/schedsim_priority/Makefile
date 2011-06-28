@@ -2,16 +2,23 @@
 #  $Id$
 #
 
-PREFIX=/home/joel/rtems-4.11-work/bsp-install/
+# Change this path to match your installation
+PREFIX=/tmp/schedsim
 OBJS = config.o printheir_executing.o schedsim.o wrap_thread_dispatch.o
 CPPFLAGS = -I${PREFIX}/include/schedsim
 LDFLAGS = -L${PREFIX}/lib
 LDFLAGS += -Wl,--wrap=_Thread_Dispatch
+SCHEDSIM=schedsim_priority
 
-all:    schedsim
+all:    stamp-test_prefix $(SCHEDSIM)
 
-schedsim: $(OBJS)
-	g++ -o schedsim $(OBJS) $(LDFLAGS) -lschedsim -lrtems
+stamp-test_prefix:
+	test -d ${PREFIX}
+	test -f ${PREFIX}/include/schedsim/rtems_sched.h
+	touch stamp-test_prefix
+
+$(SCHEDSIM): $(OBJS)
+	g++ -o $(SCHEDSIM) $(OBJS) $(LDFLAGS) -lschedsim -lrtems
 
 clean:
-	rm -f *.o schedsim
+	rm -f *.o $(SCHEDSIM) stamp-test_prefix

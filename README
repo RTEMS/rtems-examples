@@ -5,6 +5,7 @@
 This is a set of example RTEMS programs.  Each subdirectory
 reflects a set of related examples.
 
+benchmarks  - Collection of various public benchmark programs
 classic_api - Classic API examples (no LED)
 cxx         - C++ examples
 file_io     - File I/O

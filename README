@@ -7,9 +7,9 @@ reflects a set of related examples.
 
 classic_api - Classic API examples (no LED)
 cxx         - C++ examples
-hello       - Hello World Variations
-led         - LED Blinker Varations
 file_io     - File I/O
 filesystem  - File systems, check inside for more details
+hello       - Hello World Variations
+led         - LED Blinker Varations
 misc        - Miscellaneous 
 ticker      - Ticker Variations

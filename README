@@ -5,12 +5,13 @@
 This is a set of example RTEMS programs.  Each subdirectory
 reflects a set of related examples.
 
-benchmarks  - Collection of various public benchmark programs
-classic_api - Classic API examples (no LED)
-cxx         - C++ examples
-file_io     - File I/O
-filesystem  - File systems, check inside for more details
-hello       - Hello World Variations
-led         - LED Blinker Varations
-misc        - Miscellaneous 
-ticker      - Ticker Variations
+benchmarks   - Collection of various public benchmark programs
+classic_api  - Classic API examples (no LED)
+cxx          - C++ examples
+file_io      - File I/O
+filesystem   - File systems, check inside for more details
+hello        - Hello World Variations
+led          - LED Blinker Varations
+micromonitor - MicroMonitor access.
+misc         - Miscellaneous 
+ticker       - Ticker Variations

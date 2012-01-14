@@ -8,5 +8,6 @@ reflects a set of related examples.
 classic_api - Classic API examples (no LED)
 hello       - Hello World Variations
 led         - LED Blinker Varations
+filesystem  - File systems, check inside for more details
 misc        - Miscellaneous 
 ticker      - Ticker Variations

@@ -6,6 +6,7 @@ This is a set of example RTEMS programs.  Each subdirectory
 reflects a set of related examples.
 
 classic_api - Classic API examples (no LED)
+cxx         - C++ examples
 hello       - Hello World Variations
 led         - LED Blinker Varations
 filesystem  - File systems, check inside for more details

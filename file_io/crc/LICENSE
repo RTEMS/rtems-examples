@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 The CRC32 code is from http://www.snippets.org/.  This is the following files:
 
 crc_32.c

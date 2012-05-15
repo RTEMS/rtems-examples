@@ -1,7 +1,5 @@
 /*
  *  Simple test program to demonstrate memory overwrite.
- *
- *  $Id$
  */
 
 #include <stdlib.h>

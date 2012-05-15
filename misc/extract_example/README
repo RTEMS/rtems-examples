@@ -1,6 +1,2 @@
-#
-#  $Id$
-#
-
 This directory contains a Makefile demonstrating how to extract information
 from an installed RTEMS.

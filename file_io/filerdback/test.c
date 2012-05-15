@@ -1,7 +1,5 @@
 /*
  *  Simple test program to write and read a file back.
- *
- *  $Id$
  */
 
 #include <bsp.h>

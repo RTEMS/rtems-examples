@@ -1,8 +1,6 @@
 /*
  *  This is a general set of routines to provide a user interface
  *  for testing.
- *
- *  $Id$
  */
 
 #include <bsp.h>

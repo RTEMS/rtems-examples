@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 PGM=${ARCH}/triple_period.exe
 
 # optional managers required

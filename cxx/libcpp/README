@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 Example C++ library submitted by Ralf Corsepius <corsepiu@faw.uni-ulm.de>.
 
 The C++ is just place holders to illustrate the Makefile mechanics needed.

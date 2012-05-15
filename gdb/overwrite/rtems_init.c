@@ -1,7 +1,5 @@
 /*
  *  Wrapper for Overwrite main().
- *
- *  $Id$
  */
 
 #include <bsp.h>

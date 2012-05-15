@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #ifndef __PERIOD_THREADS_h
 #define __PERIOD_THREADS_h
 

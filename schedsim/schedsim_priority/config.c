@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include <rtems.h>
 
 #define CONFIGURE_INIT

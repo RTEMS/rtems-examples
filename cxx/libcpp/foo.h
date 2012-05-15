@@ -1,5 +1,4 @@
 //
-// $Id$
 //
 
 #ifndef _foo_h

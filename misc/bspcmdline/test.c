@@ -1,7 +1,5 @@
 /*
  *  Demonstrate accessing Boot Command Line provided by BSP
- *
- *  $Id$
  */
 
 #include <bsp.h>

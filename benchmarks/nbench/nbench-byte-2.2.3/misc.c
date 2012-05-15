@@ -1,4 +1,3 @@
-
 /*
 ** misc.c
 ** BYTEmark (tm)

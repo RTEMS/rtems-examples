@@ -1,7 +1,5 @@
 /*
  *  Starting point for this example.  Can be compiled on RTEMS or Linux.
- *   
- *  $Id$
  */
 
 

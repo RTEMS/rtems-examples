@@ -1,7 +1,6 @@
 //
 //  MessageQueue Template Base
 //
-//  $Id$
 //
 
 #ifndef __MessageQueueT_OE3_h

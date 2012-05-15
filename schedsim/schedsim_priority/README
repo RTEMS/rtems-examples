@@ -1,6 +1,2 @@
-#
-#  $Id$
-#
-
 This is an example of how to build a custom RTEMS Scheduler Simulator
 instance for evaluation of new scheduling algorithms.

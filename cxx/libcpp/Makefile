@@ -1,6 +1,3 @@
-#
-#  $Id$
-#
 # Templates/Makefile.lib
 #       adapted for an external library
 #

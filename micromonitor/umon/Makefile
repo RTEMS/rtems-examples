@@ -1,8 +1,4 @@
 #
-#  $Id$
-#
-
-#
 #  RTEMS_MAKEFILE_PATH is typically set in an environment variable
 #
 

@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 This directory contains an example program which should be of use
 in some situations.  It is designed to be used with Qemu's
 virtual FAT file system support.  Qemu can make a directory on

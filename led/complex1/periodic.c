@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include <bsp.h>
 #if !defined(BSP_SMALL_MEMORY)
 

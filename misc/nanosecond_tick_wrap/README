@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 PR 1748 [1] points out a general problem that many BSPs could have in their
 nanoseconds since last tick handler.  This problem occurs when:
 

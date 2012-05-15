@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 # Change this path to match your installation
 PREFIX=/tmp/schedsim
 OBJS = config.o printheir_executing.o schedsim.o wrap_thread_dispatch.o

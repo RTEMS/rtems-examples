@@ -1,4 +1,3 @@
-
 #include <rtems.h>
 
 /*

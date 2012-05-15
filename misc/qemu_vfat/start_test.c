@@ -1,7 +1,5 @@
 /*
  *  Start Test Example
- *
- *  $Id$
  */
 
 #if defined(USE_START_TEST)

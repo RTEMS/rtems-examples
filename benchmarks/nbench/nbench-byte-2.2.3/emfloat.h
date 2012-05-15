@@ -1,4 +1,3 @@
-
 /*
 ** emfloat.h
 ** Header for emfloat.c

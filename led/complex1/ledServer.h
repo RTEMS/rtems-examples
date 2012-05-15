@@ -1,5 +1,4 @@
 //
-//  $Id$
 //
 
 #ifndef __LED_SERVER_h

@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 This is a set of example RTEMS programs.  Most of these programs are
 demonstrations various ways to use inter-task communication to 
 turn and LED on and off at a fixed rate.

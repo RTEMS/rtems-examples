@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include <bsp.h>
 #include <pthread.h>
 #include <stdlib.h>

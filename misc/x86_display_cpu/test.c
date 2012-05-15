@@ -1,7 +1,5 @@
 /*
  *  Simple test program -- simplified version of sample test hello.
- *
- *  $Id$
  */
 
 #include <bsp.h>

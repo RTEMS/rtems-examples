@@ -1,6 +1,3 @@
-/*
- *  $Id$
- */
 #include <sched.h>
 #include <bsp.h>
 #include <stdlib.h>

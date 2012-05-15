@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 This program deliberately writes past the end of an array and
 corrupts another variable.  This is done so the program can
 be used to demonstrate how the gdb "watch" command can be used

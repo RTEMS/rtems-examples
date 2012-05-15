@@ -1,7 +1,5 @@
 /*
  *  LED -- simple LED support
- *
- *  $Id$
  */
 
 #ifndef __LED_h

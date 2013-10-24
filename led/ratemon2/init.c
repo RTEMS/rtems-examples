@@ -40,7 +40,7 @@ rtems_task Init(
   status = rtems_rate_monotonic_period( period_id1, 2 * ticks );
   LED_OFF();
 
-  (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
+  (void) rtems_task_wake_after( ticks );
   status = rtems_rate_monotonic_period( period_id2, 2 * ticks );
   LED_ON();
 

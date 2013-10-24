@@ -61,13 +61,23 @@ uint8_t MPC8313_LED_Count;
 #define LED_ON() LED_ROTATE()
 #define LED_OFF() LED_ROTATE()
 
+#elif defined(BCM2835_GPIO_REGS_BASE)
+// Raspberry Pi
+#define INP_GPIO(g) *(gpio+((g)/10)) &= ~(7<<(((g)%10)*3)) 
+#define OUT_GPIO(g) *(gpio+((g)/10)) |=  (1<<(((g)%10)*3)) 
+#define GPIO_SET *(gpio+7)   // sets   bits which are 1 ignores bits which are 0 
+#define GPIO_CLR *(gpio+10) // clears bits which are 1 ignores bits which are 0
+
+#define LED_INIT()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; OUT_GPIO(16);} while(0)
+#define LED_ON()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_CLR = 1 << 16;} while(0)
+#define LED_OFF()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_SET = 1 << 16;} while(0)
+
 #else
 /* default case is to print */
 
 #define __LED_PRINTING 1
 #define LED_ON()  fputs( "LED ON\n", stderr )
 #define LED_OFF() fputs( "LED OFF\n", stderr )
-
 #endif
 
 #ifndef LED_INIT

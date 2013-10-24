@@ -2,7 +2,6 @@
  *  Simple test program -- simplified version of sample test hello.
  */
 
-#include <bsp.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,6 +16,8 @@ void *POSIX_Init(
 }
 
 /* configuration information */
+
+#include <bsp.h>
 
 /* NOTICE: the clock driver is explicitly disabled */
 #define CONFIGURE_APPLICATION_DOES_NOT_NEED_CLOCK_DRIVER

@@ -22,38 +22,30 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# Waf build script for RTEMS examples 
-#
-# To configure, build and run do:
-#
-# $ waf configure --rtems=/Users/chris/Development/rtems/build/4.11 \
-#                 --rtems-tools=/Users/chris/Development/rtems/4.11 \
-#                 --rtems-bsps=sparc/sis
-# $ waf
-# $ /Users/chris/Development/rtems/4.11/bin/sparc-rtems4.11-run ./build/sparc-rtems4.11-sis/hello
-#
-# You can use '--rtems-archs=sparc,i386' or '--rtems-bsps=sparc/sis,i386/pc586'
-# to build for more than BSP at a time.
-#
+# Waf build script for an RTEMS Hello
 
 import rtems_waf.rtems as rtems
 
-def init(ctx):
-    rtems.init(ctx)
-
-def options(opt):
-    rtems.options(opt)
-
-def configure(conf):
-    rtems.configure(conf)
+version = "1.0.0"
 
 def build(bld):
     rtems.build(bld)
-    bld.recurse('hello')
 
-def rebuild(ctx):
-    import waflib.Options
-    waflib.Options.commands.extend(['clean', 'build'])
+    arch_bsp = bld.get_env()['RTEMS_ARCH_BSP']
+    arch = bld.get_env()['RTEMS_ARCH']
+    bsp = bld.get_env()['RTEMS_BSP']
 
-def tags(ctx):
-    ctx.exec_command('etags $(find . -name \*.[sSch])', shell = True)
+    #
+    # The include paths and defines.
+    #
+    bld.includes = ['.']
+    bld.defines = ['PACKAGE_VERSION="' + version + '"']
+    bld.cflags = ['-g', '-O']
+
+    bld(features = 'c cprogram',
+        target = 'hello',
+        includes = bld.includes,
+        defines = bld.defines,
+        cflags = bld.cflags,
+        source = ['test.c'])
+

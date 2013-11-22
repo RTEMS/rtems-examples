@@ -1,0 +1,39 @@
+# Copyright 2013 Gedare Bloom (gedare@rtems.org) 
+# 
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+# Waf build script for RTEMS fat_ramdisk
+
+import rtems_waf.rtems as rtems
+
+version = "1.0.0"
+
+def build(bld):
+    rtems.build(bld)
+
+    arch_bsp = bld.get_env()['RTEMS_ARCH_BSP']
+    arch = bld.get_env()['RTEMS_ARCH']
+    bsp = bld.get_env()['RTEMS_BSP']
+    cflags = bld.get_env()['CFLAGS']
+
+    #
+    # The include paths and defines.
+    #
+    bld.includes = ['.']
+    bld.defines = ['PACKAGE_VERSION="' + version + '"']
+
+    generate_fs = 'cd rootfs ; tar cf ../FilesystemImage .'
+    generate_fs = generate_fs + ' ; cd .. ; '
+    generate_fs = generate_fs + 'rtems-bin2c FilesystemImage FilesystemImage'
+    bld(rule=generate_fs,
+        source='rootfs/shell-init',
+        target=['FilesystemImage.c','FilesystemImage.h'])
+
+    bld(features = 'c cprogram',
+        target = 'fat_ramdisk.exe',
+        includes = bld.includes,
+        defines = bld.defines,
+        cflags = cflags,
+        source = ['init.c', 'FilesystemImage.c', 'FilesystemImage.h'])
+

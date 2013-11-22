@@ -15,18 +15,18 @@ def build(bld):
     arch_bsp = bld.get_env()['RTEMS_ARCH_BSP']
     arch = bld.get_env()['RTEMS_ARCH']
     bsp = bld.get_env()['RTEMS_BSP']
+    cflags = bld.get_env()['CFLAGS']
 
     #
     # The include paths and defines.
     #
     bld.includes = ['.']
     bld.defines = ['PACKAGE_VERSION="' + version + '"']
-    bld.cflags = ['-g', '-O']
 
     bld(features = 'c cprogram',
         target = 'hello',
         includes = bld.includes,
         defines = bld.defines,
-        cflags = bld.cflags,
+        cflags = cflags,
         source = ['test.c'])
 

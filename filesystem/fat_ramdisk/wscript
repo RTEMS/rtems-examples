@@ -6,19 +6,18 @@
 # Waf build script for RTEMS fat_ramdisk
 
 import rtems_waf.rtems as rtems
-import os
 version = "1.0.0"
 
-## TODO: Move this somewhere more general
+## FilesystemImage processing
 from waflib.Task import Task
 from waflib.TaskGen import extension
-
 class bin2c(Task):
-  run_str = 'rtems-bin2c ${SRC} ${TGT[0].abspath()} && touch ${TGT[1].abspath()}'
+  run_str = 'rtems-bin2c ${SRC} ${TGT[0].abspath()} && ' + \
+            'touch ${TGT[1].abspath()}'
   ext_out = ['.h']
 
 @extension('FilesystemImage')
-def process_tarfs(self, node):
+def process_FilesystemImage(self, node):
   c_node = node.change_ext('.c')
   h_node = node.change_ext('.h')
   self.create_task('bin2c', node, [c_node, h_node])

@@ -216,6 +216,9 @@ def tweaks(conf, arch_bsp):
     if re.match('i386-.*-pc[3456]86', arch_bsp) is not None:
         conf.env.LINKFLAGS += ['-Wl,-Ttext,0x00100000']
 
+    if '-ffunction-sections' in conf.env.CFLAGS:
+      conf.env.LINKFLAGS += ['-Wl,--gc-sections']
+
 def check_options(ctx, rtems_tools, rtems_path, rtems_version, rtems_archs, rtems_bsps):
     #
     # Check the paths are valid.

@@ -1,11 +1,32 @@
-# Copyright 2012 Chris Johns (chrisj@rtems.org)
 #
-# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+# Copyright 2012, 2013 Chris Johns (chrisj@rtems.org)
 #
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice, this
+# list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #
 # RTEMS support for applications.
 #
+
+import copy
 import os
 import os.path
 import pkgconfig
@@ -67,12 +88,12 @@ def init(ctx, filters = None):
         #
         # Check the tools, architectures and bsps.
         #
-        rtems_tools, archs, arch_bsps = check_options(ctx,
-                                                      env.options['rtems_tools'],
-                                                      env.options['rtems_path'],
-                                                      env.options['rtems_version'],
-                                                      env.options['rtems_archs'],
-                                                      env.options['rtems_bsps'])
+        rtems_path, rtems_tools, archs, arch_bsps = check_options(ctx,
+                                                                  env.options['rtems_tools'],
+                                                                  env.options['rtems_path'],
+                                                                  env.options['rtems_version'],
+                                                                  env.options['rtems_archs'],
+                                                                  env.options['rtems_bsps'])
 
         #
         # Update the contextes for all the bsps.
@@ -106,12 +127,12 @@ def configure(conf):
     else:
         show_commands = 'no'
 
-    rtems_tools, archs, arch_bsps = check_options(conf,
-                                                  conf.options.rtems_tools,
-                                                  conf.options.rtems_path,
-                                                  conf.options.rtems_version,
-                                                  conf.options.rtems_archs,
-                                                  conf.options.rtems_bsps)
+    rtems_path, rtems_tools, archs, arch_bsps = check_options(conf,
+                                                              conf.options.rtems_tools,
+                                                              conf.options.rtems_path,
+                                                              conf.options.rtems_version,
+                                                              conf.options.rtems_archs,
+                                                              conf.options.rtems_bsps)
 
     _log_header(conf)
 
@@ -134,7 +155,7 @@ def configure(conf):
         conf.env.RTEMS_ARCH_RTEMS = arch
         conf.env.RTEMS_BSP = _bsp_from_arch_bsp(ab)
 
-        tools = _find_tools(conf, arch, rtems_tools, tools)
+        tools = _find_tools(conf, arch, [rtems_path] + rtems_tools, tools)
         for t in tools[arch]:
             conf.env[t] = tools[arch][t]
 
@@ -207,6 +228,10 @@ def check_options(ctx, rtems_tools, rtems_path, rtems_version, rtems_archs, rtem
         rtems_config = os.path.join(rtems_path, 'rtems-config')
     else:
         ctx.fatal('RTEMS path is not valid. No lib/pkgconfig or rtems-config found.')
+    if os.path.exists(os.path.join(rtems_path, 'bin')):
+        rtems_bin = os.path.join(rtems_path, 'bin')
+    else:
+        ctx.fatal('RTEMS path is not valid. No bin directory found.')
 
     #
     # We can more than one path to tools. This happens when testing different
@@ -266,7 +291,7 @@ def check_options(ctx, rtems_tools, rtems_path, rtems_version, rtems_archs, rtem
     #
     arch_bsps = filter(ctx, 'bsps', arch_bsps)
 
-    return tools, archs, arch_bsps
+    return rtems_bin, tools, archs, arch_bsps
 
 def arch(arch_bsp):
     """ Given an arch/bsp return the architecture."""
@@ -292,23 +317,30 @@ def filter(ctx, filter, items):
         return items
     items_in = []
     items_out = []
-    filtered_items = []
     if 'in' in rtems_filters[filter]:
-        items_in = rtems_filters[filter]['in']
+        items_in = copy.copy(rtems_filters[filter]['in'])
     if 'out' in rtems_filters[filter]:
-        items_out = rtems_filters[filter]['out']
+        items_out = copy.copy(rtems_filters[filter]['out'])
+    filtered_items = []
     for i in items:
-        ab = '%s/%s' % (arch(i), bsp(i))
-        if ab in items_out:
-            i = None
-        elif ab in items_in:
-            items_in.remove(ab)
-        if i is not None:
-            filtered_items += [i]
-        if len(items_in) != 0:
-            ctx.fatal('Following %s not found: %s' % (filter, ', '.join(items_in)))
-    filtered_items.sort()
-    return filtered_items
+        item = i
+        ab = '%s/%s' % (arch(item), bsp(item))
+        for inre in items_in:
+            if re.compile(inre).match(ab):
+                items_in.remove(inre)
+                filtered_items += [item]
+                item = None
+                break
+        if item is not None:
+            for outre in items_out:
+                if re.compile(outre).match(ab):
+                    item = None
+                    break
+        if item is not None:
+            filtered_items += [item]
+    if len(items_in) != 0:
+        ctx.fatal('Following %s not found: %s' % (filter, ', '.join(items_in)))
+    return sorted(filtered_items)
 
 def arch_rtems_version(arch):
     """ Return the RTEMS architecture path, ie sparc-rtems4.11."""
@@ -387,21 +419,23 @@ def output_command_line():
 def _find_tools(conf, arch, paths, tools):
     if arch not in tools:
         arch_tools = {}
-        arch_tools['CC']       = conf.find_program([arch + '-gcc'], path_list = paths)
-        arch_tools['CXX']      = conf.find_program([arch + '-g++'], path_list = paths)
-        arch_tools['AS']       = conf.find_program([arch + '-gcc'], path_list = paths)
-        arch_tools['LD']       = conf.find_program([arch + '-ld'],  path_list = paths)
-        arch_tools['AR']       = conf.find_program([arch + '-ar'],  path_list = paths)
-        arch_tools['LINK_CC']  = arch_tools['CC']
-        arch_tools['LINK_CXX'] = arch_tools['CXX']
-        arch_tools['AR']       = conf.find_program([arch + '-ar'], path_list = paths)
-        arch_tools['LD']       = conf.find_program([arch + '-ld'], path_list = paths)
-        arch_tools['NM']       = conf.find_program([arch + '-nm'], path_list = paths)
-        arch_tools['OBJDUMP']  = conf.find_program([arch + '-objdump'], path_list = paths)
-        arch_tools['OBJCOPY']  = conf.find_program([arch + '-objcopy'], path_list = paths)
-        arch_tools['READELF']  = conf.find_program([arch + '-readelf'], path_list = paths)
-        arch_tools['STRIP']    = conf.find_program([arch + '-strip'], path_list = paths)
-        arch_tools['RTEMS_LD'] = conf.find_program(['rtems-ld'], path_list = paths, mandatory = False)
+        arch_tools['CC']          = conf.find_program([arch + '-gcc'], path_list = paths)
+        arch_tools['CXX']         = conf.find_program([arch + '-g++'], path_list = paths)
+        arch_tools['AS']          = conf.find_program([arch + '-gcc'], path_list = paths)
+        arch_tools['LD']          = conf.find_program([arch + '-ld'],  path_list = paths)
+        arch_tools['AR']          = conf.find_program([arch + '-ar'],  path_list = paths)
+        arch_tools['LINK_CC']     = arch_tools['CC']
+        arch_tools['LINK_CXX']    = arch_tools['CXX']
+        arch_tools['AR']          = conf.find_program([arch + '-ar'], path_list = paths)
+        arch_tools['LD']          = conf.find_program([arch + '-ld'], path_list = paths)
+        arch_tools['NM']          = conf.find_program([arch + '-nm'], path_list = paths)
+        arch_tools['OBJDUMP']     = conf.find_program([arch + '-objdump'], path_list = paths)
+        arch_tools['OBJCOPY']     = conf.find_program([arch + '-objcopy'], path_list = paths)
+        arch_tools['READELF']     = conf.find_program([arch + '-readelf'], path_list = paths)
+        arch_tools['STRIP']       = conf.find_program([arch + '-strip'], path_list = paths)
+        arch_tools['RTEMS_LD']    = conf.find_program(['rtems-ld'], path_list = paths, mandatory = False)
+        arch_tools['RTEMS_BIN2C'] = conf.find_program(['rtems-bin2c'], path_list = paths, mandatory = False)
+        arch_tools['TAR']         = conf.find_program(['tar'], mandatory = False)
         tools[arch] = arch_tools
     return tools
 
@@ -588,7 +622,7 @@ from waflib.Tools.ccroot import link_task, USELIB_VARS
 USELIB_VARS['rap'] = set(['RTEMS_LINKFLAGS'])
 @TaskGen.extension('.c')
 class rap(link_task):
-        "Link object files into a RTEMS applicatoin"
+        "Link object files into a RTEMS application"
         run_str = '${RTEMS_LD} ${RTEMS_LINKFLAGS} --cc ${CC} ${SRC} -o ${TGT[0].abspath()} ${STLIB_MARKER} ${STLIBPATH_ST:STLIBPATH} ${STLIB_ST:STLIB} ${LIBPATH_ST:LIBPATH} ${LIB_ST:LIB}'
         ext_out = ['.rap']
         vars    = ['RTEMS_LINKFLAGS', 'LINKDEPS']

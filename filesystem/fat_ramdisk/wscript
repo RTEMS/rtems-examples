@@ -1,5 +1,5 @@
-# Copyright 2013 Gedare Bloom (gedare@rtems.org) 
-# 
+# Copyright 2013 Gedare Bloom (gedare@rtems.org)
+#
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
@@ -12,7 +12,7 @@ version = "1.0.0"
 from waflib.Task import Task
 from waflib.TaskGen import extension
 class bin2c(Task):
-  run_str = 'rtems-bin2c ${SRC} ${TGT[0].abspath()} && ' + \
+  run_str = '${RTEMS_BIN2C} ${SRC} ${TGT[0].abspath()} && ' + \
             'touch ${TGT[1].abspath()}'
   ext_out = ['.h']
 
@@ -46,4 +46,3 @@ def build(bld):
         defines = bld.defines,
         cflags = cflags,
         source = 'init.c FilesystemImage')
-

@@ -1,0 +1,9 @@
+# Waf build script for an RTEMS 
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    rtems.build(bld)
+
+    bld(features = 'c cprogram',
+        target = 'triple_period',
+        source = ['init.c', 'tasks.c'])

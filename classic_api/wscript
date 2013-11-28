@@ -6,3 +6,5 @@
 import rtems_waf.rtems as rtems
 
 def build(bld):
+    bld.recurse('classic_signal')
+    bld.recurse('triple_period')

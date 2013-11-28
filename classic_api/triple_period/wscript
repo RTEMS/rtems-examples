@@ -1,4 +1,4 @@
-# Waf build script for an RTEMS 
+# Waf build script for an RTEMS triple_period 
 import rtems_waf.rtems as rtems
 
 def build(bld):

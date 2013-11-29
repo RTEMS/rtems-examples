@@ -1,0 +1,48 @@
+#Copyright 2013 Gedare Bloom (gedare@rtems.org)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+# Waf build script for RTEMS fat_ramdisk
+
+import rtems_waf.rtems as rtems
+version = "1.0.0"
+
+## FilesystemImage processing
+from waflib.Task import Task
+from waflib.TaskGen import extension
+class bin2c(Task):
+  run_str = '${RTEMS_BIN2C} ${SRC} ${TGT[0].abspath()} && ' + \
+            'touch ${TGT[1].abspath()}'
+  ext_out = ['.h']
+
+@extension('FilesystemImage')
+def process_FilesystemImage(self, node):
+  c_node = node.change_ext('.c')
+  h_node = node.change_ext('.h')
+  self.create_task('bin2c', node, [c_node, h_node])
+  self.source.append(c_node)
+
+def build(bld):
+    rtems.build(bld)
+
+    arch_bsp = bld.get_env()['RTEMS_ARCH_BSP']
+    arch = bld.get_env()['RTEMS_ARCH']
+    bsp = bld.get_env()['RTEMS_BSP']
+    cflags = bld.get_env()['CFLAGS']
+
+    #
+    # The include paths and defines.
+    #
+    bld.includes = ['.']
+    bld.defines = ['PACKAGE_VERSION="' + version + '"']
+    bld(rule='tar -C ' + bld.path.find_dir('rootfs').abspath() + \
+              ' -cf ${TGT} .',
+        target='FilesystemImage')
+
+    bld(features = 'c cprogram',
+        target = 'crc.exe',
+        includes = bld.includes,
+        defines = bld.defines,
+        cflags = cflags,
+        source = 'init.c FilesystemImage crc_32.c')

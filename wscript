@@ -34,6 +34,7 @@ def build(bld):
     bld.recurse('hello')
     bld.recurse('filesystem/fat_ramdisk')
     bld.recurse('classic_api')
+    bld.recurse('file_io')
 
 def rebuild(ctx):
     import waflib.Options

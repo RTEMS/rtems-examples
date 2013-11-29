@@ -32,6 +32,7 @@ def build(bld):
     rtems.build(bld)
     bld.env.CFLAGS += ['-O2','-g']
     bld.recurse('hello')
+    bld.recurse('gdb')
     bld.recurse('filesystem/fat_ramdisk')
     bld.recurse('classic_api')
     bld.recurse('file_io')

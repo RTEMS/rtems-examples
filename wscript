@@ -37,6 +37,7 @@ def build(bld):
     bld.recurse('classic_api')
     bld.recurse('file_io')
     bld.recurse('ticker')
+    bld.recurse('uboot')
 
 def rebuild(ctx):
     import waflib.Options

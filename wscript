@@ -41,6 +41,7 @@ def build(bld):
     bld.recurse('led')
     bld.recurse('misc')
     bld.recurse('benchmarks')
+    bld.recurse('micromonitor')
 
 def rebuild(ctx):
     import waflib.Options

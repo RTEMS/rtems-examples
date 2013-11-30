@@ -12,3 +12,4 @@ def build(bld):
     bld.recurse('delay')
     bld.recurse('timer_server')
     bld.recurse('event_server')
+    bld.recurse('timeout_event')

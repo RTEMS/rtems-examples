@@ -10,5 +10,5 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'display_cpu',
+        target = 'display_cpu.exe',
         source = ['test.c'],)

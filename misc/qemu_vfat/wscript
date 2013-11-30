@@ -12,7 +12,7 @@ def build(bld):
     bld.defines = ['USE_START_TEST']
 
     bld(features = 'c cprogram',
-        target = 'qemu_vfat',
+        target = 'qemu_vfat.exe',
         defines = bld.defines,
         source = ['init.c', 'start_test.c'])
 

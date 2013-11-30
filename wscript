@@ -39,6 +39,7 @@ def build(bld):
     bld.recurse('ticker')
     bld.recurse('uboot')
     bld.recurse('led')
+    bld.recurse('misc')
 
 def rebuild(ctx):
     import waflib.Options

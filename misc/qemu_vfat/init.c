@@ -32,7 +32,7 @@
 fstab_t fs_table[] = {
   {
     "/dev/hda1", MOUNT_POINT,
-    &msdos_ops, RTEMS_FILESYSTEM_READ_WRITE,
+    "dosfs", RTEMS_FILESYSTEM_READ_WRITE,
     FSMOUNT_MNT_OK | FSMOUNT_MNTPNT_CRTERR | FSMOUNT_MNT_FAILED,
     0
   },

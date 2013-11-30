@@ -15,3 +15,4 @@ def build(bld):
     bld.recurse('timeout_event')
     bld.recurse('ratemon1')
     bld.recurse('ratemon2')
+    bld.recurse('ratemon_cond_server')

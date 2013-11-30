@@ -1,0 +1,17 @@
+# Copyright 2013 Gedare Bloom (gedare@rtems.org)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+import rtems_waf.rtems as rtems
+
+def build(bld):
+
+    path = 'nbench-byte-2.2.3/'
+
+    bld(features = 'c cprogram',
+        target = 'nbench.exe',
+        source = ['main.c', path + 'emfloat.c', path + 'hardware.c',
+            path + 'misc.c', path + 'nbench0.c', path + 'nbench1.c',
+            path + 'sysspec.c'],
+        lib = ['m'])

@@ -12,3 +12,4 @@ def build(bld):
     if (arch == 'i386'):
         bld.recurse('x86_display_cpu')
     bld.recurse('bspcmdline')
+    bld.recurse('nanosecond_tick_wrap')

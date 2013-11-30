@@ -3,9 +3,13 @@
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
+# Waf build script for an RTEMS Hello
 import rtems_waf.rtems as rtems
 
 def build(bld):
-    bld.recurse('timer')
-    bld.recurse('sem_server')
-    bld.recurse('msg_server')
+    rtems.build(bld)
+
+    bld(features = 'c cprogram',
+        target = 'msg_server',
+        source = ['init.c'])
+

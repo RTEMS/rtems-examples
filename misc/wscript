@@ -14,3 +14,4 @@ def build(bld):
     bld.recurse('bspcmdline')
     bld.recurse('nanosecond_tick_wrap')
     bld.recurse('qemu_vfat')
+    bld.recurse('applib')

@@ -367,7 +367,7 @@ def check_networking(ctx):
     return check(ctx, 'RTEMS_NETWORKING')
 
 def check_atomic(ctx):
-    return check(ctx, 'RTEMS_ATROMIC')
+    return check(ctx, 'RTEMS_ATOMIC')
 
 def arch(arch_bsp):
     """ Given an arch/bsp return the architecture."""

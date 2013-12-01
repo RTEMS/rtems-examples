@@ -181,10 +181,22 @@ def configure(conf):
         conf.env.LIB       = flags['LIB']
 
         #
+        # Checks for various RTEMS features.
+        #
+        conf.multicheck({ 'header_name': 'rtems.h'},
+                        { 'header_name': 'rtems/score/cpuopts.h'},
+                        msg = 'Checking for RTEMS headers',
+                        mandatory = True)
+        load_cpuopts(conf, ab, conf.options.rtems_path)
+
+        #
         # Add tweaks.
         #
         tweaks(conf, ab)
 
+        #
+        # Show commands support the user can supply.
+        #
         conf.env.SHOW_COMMANDS = show_commands
 
         conf.setenv('', env)
@@ -198,6 +210,41 @@ def configure(conf):
 def build(bld):
     if bld.env.SHOW_COMMANDS == 'yes':
         output_command_line()
+
+def load_cpuopts(conf, arch_bsp, rtems_path):
+    options = ['RTEMS_DEBUG',
+               'RTEMS_MULTIPROCESSING',
+               'RTEMS_NEWLIB',
+               'RTEMS_POSIX_API',
+               'RTEMS_SMP',
+               'RTEMS_NETWORKING',
+               'RTEMS_ATOMIC']
+    for opt in options:
+        enabled = check_opt(conf, opt, 'rtems/score/cpuopts.h', arch_bsp, rtems_path)
+        if enabled:
+            conf.env[opt] = 'Yes'
+        else:
+            conf.env[opt] = 'No'
+
+def check_opt(conf, opt, header, arch_bsp, rtems_path):
+    code  = '#include <%s>%s' % (header, os.linesep)
+    code += '#ifndef %s%s' % (opt, os.linesep)
+    code += ' #error %s is not defined%s' % (opt, os.linesep)
+    code += '#endif%s' % (os.linesep)
+    code += '#if %s%s' % (opt, os.linesep)
+    code += ' /* %s is true */%s' % (opt, os.linesep)
+    code += '#else%s' % (os.linesep)
+    code += ' #error %s is false%s' % (opt, os.linesep)
+    code += '#endif%s' % (os.linesep)
+    code += 'int main() { return 0; }%s' % (os.linesep)
+    try:
+        conf.check_cc(fragment = code,
+                      execute = False,
+                      define_ret = False,
+                      msg = 'Checking for %s' % (opt))
+    except conf.errors.WafError:
+        return False;
+    return True
 
 def tweaks(conf, arch_bsp):
     #
@@ -296,6 +343,32 @@ def check_options(ctx, rtems_tools, rtems_path, rtems_version, rtems_archs, rtem
 
     return rtems_bin, tools, archs, arch_bsps
 
+def check(ctx, option):
+    if option in ctx.env:
+        return ctx.env[option] == 'Yes'
+    return False
+
+def check_debug(ctx):
+    return check(ctx, 'RTEMS_DEBUG')
+
+def check_multiprocessing(ctx):
+    return check(ctx, 'RTEMS_MULTIPROCESSING')
+
+def check_newlib(ctx):
+    return check(ctx, 'RTEMS_NEWLIB')
+
+def check_posix(ctx):
+    return check(ctx, 'RTEMS_POSIX_API')
+
+def check_smp(ctx):
+    return check(ctx, 'RTEMS_SMP')
+
+def check_networking(ctx):
+    return check(ctx, 'RTEMS_NETWORKING')
+
+def check_atomic(ctx):
+    return check(ctx, 'RTEMS_ATROMIC')
+
 def arch(arch_bsp):
     """ Given an arch/bsp return the architecture."""
     return _arch_from_arch_bsp(arch_bsp).split('-')[0]
@@ -315,7 +388,8 @@ def filter(ctx, filter, items):
     if rtems_filters is None:
         return items
     if type(rtems_filters) is not dict:
-        ctx.fatal("Invalid RTEMS filter type, ie { 'tools': { 'in': [], 'out': [] }, 'arch': {}, 'bsps': {} }")
+        ctx.fatal("Invalid RTEMS filter type, " \
+                  "ie { 'tools': { 'in': [], 'out': [] }, 'arch': {}, 'bsps': {} }")
     if filter not in rtems_filters:
         return items
     items_in = []
@@ -436,8 +510,10 @@ def _find_tools(conf, arch, paths, tools):
         arch_tools['OBJCOPY']     = conf.find_program([arch + '-objcopy'], path_list = paths)
         arch_tools['READELF']     = conf.find_program([arch + '-readelf'], path_list = paths)
         arch_tools['STRIP']       = conf.find_program([arch + '-strip'], path_list = paths)
-        arch_tools['RTEMS_LD']    = conf.find_program(['rtems-ld'], path_list = paths, mandatory = False)
-        arch_tools['RTEMS_BIN2C'] = conf.find_program(['rtems-bin2c'], path_list = paths, mandatory = False)
+        arch_tools['RTEMS_LD']    = conf.find_program(['rtems-ld'], path_list = paths,
+                                                      mandatory = False)
+        arch_tools['RTEMS_BIN2C'] = conf.find_program(['rtems-bin2c'], path_list = paths,
+                                                      mandatory = False)
         arch_tools['TAR']         = conf.find_program(['tar'], mandatory = False)
         tools[arch] = arch_tools
     return tools
@@ -620,13 +696,16 @@ def _strip_cflags(cflags):
 def _log_header(conf):
     conf.to_log('-----------------------------------------')
 
+from waflib import Task
 from waflib import TaskGen
+from waflib import Utils
+from waflib import Node
 from waflib.Tools.ccroot import link_task, USELIB_VARS
 USELIB_VARS['rap'] = set(['RTEMS_LINKFLAGS'])
 @TaskGen.extension('.c')
 class rap(link_task):
-        "Link object files into a RTEMS application"
-        run_str = '${RTEMS_LD} ${RTEMS_LINKFLAGS} --cc ${CC} ${SRC} -o ${TGT[0].abspath()} ${STLIB_MARKER} ${STLIBPATH_ST:STLIBPATH} ${STLIB_ST:STLIB} ${LIBPATH_ST:LIBPATH} ${LIB_ST:LIB}'
-        ext_out = ['.rap']
-        vars    = ['RTEMS_LINKFLAGS', 'LINKDEPS']
-        inst_to = '${BINDIR}'
+    "Link object files into a RTEMS application"
+    run_str = '${RTEMS_LD} ${RTEMS_LINKFLAGS} --cc ${CC} ${SRC} -o ${TGT[0].abspath()} ${STLIB_MARKER} ${STLIBPATH_ST:STLIBPATH} ${STLIB_ST:STLIB} ${LIBPATH_ST:LIBPATH} ${LIB_ST:LIB}'
+    ext_out = ['.rap']
+    vars    = ['RTEMS_LINKFLAGS', 'LINKDEPS']
+    inst_to = '${BINDIR}'

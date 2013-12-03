@@ -3,11 +3,12 @@
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
+# Waf build script for an RTEMS Hello
 import rtems_waf.rtems as rtems
 
 def build(bld):
-    bld.recurse('hello_world_c')
-    if rtems.check_posix:
-        bld.recurse('posix_hello_world')
-        bld.recurse('both_hello')
+    rtems.build(bld)
 
+    bld(features = 'c cprogram',
+        target = 'both_hello.exe',
+        source = ['test.c'])

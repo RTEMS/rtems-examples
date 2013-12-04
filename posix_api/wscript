@@ -6,7 +6,7 @@
 import rtems_waf.rtems as rtems
 
 def build(bld):
-    if rtems.check_posix():
+    if rtems.check_posix(bld):
         bld.recurse('psx_example_1')
         bld.recurse('psx_example_2')
         bld.recurse('psx_example_3')

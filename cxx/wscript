@@ -1,0 +1,13 @@
+# Copyright 2013 Gedare Bloom (gedare@rtems.org)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    # These tests require C++
+    if bld.env['CXX'] is not None:
+        bld.recurse('libcpp')
+        bld.recurse('cxx_throw')
+

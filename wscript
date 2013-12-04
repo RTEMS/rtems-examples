@@ -43,6 +43,7 @@ def build(bld):
     bld.recurse('benchmarks')
     bld.recurse('micromonitor')
     bld.recurse('posix_api')
+    bld.recurse('cxx')
 
 def rebuild(ctx):
     import waflib.Options

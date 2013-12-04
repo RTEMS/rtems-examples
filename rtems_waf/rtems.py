@@ -134,6 +134,9 @@ def configure(conf):
                                                               conf.options.rtems_archs,
                                                               conf.options.rtems_bsps)
 
+    if rtems_tools is None:
+        conf.fatal('RTEMS tools not found.')
+
     _log_header(conf)
 
     conf.msg('Architectures', ', '.join(archs), 'YELLOW')

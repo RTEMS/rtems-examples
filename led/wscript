@@ -21,3 +21,6 @@ def build(bld):
         bld.recurse('posix_delay_nanosleep')
         bld.recurse('posix_delay_sleep')
         bld.recurse('posix_mutex_server')
+        # This test requires POSIX and C++
+        if bld.env['CXX'] is not None:
+            bld.recurse('complex1')

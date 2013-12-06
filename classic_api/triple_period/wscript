@@ -5,5 +5,5 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'triple_period',
+        target = 'triple_period.exe',
         source = ['init.c', 'tasks.c'])

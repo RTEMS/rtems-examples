@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'cxx cxxstlib',
-        target = 'foo',
+        target = 'foo.exe',
         source = ['foo.cc', 'foo1.cpp'])
 

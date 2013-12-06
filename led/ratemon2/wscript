@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'ratemon2',
+        target = 'ratemon2.exe',
         source = ['init.c'])
 

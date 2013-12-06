@@ -5,5 +5,5 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'classic_signal',
+        target = 'classic_signal.exe',
         source = ['test.c'])

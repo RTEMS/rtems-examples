@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'timeout_event',
+        target = 'timeout_event.exe',
         source = ['init.c'])
 

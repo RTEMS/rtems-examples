@@ -10,5 +10,5 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'overwrite',
+        target = 'overwrite.exe',
         source = ['overwrite.c', 'rtems_init.c'])

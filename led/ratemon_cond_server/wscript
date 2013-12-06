@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'ratemon_cond_server',
+        target = 'ratemon_cond_server.exe',
         source = ['test.c'])
 

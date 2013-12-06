@@ -10,5 +10,5 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cstlib',
-        target = 'UserLib',
+        target = 'UserLib.exe',
         source = ['file_1.c'])

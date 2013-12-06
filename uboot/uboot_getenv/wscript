@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'uboot_getenv',
+        target = 'uboot_getenv.exe',
         source = ['test.c'])
 

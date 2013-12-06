@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'low_ticker',
+        target = 'low_ticker.exe',
         source = ['init.c'])
 

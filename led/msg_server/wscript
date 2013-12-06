@@ -10,6 +10,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'msg_server',
+        target = 'msg_server.exe',
         source = ['init.c'])
 

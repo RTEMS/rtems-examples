@@ -21,7 +21,12 @@ Steps
 3. Unpack this package somewhere, anywhere on your disk and change into the top
    level directory.
 
-4. Configure with your specific settings. In this case the path to the tools
+4. Populate the git submodule:
+
+    $ git submodule init
+    $ git submodule update
+
+5. Configure with your specific settings. In this case the path to the tools
    and RTEMS and provided on the command line and so do not need to be in your
    path or environment [1] and we limit the build to 'sparc/sis' BSP:
 
@@ -32,11 +37,11 @@ Steps
    You can use '--rtems-archs=sparc,i386' or
    '--rtems-bsps=sparc/sis,i386/pc586' to build for more than BSP at a time.
 
-5. Build:
+6. Build:
 
    $ waf
 
-6. Run the executable using the simulator:
+7. Run the executable using the simulator:
 
     $ $HOME/Development/rtems/4.11/bin/sparc-rtems4.11-run \
        ./build/sparc-rtems4.11-sis/hello

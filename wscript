@@ -1,9 +1,9 @@
 # Copyright 2013 Chris Johns (chrisj@rtems.org)
-# 
+#
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
-# Waf build script for RTEMS examples 
+# Waf build script for RTEMS examples
 #
 # To configure, build and run do:
 #
@@ -17,7 +17,12 @@
 # to build for more than BSP at a time.
 #
 
-import rtems_waf.rtems as rtems
+try:
+    import rtems_waf.rtems as rtems
+except:
+    print 'error: no rtems_waf git submodule; see README.waf'
+    import sys
+    sys.exit(1)
 
 def init(ctx):
     rtems.init(ctx)

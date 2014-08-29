@@ -67,10 +67,18 @@ uint8_t MPC8313_LED_Count;
 #define OUT_GPIO(g) *(gpio+((g)/10)) |=  (1<<(((g)%10)*3)) 
 #define GPIO_SET *(gpio+7)   // sets   bits which are 1 ignores bits which are 0 
 #define GPIO_CLR *(gpio+10) // clears bits which are 1 ignores bits which are 0
+// For GPIO# >= 32 (RPi B+)
+#define GPIO_SET_EXT *(gpio+8)  // sets   bits which are 1 ignores bits which are 0
+#define GPIO_CLR_EXT *(gpio+11) // clears bits which are 1 ignores bits which are 0
 
-#define LED_INIT()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; OUT_GPIO(16);} while(0)
-#define LED_ON()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_CLR = 1 << 16;} while(0)
-#define LED_OFF()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_SET = 1 << 16;} while(0)
+// RPi B
+//#define LED_INIT()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; OUT_GPIO(16);} while(0)
+//#define LED_ON()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_CLR = 1 << 16;} while(0)
+//#define LED_OFF()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_SET = 1 << 16;} while(0)
+// RPi B+ => led 47
+#define LED_INIT()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; OUT_GPIO(47);} while(0)
+#define LED_ON()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_CLR_EXT = 1 << (47 % 32);} while(0)
+#define LED_OFF()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_SET_EXT = 1 << (47 % 32);} while(0)
 
 #else
 /* default case is to print */

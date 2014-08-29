@@ -17,14 +17,12 @@ rtems_id     Timer2;
 
 rtems_timer_service_routine Timer_Routine( rtems_id id, void *ignored )
 {
-  rtems_status_code status;
-
   if ( id == Timer1 )
     LED_OFF();
   else
     LED_ON();
 
-  status = rtems_timer_server_fire_after(
+  (void) rtems_timer_server_fire_after(
     id,
     2 * rtems_clock_get_ticks_per_second(),
     Timer_Routine,
@@ -36,36 +34,27 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  rtems_status_code status;
-
   puts( "\n\n*** LED BLINKER -- timer_server ***" );
 
   LED_INIT();
 
-  status = rtems_timer_initiate_server(
+  (void) rtems_timer_initiate_server(
     1, 
     RTEMS_MINIMUM_STACK_SIZE * 2,
     RTEMS_DEFAULT_ATTRIBUTES
   );
 
-  if ( status != RTEMS_SUCCESSFUL )
-    fputs( "timer create server failed\n", stderr );
+  (void) rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '1' ), &Timer1);
 
-  status = rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '1' ), &Timer1);
-  if ( status != RTEMS_SUCCESSFUL )
-    fputs( "Timer1 create failed\n", stderr );
-
-  status = rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '2' ), &Timer2);
-  if ( status != RTEMS_SUCCESSFUL )
-    fputs( "Timer2 create failed\n", stderr );
+  (void) rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '2' ), &Timer2);
 
   Timer_Routine(Timer1, NULL);
 
-  status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
+  (void) rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
 
   Timer_Routine(Timer2, NULL);
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 
@@ -79,7 +68,7 @@ rtems_task Init(
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
-#define CONFIGURE_EXTRA_TASK_STACKS         (3 * RTEMS_MINIMUM_STACK_SIZE)
+#define CONFIGURE_EXTRA_TASK_STACKS         (RTEMS_MINIMUM_STACK_SIZE)
 
 #define CONFIGURE_INIT
 #include <rtems/confdefs.h>

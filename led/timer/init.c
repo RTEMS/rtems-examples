@@ -37,15 +37,13 @@ void LED_Change_Routine( void ) {
 
 rtems_timer_service_routine Timer_Routine( rtems_id id, void *ignored )
 {
-  rtems_status_code status;
-
   if ( id == Timer1 )
     led_value = 1;
   else
     led_value = 2;
   led_do_print = 1;
 
-  status = rtems_timer_fire_after(
+  (void) rtems_timer_fire_after(
     id,
     2 * rtems_clock_get_ticks_per_second(),
     Timer_Routine,
@@ -57,34 +55,28 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  rtems_status_code status;
-
   puts( "\n\n*** LED BLINKER -- timer ***" );
 
   LED_INIT();
 
-  status = rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '1' ), &Timer1);
-  if ( status != RTEMS_SUCCESSFUL )
-    fputs( "Timer1 create failed\n", stderr );
+  (void) rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '1' ), &Timer1);
 
-  status = rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '2' ), &Timer2);
-  if ( status != RTEMS_SUCCESSFUL )
-    fputs( "Timer2 create failed\n", stderr );
+  (void) rtems_timer_create(rtems_build_name( 'T', 'M', 'R', '2' ), &Timer2);
 
   Timer_Routine(Timer1, NULL);
   LED_Change_Routine();
 
-  status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
+  (void) rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
 
   Timer_Routine(Timer2, NULL);
   LED_Change_Routine();
 
   while (1) {
-    status = rtems_task_wake_after( 10 );
+    (void) rtems_task_wake_after( 10 );
     LED_Change_Routine();
   }
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 
@@ -97,8 +89,6 @@ rtems_task Init(
 #define CONFIGURE_MAXIMUM_TIMERS        2
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
-
-#define CONFIGURE_EXTRA_TASK_STACKS         (3 * RTEMS_MINIMUM_STACK_SIZE)
 
 #define CONFIGURE_INIT
 #include <rtems/confdefs.h>

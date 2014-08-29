@@ -16,7 +16,6 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  rtems_status_code status;
   rtems_id          period_id1;
   rtems_id          period_id2;
   rtems_interval    ticks;
@@ -25,39 +24,38 @@ rtems_task Init(
 
   LED_INIT();
 
-  status = rtems_rate_monotonic_create(
+  (void) rtems_rate_monotonic_create(
     rtems_build_name( 'P', 'E', 'R', '1' ),
     &period_id1
   );
 
-  status = rtems_rate_monotonic_create(
+  (void) rtems_rate_monotonic_create(
     rtems_build_name( 'P', 'E', 'R', '2' ),
     &period_id2
   );
 
   ticks = rtems_clock_get_ticks_per_second();
 
-  status = rtems_rate_monotonic_period( period_id1, 2 * ticks );
+  (void) rtems_rate_monotonic_period( period_id1, 2 * ticks );
   LED_OFF();
 
   (void) rtems_task_wake_after( ticks );
-  status = rtems_rate_monotonic_period( period_id2, 2 * ticks );
+  (void) rtems_rate_monotonic_period( period_id2, 2 * ticks );
   LED_ON();
 
   while (1) {
-    status = rtems_rate_monotonic_period( period_id1, 2 * ticks );
+    (void) rtems_rate_monotonic_period( period_id1, 2 * ticks );
     LED_OFF();
 
-    status = rtems_rate_monotonic_period( period_id2, 2 * ticks );
+    (void) rtems_rate_monotonic_period( period_id2, 2 * ticks );
     LED_ON();
   }
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 /**************** START OF CONFIGURATION INFORMATION ****************/
 
-#define CONFIGURE_INIT
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
@@ -66,8 +64,7 @@ rtems_task Init(
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
-#define CONFIGURE_EXTRA_TASK_STACKS         (3 * RTEMS_MINIMUM_STACK_SIZE)
-
+#define CONFIGURE_INIT
 #include <rtems/confdefs.h>
 
 /****************  END OF CONFIGURATION INFORMATION  ****************/

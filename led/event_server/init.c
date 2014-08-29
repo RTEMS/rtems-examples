@@ -17,12 +17,11 @@ rtems_task Test_task(
   rtems_task_argument unused
 )
 {
-  rtems_event_set   events;
-  rtems_status_code status;
+  rtems_event_set events;
 
   for ( ; ; ) {
     events = 0;
-    status = rtems_event_receive(
+    (void) rtems_event_receive(
       (RTEMS_EVENT_1 | RTEMS_EVENT_2),
       RTEMS_EVENT_ANY,
       RTEMS_NO_TIMEOUT,
@@ -55,12 +54,12 @@ rtems_task Init(
 
   task_name = rtems_build_name( 'T', 'A', '1', ' ' );
 
-  status = rtems_task_create(
+  (void) rtems_task_create(
     task_name, 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
     RTEMS_DEFAULT_ATTRIBUTES, &task_id
   );
 
-  status = rtems_task_start( task_id, Test_task, 1 );
+  (void) rtems_task_start( task_id, Test_task, 1 );
 
   for (count=0; ; count++) {
 
@@ -69,10 +68,10 @@ rtems_task Init(
     if ( status != RTEMS_SUCCESSFUL )
       fputs( "send did not work\n", stderr );
 
-    status = rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
+    (void) rtems_task_wake_after( rtems_clock_get_ticks_per_second() );
   }
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 /**************** START OF CONFIGURATION INFORMATION ****************/

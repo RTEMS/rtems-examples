@@ -164,6 +164,12 @@ rtems_task Init(
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
 #define CONFIGURE_MAXIMUM_TASKS 1
+/*
+ * GCC C++ support requires Classic Semaphores but this could change to 
+ * POSIX mutexes at some point in the future. When that happens, this will
+ * need to change.
+ */
+#define CONFIGURE_MAXIMUM_SEMAPHORES 1
 
 #define CONFIGURE_INIT
 

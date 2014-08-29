@@ -7,6 +7,7 @@ import rtems_waf.rtems as rtems
 
 def build(bld):
     bld.recurse('hello_world_c')
+    bld.recurse('main')
     if rtems.check_posix(bld):
         bld.recurse('posix_hello_world')
         bld.recurse('both_hello')

@@ -16,7 +16,6 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  rtems_status_code status;
   rtems_id          period_id;
   rtems_interval    ticks;
   uint32_t          count;
@@ -25,7 +24,7 @@ rtems_task Init(
 
   LED_INIT();
 
-  status = rtems_rate_monotonic_create(
+  (void) rtems_rate_monotonic_create(
     rtems_build_name( 'P', 'E', 'R', '1' ),
     &period_id
   );
@@ -33,14 +32,14 @@ rtems_task Init(
   ticks = rtems_clock_get_ticks_per_second();
 
   for (count=0; ; count++) {
-    status = rtems_rate_monotonic_period( period_id, ticks );
+    (void) rtems_rate_monotonic_period( period_id, ticks );
     if ( (count % 2) == 0 )
       LED_OFF();
     else
       LED_ON();
   }
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 /**************** START OF CONFIGURATION INFORMATION ****************/

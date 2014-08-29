@@ -27,8 +27,12 @@ rtems_task Init(
 
   for (count=0; ; count++) {
 
-    status = rtems_event_receive( RTEMS_EVENT_1,
-      RTEMS_DEFAULT_OPTIONS, rtems_clock_get_ticks_per_second(), &events );
+    status = rtems_event_receive(
+      RTEMS_EVENT_1,
+      RTEMS_DEFAULT_OPTIONS,
+      rtems_clock_get_ticks_per_second(),
+      &events
+    );
     if ( status != RTEMS_TIMEOUT )
       fputs( "receive did not timeout\n", stderr );
 
@@ -39,12 +43,11 @@ rtems_task Init(
 
   }
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 /**************** START OF CONFIGURATION INFORMATION ****************/
 
-#define CONFIGURE_INIT
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
@@ -52,8 +55,7 @@ rtems_task Init(
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
-#define CONFIGURE_EXTRA_TASK_STACKS         (3 * RTEMS_MINIMUM_STACK_SIZE)
-
+#define CONFIGURE_INIT
 #include <rtems/confdefs.h>
 
 /****************  END OF CONFIGURATION INFORMATION  ****************/

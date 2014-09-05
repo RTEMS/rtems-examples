@@ -35,11 +35,11 @@ rtems_task Init(
   puts( "\n\n*** untar/imfs/crc example ***" );
 
   printf("Unpacking tar filesystem\nThis may take awhile...\n");
-  if(Untar_FromMemory(FilesystemImage, FilesystemImage_size) != 0) {
+  if(Untar_FromMemory((char*) FilesystemImage, FilesystemImage_size) != 0) {
     printf("Can't unpack tar filesystem\n");
     exit(1);
   }
-	
+
   crc32file(in_file,&crc, &charcnt);
   printf("%08lX %7ld %s\n", crc, charcnt, in_file);
 

@@ -2,6 +2,8 @@
  *  Wrapper for Overwrite main().
  */
 
+#include <stdlib.h>
+
 #include <bsp.h>
 
 int main( int, char ** );

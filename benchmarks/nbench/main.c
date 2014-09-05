@@ -1,7 +1,7 @@
 /*
  *  Written by Petri Rokka <petri.rokka@tut.fi> based
  *  upon numerous RTEMS examples.
- *   
+ *
  *  The license and distribution terms for this file may be
  *  found in the file LICENSE in this distribution or at
  *  http://www.rtems.com/license/LICENSE.
@@ -63,7 +63,7 @@ int nbench_main(int argc, char **argv);
 
 rtems_task task_nbench(rtems_task_argument arg)
 {
-  char **args[1] = {"./nbench"};
+  char *args[1] = {"./nbench"};
   nbench_main(1, args);
 }
 
@@ -71,7 +71,7 @@ rtems_task Init(rtems_task_argument arg)
 {
   rtems_status_code   sc;
   rtems_id            task_id_nbench;
-  char              **args[1] = {"./nbench"};
+  char               *args[1] = {"./nbench"};
   rtems_interval      tickspersec;
 
   /*

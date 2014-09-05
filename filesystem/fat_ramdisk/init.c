@@ -56,7 +56,7 @@ int setup_ramdisk (const char* mntpath)
 {
   rtems_device_major_number major;
   rtems_status_code         sc;
-  
+
   /*
    * Register the RAM Disk driver.
    */
@@ -111,7 +111,7 @@ rtems_task Init(
   puts( "\n\n*** ramdisk/fat example ***" );
 
   printf("Unpacking tar filesystem\nThis may take awhile...\n");
-  if(Untar_FromMemory(FilesystemImage, FilesystemImage_size) != 0) {
+  if(Untar_FromMemory((char*) FilesystemImage, FilesystemImage_size) != 0) {
     printf("Can't unpack tar filesystem\n");
     exit(1);
   }

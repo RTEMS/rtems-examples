@@ -1,4 +1,5 @@
 # Copyright 2013 Gedare Bloom (gedare@rtems.org)
+# Copyright 2014 Chris Johns (chrisj@rtems.org)
 #
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
@@ -8,6 +9,13 @@ import rtems_waf.rtems as rtems
 
 def build(bld):
     rtems.build(bld)
+
+    if rtems.check_env(bld, 'RTEMS_TLD'):
+        bld(features = 'c rtrace',
+            target = 'both_hello.texe',
+            source = ['test.c'],
+            rtrace_cfg = '../../hello/both_hello/hello.ini',
+            rtrace_wrapper = 'hello-test')
 
     bld(features = 'c cprogram',
         target = 'both_hello.exe',

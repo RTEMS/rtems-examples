@@ -46,3 +46,12 @@ def build(bld):
         defines = bld.defines,
         cflags = cflags,
         source = 'init.c FilesystemImage')
+
+    if rtems.check_env(bld, 'RTEMS_TLD'):
+        bld(features = 'c rtrace',
+            target = 'fat_ramdisk.texe',
+            includes = bld.includes,
+            defines = bld.defines,
+            cflags = cflags,
+            source = 'init.c FilesystemImage',
+            rtrace_cfg = '../../filesystem/fat_ramdisk/fat_ramdisk.ini')

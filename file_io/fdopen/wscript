@@ -4,5 +4,12 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'test.exe',
+        target = 'fdopen.exe',
         source = ['test.c'])
+
+    if rtems.check_env(bld, 'RTEMS_TLD'):
+        bld(features = 'c rtrace',
+            target = 'fdopen.texe',
+            source = ['test.c'],
+            rtrace_cfg = '../../file_io/fdopen/fdopen.ini',
+            rtrace_wrapper = 'fdopen_wrapper')

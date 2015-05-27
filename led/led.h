@@ -80,6 +80,29 @@ uint8_t MPC8313_LED_Count;
 #define LED_ON()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_CLR_EXT = 1 << (47 % 32);} while(0)
 #define LED_OFF()  do { unsigned int *gpio = (unsigned int *)BCM2835_GPIO_REGS_BASE; GPIO_SET_EXT = 1 << (47 % 32);} while(0)
 
+#elif defined(STM32F4_FAMILY_F4XXXX)
+
+#include <bsp/io.h> //Everything we need is in io.h
+
+//STM32F4 Discovery Board, LED4: PORTD, 12
+stm32f4_gpio_config led3config =
+{
+	.fields={
+		.pin_first = STM32F4_GPIO_PIN(3, 12),
+	.pin_last = STM32F4_GPIO_PIN(3, 12),
+	.mode = STM32F4_GPIO_MODE_OUTPUT,
+	.otype = STM32F4_GPIO_OTYPE_PUSH_PULL,
+	.ospeed = STM32F4_GPIO_OSPEED_2_MHZ,
+	.pupd = STM32F4_GPIO_NO_PULL,
+	.output = 1,
+	.af = 0
+   }
+};
+
+#define LED_INIT() stm32f4_gpio_set_config(&led3config)
+#define LED_ON() stm32f4_gpio_set_output(STM32F4_GPIO_PIN(3,12), 1)
+#define LED_OFF() stm32f4_gpio_set_output(STM32F4_GPIO_PIN(3,12), 0)
+
 #else
 /* default case is to print */
 

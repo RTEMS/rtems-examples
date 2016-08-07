@@ -1,5 +1,5 @@
 /*
- *  Simple test program -- simplified version of sample test hello.
+ *  Program to print POSIX Scheduler Characteristics
  */
 
 #include <stdlib.h>
@@ -30,39 +30,16 @@ void print_sched_info(
               (long)t.tv_sec, (long)t.tv_nsec );
 }
 
-
-#if defined(__rtems__)
-  #include <bsp.h>
-
-rtems_task Init(
-  rtems_task_argument ignored
-)
-#else
 int main()
-#endif
 {
   print_sched_info( "SCHED_OTHER", SCHED_OTHER );
   print_sched_info( "SCHED_FIFO", SCHED_FIFO );
   print_sched_info( "SCHED_RR", SCHED_RR );
+#if defined(SCHED_SPORADIC)
+  print_sched_info( "SCHED_SPORADIC", SCHED_RR );
+#else
+  printf( "SCHED_SPORADIC is not supported\n" );
+#endif
 
   exit( 0 );
 }
-
-#if defined(__rtems__)
-/* configuration information */
-
-/* NOTICE: the clock driver is explicitly disabled */
-#define CONFIGURE_APPLICATION_DOES_NOT_NEED_CLOCK_DRIVER
-#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
-
-#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
-#define CONFIGURE_MICROSECONDS_PER_TICK 1000
-#define CONFIGURE_TICKS_PER_TIMESLICE   1
-#define CONFIGURE_MAXIMUM_TASKS 1
-
-#define CONFIGURE_INIT
-
-#include <rtems/confdefs.h>
-#endif
-
-/* end of file */

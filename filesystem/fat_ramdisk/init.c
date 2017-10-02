@@ -18,7 +18,7 @@
 #include <rtems/untar.h>
 #include <rtems/shell.h>
 
-#include "FilesystemImage.h"
+#include "fs-root-tar.h"
 
 
 /**
@@ -111,7 +111,7 @@ rtems_task Init(
   puts( "\n\n*** ramdisk/fat example ***" );
 
   printf("Unpacking tar filesystem\nThis may take awhile...\n");
-  if(Untar_FromMemory((char*) FilesystemImage, FilesystemImage_size) != 0) {
+  if(Untar_FromMemory((char*) fs_root_tar, fs_root_tar_size) != 0) {
     printf("Can't unpack tar filesystem\n");
     exit(1);
   }

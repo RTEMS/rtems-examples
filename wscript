@@ -17,6 +17,7 @@
 # to build for more than BSP at a time.
 #
 
+rtems_version = "4.12"
 try:
     import rtems_waf.rtems as rtems
 except:
@@ -25,7 +26,7 @@ except:
     sys.exit(1)
 
 def init(ctx):
-    rtems.init(ctx)
+    rtems.init(ctx, version = rtems_version, long_commands = True)
 
 def options(opt):
     rtems.options(opt)

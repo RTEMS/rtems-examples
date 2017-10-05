@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include <bsp.h>
+#include <rtems/bspIo.h>
 
 rtems_task Test_task(
   rtems_task_argument task_index
@@ -34,8 +35,8 @@ rtems_task Test_task(
   }
 }
 
-rtems_task Init(
-  rtems_task_argument argument
+void Init(
+  uintptr_t argument
 )
 {
   rtems_status_code status;

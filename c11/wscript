@@ -1,0 +1,13 @@
+# Copyright 2013 Gedare Bloom (gedare@rtems.org)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    if rtems.check_posix(bld):
+        bld.recurse('c11_thread01 ')
+        bld.recurse('c11_mutex01 ')
+        bld.recurse('c11_cndvar01 ')
+        bld.recurse('c11_key01 ')

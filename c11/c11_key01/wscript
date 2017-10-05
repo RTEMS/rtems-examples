@@ -1,0 +1,14 @@
+# Copyright 2017 Joel Sherrill (joel.sherrill@oarcorp.com)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+# Waf build script for an RTEMS Hello
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    rtems.build(bld)
+
+    bld(features = 'c cprogram',
+        target = 'c11_key01.exe',
+        source = ['rtems_config.c', 'test.c'])

@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 
 #include "LocalMessageQueuePOSIX10031c.h"
 namespace OSWrapper {

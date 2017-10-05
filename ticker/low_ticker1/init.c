@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include <bsp.h>
+#include <rtems/bspIo.h>
 
 rtems_task Test_task(
   rtems_task_argument task_index

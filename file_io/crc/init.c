@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "FilesystemImage.h"
+#include "fs-root-tar.h"
 #include <rtems/untar.h>
 
 /* sha-specific includes */
@@ -35,7 +35,7 @@ rtems_task Init(
   puts( "\n\n*** untar/imfs/crc example ***" );
 
   printf("Unpacking tar filesystem\nThis may take awhile...\n");
-  if(Untar_FromMemory((char*) FilesystemImage, FilesystemImage_size) != 0) {
+  if(Untar_FromMemory((char*) fs_root_tar, fs_root_tar_size) != 0) {
     printf("Can't unpack tar filesystem\n");
     exit(1);
   }

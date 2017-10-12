@@ -35,7 +35,7 @@ rtems_task Test_task(
   }
 }
 
-void Init(
+void *Init(
   uintptr_t argument
 )
 {

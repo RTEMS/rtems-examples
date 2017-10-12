@@ -10,8 +10,8 @@
 
 #include <bsp.h>
 
-rtems_task Init(
-  rtems_task_argument ignored
+void *Init(
+  uintptr_t ignored
 )
 {
   /* initialize application */

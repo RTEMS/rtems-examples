@@ -35,8 +35,8 @@ rtems_task Test_task(
   }
 }
 
-rtems_task Init(
-  rtems_task_argument argument
+static void *Init(
+  uintptr_t ignored
 )
 {
   rtems_status_code status;

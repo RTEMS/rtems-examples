@@ -17,7 +17,7 @@
 # to build for more than BSP at a time.
 #
 
-rtems_version = "4.12"
+rtems_version = "5"
 try:
     import rtems_waf.rtems as rtems
 except:

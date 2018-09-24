@@ -19,12 +19,14 @@ void initialize_subsystem_once(void)
 {
   printf("*** Subsystem initialization should only happen once\n");
 }
+
 void initialize_subsystem(void)
 {
-  static once_flag initialize_subsystem_only_once= ONCE_FLAG_INIT;
+  static once_flag initialize_subsystem_only_once = ONCE_FLAG_INIT;
 
   call_once(&initialize_subsystem_only_once, initialize_subsystem_once);
 }
+
 int Thread1_Body(void *arg)
 {
   thrd_t *t = (thrd_t *) arg;
@@ -42,7 +44,7 @@ int Thread1_Body(void *arg)
   puts("Thread1 - join Thread2" );
   rc = thrd_join(thread2, &result);
   assert(rc == thrd_success);
-  printf("Thread1 - thread1 exited with %d\n", result);
+  printf("Thread1 - thread2 exited with %d\n", result);
 
   puts("Thread1 - exit" );
   thrd_exit(0);
@@ -94,7 +96,7 @@ int main(int argc, char **argv)
   rc = thrd_equal(thread1, thread1);
   assert(rc != 0);
 
-  puts("main - sleep and let Thread2 run");
+  puts("main - sleep and let other threads run");
   rc = thrd_sleep(&delay, NULL);
   assert(rc == 0);
 

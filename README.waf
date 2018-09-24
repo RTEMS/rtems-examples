@@ -3,7 +3,7 @@ RTEMS Waf
 
 You can find the Waf project here:
 
- http://code.google.com/p/waf/
+ https://waf.io
 
 Simple instructions on How to set up Waf is here:
 
@@ -28,14 +28,14 @@ Steps
 
 5. Configure with your specific settings. In this case the path to the tools
    and RTEMS and provided on the command line and so do not need to be in your
-   path or environment [1] and we limit the build to 'sparc/sis' BSP:
+   path or environment [1] and we limit the build to 'sparc/erc32' BSP:
 
     $ waf configure --rtems=$HOME/Development/rtems/build/4.11 \
                     --rtems-tools=$HOME/Development/rtems/4.11 \
-                    --rtems-bsps=sparc/sis
+                    --rtems-bsps=sparc/erc32
 
    You can use '--rtems-archs=sparc,i386' or
-   '--rtems-bsps=sparc/sis,i386/pc586' to build for more than BSP at a time.
+   '--rtems-bsps=sparc/erc32,i386/pc586' to build for more than BSP at a time.
 
 6. Build:
 

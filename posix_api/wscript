@@ -10,5 +10,10 @@ def build(bld):
         bld.recurse('psx_example_1')
         bld.recurse('psx_example_2')
         bld.recurse('psx_example_3')
+        bld.recurse('psx_barrier_report')
+        bld.recurse('psx_condvar_report')
+        bld.recurse('psx_mqueue_report')
+        bld.recurse('psx_mutex_report')
+        bld.recurse('psx_pthread_report')
+        bld.recurse('psx_rwlock_report')
         bld.recurse('psx_sched_report')
-

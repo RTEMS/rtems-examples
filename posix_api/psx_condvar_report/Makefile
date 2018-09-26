@@ -2,10 +2,10 @@
 #  RTEMS_MAKEFILE_PATH is typically set in an environment variable
 #
 
-PGM=${ARCH}/psx_sched_report.exe
+PGM=${ARCH}/psx_condvar_report.exe
 
 # C source names
-CSRCS = psx_sched_report.c rtems_config.c
+CSRCS = condvar_attr_report.c rtems_config.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc

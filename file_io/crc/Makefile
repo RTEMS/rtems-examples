@@ -8,11 +8,11 @@ PGM=${ARCH}/crc.exe
 MANAGERS=all
 
 # C source names
-CSRCS = crc_32.c init.c FilesystemImage.c
+CSRCS = crc_32.c init.c fs-root-tar.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)
 
 CLEAN_ADDITIONS += stamp-fs-image
-CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
+CLEAN_ADDITIONS += fs-root-tar fs-root-tar.c fs-root-tar.h
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
@@ -24,15 +24,15 @@ all:    ${ARCH} $(OBJS) $(PGM)
 
 $(ARCH)/init.o: init.c stamp-fs-image
 
-$(ARCH)/FilesystemImage.o: stamp-fs-image FilesystemImage.c FilesystemImage.h
+$(ARCH)/fs-root-tar.o: stamp-fs-image fs-root-tar.c fs-root-tar.h
 
-FilesystemImage: $(ARCH) rootfs/image.img
+fs-root-tar: $(ARCH) rootfs/image.img
 	cd rootfs ; \
-	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
+	    tar cf ../fs-root-tar --exclude CVS --exclude .cvsignore .
 
-stamp-fs-image: $(ARCH) FilesystemImage
-	$(PROJECT_ROOT)/bin/rtems-bin2c FilesystemImage FilesystemImage
-	ls -l Filesystem*
+stamp-fs-image: $(ARCH) fs-root-tar
+	rtems-bin2c fs-root-tar fs-root-tar
+	ls -l fs-root-tar*
 	touch stamp-fs-image
 
 $(PGM): $(OBJS)

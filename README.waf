@@ -13,10 +13,10 @@ Steps
 -----
 
 1. Build or install the tools. In this example the path is
-   $HOME/Development/rtems/4.11.
+   $HOME/Development/rtems/5.
 
 2. Build and install the RTEMS Board Support Packages you want to use. In this
-   example the path is $HOME/Development/rtems/build/4.11.
+   example the path is $HOME/Development/rtems/build/5.
 
 3. Unpack this package somewhere, anywhere on your disk and change into the top
    level directory.
@@ -28,10 +28,14 @@ Steps
 
 5. Configure with your specific settings. In this case the path to the tools
    and RTEMS and provided on the command line and so do not need to be in your
-   path or environment [1] and we limit the build to 'sparc/erc32' BSP:
+   path or environment [1] and we limit the build to a single BSP. The single
+   BSP should be the 'sparc/erc32' BSP since this is the easiest BSP to use
+   on a simulator. After you have successfully build the executables for this
+   BSP and run them on the simulator, you can repeat this exercise with the
+   BSP you are most interested in.
 
-    $ waf configure --rtems=$HOME/Development/rtems/build/4.11 \
-                    --rtems-tools=$HOME/Development/rtems/4.11 \
+    $ waf configure --rtems=$HOME/Development/rtems/build/5 \
+                    --rtems-tools=$HOME/Development/rtems/5 \
                     --rtems-bsps=sparc/erc32
 
    You can use '--rtems-archs=sparc,i386' or
@@ -43,8 +47,8 @@ Steps
 
 7. Run the executable using the simulator:
 
-    $ $HOME/Development/rtems/4.11/bin/sparc-rtems4.11-run \
-       ./build/sparc-rtems4.11-sis/hello
+    $ $HOME/Development/rtems/5/bin/sparc-rtems5-run \
+       ./build/sparc-rtems5-sis/hello
 
 [1] It is good practice to keep your environment as empty as possible. Setting
     paths to tools or specific values to configure or control builds is

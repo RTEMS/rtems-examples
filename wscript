@@ -3,19 +3,7 @@
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
-# Waf build script for RTEMS examples
-#
-# To configure, build and run do:
-#
-# $ waf configure --rtems=/Users/chris/Development/rtems/build/4.11 \
-#                 --rtems-tools=/Users/chris/Development/rtems/4.11 \
-#                 --rtems-bsps=sparc/sis
-# $ waf
-# $ /Users/chris/Development/rtems/4.11/bin/sparc-rtems4.11-run ./build/sparc-rtems4.11-sis/hello
-#
-# You can use '--rtems-archs=sparc,i386' or '--rtems-bsps=sparc/sis,i386/pc586'
-# to build for more than BSP at a time.
-#
+# See README.waf for building instructions.
 
 rtems_version = "5"
 try:

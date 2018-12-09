@@ -1,0 +1,13 @@
+# Copyright 2018 Marçal Comajoan Cara
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    rtems.build(bld)
+
+    bld(features = 'c cprogram',
+        target = 'pthread.exe',
+        source = ['init.c'])

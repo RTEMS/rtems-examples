@@ -1,0 +1,5 @@
+This is a simple example which illustrates how to use the
+pthreads adapted from the Lawrence Livermore POSIX Pthreads
+tutorial: ​https://computing.llnl.gov/tutorials/pthreads/.
+
+Thanks to Christopher Kerl for providing the code.

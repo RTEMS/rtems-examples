@@ -3,13 +3,16 @@
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
+from __future__ import print_function
+
 # See README.waf for building instructions.
 
 rtems_version = "5"
+
 try:
     import rtems_waf.rtems as rtems
 except:
-    print 'error: no rtems_waf git submodule; see README.waf'
+    print('error: no rtems_waf git submodule; see README.waf')
     import sys
     sys.exit(1)
 

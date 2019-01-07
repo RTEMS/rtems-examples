@@ -59,7 +59,7 @@ void *POSIX_Init(void *argument)
       pthread_join(threads[t],NULL);
    }
    /* Last thing that main() should do */
-   exit(NULL);
+   exit(0);
 }
 
 /* NOTICE: the clock driver is explicitly disabled */

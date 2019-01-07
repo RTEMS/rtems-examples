@@ -27,9 +27,8 @@
 rtems_ramdisk_config rtems_ramdisk_configuration[] =
 {
   {
-    block_size: 256,
-    block_num:  1024,
-    location:   NULL
+    .block_size = 512,
+    .block_num = 1024
   }
 };
 
@@ -37,42 +36,6 @@ rtems_ramdisk_config rtems_ramdisk_configuration[] =
  * The number of RAM Disk configurations.
  */
 size_t rtems_ramdisk_configuration_size = 1;
-
-/**
- * Create the RAM Disk Driver entry.
- */
-rtems_driver_address_table rtems_ramdisk_io_ops = {
-  initialization_entry: ramdisk_initialize,
-  open_entry:           rtems_blkdev_generic_open,
-  close_entry:          rtems_blkdev_generic_close,
-  read_entry:           rtems_blkdev_generic_read,
-  write_entry:          rtems_blkdev_generic_write,
-  control_entry:        rtems_blkdev_generic_ioctl
-};
-
-#define RTEMS_DRIVER_AUTO_MAJOR (0)
-
-int setup_ramdisk (const char* mntpath)
-{
-  rtems_device_major_number major;
-  rtems_status_code         sc;
-
-  /*
-   * Register the RAM Disk driver.
-   */
-  printf ("Register RAM Disk Driver: ");
-  sc = rtems_io_register_driver (RTEMS_DRIVER_AUTO_MAJOR,
-                                 &rtems_ramdisk_io_ops,
-                                 &major);
-  if (sc != RTEMS_SUCCESSFUL) {
-    printf ("error: ramdisk driver not initialised: %s\n",
-            rtems_status_text (sc));
-    return 1;
-  }
-
-  printf ("successful\n");
-  return 0;
-}
 
 /**
  * Run the /shell-init script.
@@ -116,10 +79,6 @@ rtems_task Init(
     exit(1);
   }
 
-  ret = setup_ramdisk ("/mnt/ramdisk");
-  if (ret)
-    exit (ret);
-
   shell_init_script();
   shell_start();
 
@@ -142,12 +101,12 @@ rtems_task Init(
 /* drivers */
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
+#define CONFIGURE_APPLICATION_EXTRA_DRIVERS RAMDISK_DRIVER_TABLE_ENTRY
 
 /* filesystem */
-#define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
+#define CONFIGURE_FILESYSTEM_DOSFS
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS   40
 #define CONFIGURE_IMFS_MEMFILE_BYTES_PER_BLOCK    512
-#define CONFIGURE_MAXIMUM_DRIVERS                  10
 
 #define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
 #define CONFIGURE_SWAPOUT_TASK_PRIORITY            10

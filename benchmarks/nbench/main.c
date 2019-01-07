@@ -42,8 +42,6 @@
 
 #define CONFIGURE_SHELL_COMMANDS_INI
 
-#define CONFIGURE_NUMBER_OF_TERMIOS_PORTS 0
-
 #include <rtems/shell.h>
 
 int nbench_main(int argc, char **argv);

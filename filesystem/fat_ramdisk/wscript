@@ -26,9 +26,9 @@ def build(bld):
     #
     # Package the root file system as a C file.
     #
-    rootfs.build(bld,
-                 name = 'fs-root',
-                 root = 'rootfs')
+    rootfs.build_from_src_root(bld,
+                               name = 'fs-root',
+                               root = 'rootfs')
 
     bld(features = 'c cprogram',
         target = 'fat_ramdisk.exe',

@@ -1,0 +1,6 @@
+This folder contains a sample graphics app using littleVGL library and libbsd
+The generated exe file can be directly run using a JTAG debugger on a target
+with the right device tree or this can be converted into an image.
+
+For instructions on how to build the image or how to run the exe, please refer
+to the BSP documentation in https://docs.rtems.org

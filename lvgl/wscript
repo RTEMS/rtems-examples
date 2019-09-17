@@ -1,0 +1,13 @@
+# Copyright 2019 Vijay Kumar Banerjee (vijaykumar9597@gmail.com)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+import rtems_waf.rtems as rtems
+import rtems_waf.rtems_bsd as rtems_bsd
+
+def configure(conf):
+    conf.recurse('hello')
+
+def build(bld):
+    bld.recurse('hello')

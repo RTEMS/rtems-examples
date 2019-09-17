@@ -15,4 +15,4 @@ posix_api    - POSIX API examples (no led)
 schedsim     - RTEMS Scheduler Simulator examples
 ticker       - Ticker Variations
 uboot        - U-Boot interaction examples
-
+lvgl_hello   - LittleVGL graphics app example using libbsd framebuffer driver

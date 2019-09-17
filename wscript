@@ -11,6 +11,7 @@ rtems_version = "5"
 
 try:
     import rtems_waf.rtems as rtems
+    import rtems_waf.rtems_bsd as rtems_bsd
 except:
     print('error: no rtems_waf git submodule; see README.waf')
     import sys
@@ -19,11 +20,16 @@ except:
 def init(ctx):
     rtems.init(ctx, version = rtems_version, long_commands = True)
 
+def bsp_configure(conf, arch_bsp):
+    rtems_bsd.bsp_configure(conf, arch_bsp, mandatory = False)
+    conf.recurse('lvgl')
+
 def options(opt):
     rtems.options(opt)
+    rtems_bsd.options(opt)
 
 def configure(conf):
-    rtems.configure(conf)
+    rtems.configure(conf, bsp_configure = bsp_configure)
 
 def build(bld):
     rtems.build(bld)
@@ -42,6 +48,7 @@ def build(bld):
     bld.recurse('posix_api')
     bld.recurse('cxx')
     bld.recurse('c11')
+    bld.recurse('lvgl')
 
 def rebuild(ctx):
     import waflib.Options

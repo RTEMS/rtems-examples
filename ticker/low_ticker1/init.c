@@ -84,6 +84,14 @@ static void *Init(
   #define CONFIGURE_MINIMUM_TASK_STACK_SIZE 512
 #endif
 
+/*
+ * This parameter was eliminated after 4.11.
+ */
+#if (__RTEMS_MAJOR__ < 5)
+#define CONFIGURE_TERMIOS_DISABLED
+#endif
+
+
 #define CONFIGURE_MAXIMUM_PRIORITY 15
 #define CONFIGURE_DISABLE_CLASSIC_API_NOTEPADS
 #define CONFIGURE_IDLE_TASK_BODY Init

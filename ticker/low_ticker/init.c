@@ -84,6 +84,13 @@ static void *Init(
 
 #define CONFIGURE_MAXIMUM_TASKS             3
 
+/*
+ * This parameter was eliminated after 4.11.
+ */
+#if (__RTEMS_MAJOR__ < 5)
+#define CONFIGURE_TERMIOS_DISABLED
+#endif
+
 #include <rtems/confdefs.h>
 
 /****************  END OF CONFIGURATION INFORMATION  ****************/

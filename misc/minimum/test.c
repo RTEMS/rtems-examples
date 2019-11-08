@@ -90,6 +90,17 @@ void *Init(
 #define CONFIGURE_IDLE_TASK_INITIALIZES_APPLICATION
 
 /*
+ * This parameter was eliminated after 4.11.
+ *
+ * In 4.11 and earlier, it eliminated termios from being included
+ * at all from a program.
+ */
+#if (__RTEMS_MAJOR__ < 5)
+#define CONFIGURE_TERMIOS_DISABLED
+#endif
+
+
+/*
  *  If you are debugging confdefs.h, define this
  */
 /* #define CONFIGURE_CONFDEFS_DEBUG */

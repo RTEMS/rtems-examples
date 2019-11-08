@@ -17,4 +17,5 @@ def build(bld):
         bld.recurse('psx_pthread_report')
         bld.recurse('psx_rwlock_report')
         bld.recurse('psx_sched_report')
+        bld.recurse('psx_sigint')
         bld.recurse('livermore')

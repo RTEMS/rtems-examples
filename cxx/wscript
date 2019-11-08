@@ -10,4 +10,5 @@ def build(bld):
     if bld.env['CXX'] is not None:
         bld.recurse('libcpp')
         bld.recurse('cxx_throw')
+        bld.recurse('cxx_stdmap')
 

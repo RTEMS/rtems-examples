@@ -45,7 +45,7 @@ void *Init(
 /*
  *  This test does not use any stdio.
  */
-#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 0
+#define CONFIGURE_MAXIMUM_FILE_DESCRIPTORS 0
 
 /*
  *  This may prevent us from running on every architecture but it

@@ -241,7 +241,7 @@ void *POSIX_Init( void *argument )
 
 #if 1
 /* We need to be able to create sockets */
-#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
+#define CONFIGURE_MAXIMUM_FILE_DESCRIPTORS	20
 
 /* We need the full IMFS to pass the full ACATS */
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM

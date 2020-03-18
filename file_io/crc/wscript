@@ -26,14 +26,15 @@ def build(bld):
     #
     # Package the root file system as a C file.
     #
-    rootfs.build_from_src_root(bld,
-                               name = 'fs-root',
-                               root = 'rootfs')
+    if rtems.check_env(bld, 'RTEMS_BIN2C'):
+        rootfs.build_from_src_root(bld,
+                                   name = 'fs-root',
+                                   root = 'rootfs')
 
-    bld(features = 'c cprogram',
-        target = 'crc.exe',
-        includes = bld.includes,
-        defines = bld.defines,
-        source = ['init.c',
-                  'fs-root-tar.c',
-                  'crc_32.c'])
+        bld(features = 'c cprogram',
+            target = 'crc.exe',
+            includes = bld.includes,
+            defines = bld.defines,
+            source = ['init.c',
+                      'fs-root-tar.c',
+                      'crc_32.c'])

@@ -26,17 +26,17 @@ def build(bld):
     #
     # Package the root file system as a C file.
     #
-    rootfs.build_from_src_root(bld,
-                               name = 'fs-root',
-                               root = 'rootfs')
+    if rtems.check_env(bld, 'RTEMS_BIN2C', 'RTEMS_TLD'):
+        rootfs.build_from_src_root(bld,
+                                   name = 'fs-root',
+                                   root = 'rootfs')
 
-    bld(features = 'c cprogram',
-        target = 'fat_ramdisk.exe',
-        includes = bld.includes,
-        defines = bld.defines,
-        source = ['init.c', 'fs-root-tar.c'])
+        bld(features = 'c cprogram',
+            target = 'fat_ramdisk.exe',
+            includes = bld.includes,
+            defines = bld.defines,
+            source = ['init.c', 'fs-root-tar.c'])
 
-    if rtems.check_env(bld, 'RTEMS_TLD'):
         bld(features = 'c rtrace',
             target = 'fat_ramdisk.texe',
             includes = bld.includes,

@@ -31,6 +31,8 @@ def build(bld):
                                    name = 'fs-root',
                                    root = 'rootfs')
 
+        bld.path.find_or_declare('fs-root-tar.h')
+
         bld(features = 'c cprogram',
             target = 'fat_ramdisk.exe',
             includes = bld.includes,

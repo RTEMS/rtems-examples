@@ -1,4 +1,4 @@
-# Copyright 2019 Vijay Kumar Banerjee (vijaykumar9597@gmail.com)
+# Copyright 2020 Vijay Kumar Banerjee (vijay@rtems.org)
 #
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
@@ -15,13 +15,14 @@ def build(bld):
         include_paths = ['',
                          'lvgl',
                          'lvgl/src',
-                         'lv_drivers/display',]
+                         'lv_drivers/display',
+                         'lv_drivers/indev',]
 
         for i in range(0,len(include_paths)):
             include_paths[i] = os.path.join(bld.env.PREFIX, arch_inc_path, include_paths[i])
 
         bld(features = 'c cprogram',
-            target = 'lvgl_hello.exe',
+            target = 'lvgl_gui.exe',
             source = ['test.c'],
             includes = include_paths,
             lib = ['m', 'lvgl', 'bsd'])

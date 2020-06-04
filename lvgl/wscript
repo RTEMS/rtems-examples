@@ -7,7 +7,10 @@ import rtems_waf.rtems as rtems
 import rtems_waf.rtems_bsd as rtems_bsd
 
 def configure(conf):
-    conf.recurse('hello')
+    rtems.check_lib_path(conf, lib = 'm')
+    rtems.check_lib_path(conf, lib = 'lvgl', mandatory = False)
+    rtems.check_lib_path(conf, lib = 'bsd', mandatory = False)
 
 def build(bld):
     bld.recurse('hello')
+    bld.recurse('gui')

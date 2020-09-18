@@ -24,7 +24,7 @@ rtems_task Init(
      "\n\n"
      "%s\n"
      "Here we go!\n",
-     _RTEMS_version
+     rtems_get_version_string()
    );
 
    fp = fopen("test", "w");

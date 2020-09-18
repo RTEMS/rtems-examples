@@ -24,7 +24,7 @@ void * print_hello(void * arg)
   return NULL;
 }
 
-int *POSIX_Init()
+void *POSIX_Init(void *arg)
 {
   pthread_t child;
   if ( pthread_create( &child, NULL, print_hello, NULL ))

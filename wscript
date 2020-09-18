@@ -7,7 +7,7 @@ from __future__ import print_function
 
 # See README.waf for building instructions.
 
-rtems_version = "5"
+rtems_version = "6"
 
 try:
     import rtems_waf.rtems as rtems

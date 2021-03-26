@@ -5,11 +5,19 @@
 
 import rtems_waf.rtems as rtems
 import rtems_waf.rtems_bsd as rtems_bsd
+import os
 
 def configure(conf):
+    arch_lib_path = rtems.arch_bsp_lib_path(conf.env.RTEMS_VERSION,
+                                            conf.env.RTEMS_ARCH_BSP)
+    arch_lib_path = os.path.join(conf.env.PREFIX, arch_lib_path)
     rtems.check_lib_path(conf, lib = 'm')
-    rtems.check_lib_path(conf, lib = 'lvgl', mandatory = False)
-    rtems.check_lib_path(conf, lib = 'bsd', mandatory = False)
+    rtems.check_lib_path(conf, lib = 'lvgl',
+                         libpath = [arch_lib_path],
+                         mandatory = False)
+    rtems.check_lib_path(conf, lib = 'bsd',
+                         libpath = [arch_lib_path],
+                         mandatory = False)
 
 def build(bld):
     bld.recurse('hello')

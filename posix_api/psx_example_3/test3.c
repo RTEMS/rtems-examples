@@ -1,21 +1,25 @@
 #include <sched.h>
-#include <bsp.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
 
-  pthread_mutex_t mutex;
-  pthread_cond_t cond;
-  struct timespec timeout;
-  struct sched_param param;
-  pthread_attr_t attr;
-  
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+
 void * print_hello(void * arg)
 {
+  struct timespec now;
+  struct timespec timeout;
+
   printf("<child>: Hello World! task with max priority \n");
-  clock_gettime( CLOCK_REALTIME, &timeout );
-  timeout.tv_sec += 3;
-  timeout.tv_nsec = 0;
+  clock_gettime( CLOCK_REALTIME, &now );
+
+  printf("\nnow tv_sec = %d, tv_nsec = %d\n", now.tv_sec, now.tv_nsec);
+
+  timeout.tv_sec  = now.tv_sec + 3;
+  timeout.tv_nsec = now.tv_nsec;
+
+  printf("timeout tv_sec = %d, tv_nsec = %d\n", timeout.tv_sec, timeout.tv_nsec);
   printf("The task is coming to enter in a timed wait\n");
   pthread_cond_timedwait(&cond, &mutex, &timeout);
   printf("The task is coming out from the timed wait \n");
@@ -29,10 +33,15 @@ void * print_hello_a(void * arg)
 }
 
 
-void *POSIX_Init()
+int main(int argc, char **argv)
 {
-  pthread_t child1;
-  pthread_t child2;
+  pthread_attr_t      attr;
+  pthread_t           child1;
+  pthread_t           child2;
+  struct sched_param  param;
+
+  (void) argc;
+  (void) argv;
 
   pthread_attr_init(&attr);
   pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
@@ -71,6 +80,15 @@ void *POSIX_Init()
 
   exit(0);
 }
+
+#if defined(__rtems__)
+#include <bsp.h>
+
+static void *POSIX_Init()
+{
+  return (void *)main(0, NULL);
+}
+
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 
@@ -79,6 +97,7 @@ void *POSIX_Init()
 
 #define CONFIGURE_INIT
 #include <rtems/confdefs.h>
+#endif
 
 
 

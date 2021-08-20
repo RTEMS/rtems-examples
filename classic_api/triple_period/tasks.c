@@ -6,13 +6,13 @@
  *  found in the file LICENSE in this distribution or at
  *  http://www.rtems.com/license/LICENSE.
  */
-/*  updated for triple test, 20003/11/06, Erik Adli */
+/*  updated for triple test, 2003/11/06, Erik Adli */
 
 #include "system.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-/* CPU usage and Rate monotonic manger statistics */
+/* CPU usage and Rate Monotonic manager statistics */
 #include "rtems/cpuuse.h"
 
 // Periods for the various tasks [seconds]
@@ -67,7 +67,8 @@ rtems_task Task_Absolute_Period(
     time.hour   = 9;
     time.minute = 0;
     time.second = count * PERIOD_TASK_ABSOLUTE;  // Every  N1 seconds
-    time.ticks  = 0;                // NB!! 'ticks' is don't care ( = does not work); rtems_task_wait_when has granularity of 1 second ( "taskwakewhen.c" nullifies time.ticks )
+    time.ticks  = 0;    // 'ticks' is don't care.  rtems_task_wake_when() has a
+                        // granularity of 1 second and zeroes time.ticks
 
     status = rtems_task_wake_when( &time );
 

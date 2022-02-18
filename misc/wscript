@@ -15,5 +15,6 @@ def build(bld):
     bld.recurse('nanosecond_tick_wrap')
     bld.recurse('qemu_vfat')
     bld.recurse('applib')
+    bld.recurse('userdrv')
     #if rtems.check_posix(bld):
     #    bld.recurse('adamain')

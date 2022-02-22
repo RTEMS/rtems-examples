@@ -16,22 +16,24 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  rtems_status_code status;
+  rtems_interval    one_second;
 
   puts( "\n\n*** LED BLINKER -- task wake after ***" );
+
+  one_second = 1 * rtems_clock_get_ticks_per_second();
 
   LED_INIT();
 
   while (1) {
 
-    (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
+    (void) rtems_task_wake_after( one_second );
     LED_OFF();
-    (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
+    (void) rtems_task_wake_after( one_second );
     LED_ON();
 
   }
 
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }
 
 /**************** START OF CONFIGURATION INFORMATION ****************/

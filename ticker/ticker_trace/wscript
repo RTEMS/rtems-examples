@@ -1,0 +1,26 @@
+# Copyright 2022 Joel Sherrill (joel@rtems.org)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+# Waf build script for an RTEMS Hello
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    rtems.build(bld)
+
+    bld(features = 'c cprogram',
+        target = 'ticker_trace.exe',
+        source = ['init.c'])
+
+    if rtems.check_env(bld, 'RTEMS_TLD'):
+        bld(features = 'c rtrace',
+            target = 'ticker_trace.texe',
+            source = ['init.c'],
+            rtrace_cfg = '../../ticker/ticker_trace/ticker.ini',
+            rtrace_wrapper = 'ticker-test')
+        bld(features = 'c rtrace',
+            target = 'ticker_trace-deep.texe',
+            source = ['init.c'],
+            rtrace_cfg = '../../ticker/ticker_trace/ticker-deep.ini',
+            rtrace_wrapper = 'ticker-deep')

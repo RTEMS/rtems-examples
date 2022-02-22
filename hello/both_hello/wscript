@@ -10,17 +10,17 @@ import rtems_waf.rtems as rtems
 def build(bld):
     rtems.build(bld)
 
-    if rtems.check_env(bld, 'RTEMS_TLD'):
-        bld(features = 'c rtrace',
-            target = 'both_hello.texe',
-            source = ['test.c'],
-            rtrace_cfg = '../../hello/both_hello/hello.ini',
-            rtrace_wrapper = 'hello-test')
-        bld(features = 'c rtrace',
-            target = 'hello-deep.texe',
-            source = ['test.c'],
-            rtrace_cfg = '../../hello/both_hello/hello-deep.ini',
-            rtrace_wrapper = 'hello-deep')
+#    if rtems.check_env(bld, 'RTEMS_TLD'):
+#        bld(features = 'c rtrace',
+#            target = 'both_hello.texe',
+#            source = ['test.c'],
+#            rtrace_cfg = '../../hello/both_hello/hello.ini',
+#            rtrace_wrapper = 'hello-test')
+#        bld(features = 'c rtrace',
+#            target = 'hello-deep.texe',
+#            source = ['test.c'],
+#            rtrace_cfg = '../../hello/both_hello/hello-deep.ini',
+#            rtrace_wrapper = 'hello-deep')
 
     bld(features = 'c cprogram',
         target = 'both_hello.exe',

@@ -16,6 +16,7 @@ static char *argv_list[] = {
   "report",
   ""
 };
+
 static void *POSIX_Init(void *arg)
 {
   (void) arg;  /* deliberately ignored */

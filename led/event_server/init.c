@@ -13,7 +13,11 @@
 
 #include "../led.h"
 
-rtems_task Test_task(
+/* Rename to something meaningful to the application */
+#define EVENT_LED_OFF RTEMS_EVENT_1
+#define EVENT_LED_ON  RTEMS_EVENT_2
+
+rtems_task LED_Server_Thread(
   rtems_task_argument unused
 )
 {
@@ -22,15 +26,15 @@ rtems_task Test_task(
   for ( ; ; ) {
     events = 0;
     (void) rtems_event_receive(
-      (RTEMS_EVENT_1 | RTEMS_EVENT_2),
+      (EVENT_LED_OFF | EVENT_LED_ON),
       RTEMS_EVENT_ANY,
       RTEMS_NO_TIMEOUT,
       &events
     );
 
-    if ( events == RTEMS_EVENT_1 ) {
+    if ( events == EVENT_LED_OFF ) {
       LED_OFF();
-    } else if ( events == RTEMS_EVENT_2 ) {
+    } else if ( events == EVENT_LED_ON ) {
       LED_ON();
     } else {
       fprintf( stderr, "Incorrect event set 0x%08" PRIx32 "\n", events );
@@ -59,11 +63,11 @@ rtems_task Init(
     RTEMS_DEFAULT_ATTRIBUTES, &task_id
   );
 
-  (void) rtems_task_start( task_id, Test_task, 1 );
+  (void) rtems_task_start( task_id, LED_Server_Thread, 1 );
 
   for (count=0; ; count++) {
 
-    events = ( (count % 2) == 0 ) ?  RTEMS_EVENT_1 : RTEMS_EVENT_2;
+    events = ( (count % 2) == 0 ) ?  EVENT_LED_OFF : EVENT_LED_ON;
     status = rtems_event_send( task_id, events );
     if ( status != RTEMS_SUCCESSFUL )
       fputs( "send did not work\n", stderr );

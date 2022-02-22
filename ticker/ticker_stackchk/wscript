@@ -3,12 +3,13 @@
 # This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
 #
 
+# Waf build script for an RTEMS Hello
 import rtems_waf.rtems as rtems
 
 def build(bld):
-    bld.recurse(['ticker',
-                 'ticker_stackchk',
-                 'low_ticker',
-                 'low_ticker1',
-                 'low_ticker2'])
+    rtems.build(bld)
+
+    bld(features = 'c cprogram',
+        target = 'ticker_stackchk.exe',
+        source = ['init.c'])
 

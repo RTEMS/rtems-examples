@@ -16,9 +16,12 @@ void *Init(
 {
   /* initialize application */
 
-  /* Real application would call idle loop functionality */
+  /* Real application must do at least this */
+  while (1) {
+    ;
+  }
 
-  /* but in this case, just return and fall into a fatal error */ 
+  return NULL;
 }
 
 /* configuration information */
@@ -65,7 +68,9 @@ void *Init(
  *  per Task Control Block.  If you aren't using these and are tight
  *  on RAM, this is an option.
  */
+#if (__RTEMS_MAJOR__ < 5)
 #define CONFIGURE_DISABLE_CLASSIC_API_NOTEPADS
+#endif
 
 /*
  *  This configures RTEMS to use a single memory pool for the RTEMS Workspace
@@ -86,7 +91,7 @@ void *Init(
  *  In this application, the initialization task performs the system
  *  initialization and then transforms itself into the idle task.
  */
-#define CONFIGURE_IDLE_TASK_BODY Init
+#define CONFIGURE_IDLE_TASK_BODY (Thread_Idle_body) Init
 #define CONFIGURE_IDLE_TASK_INITIALIZES_APPLICATION
 
 /*

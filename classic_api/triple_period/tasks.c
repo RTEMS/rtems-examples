@@ -20,8 +20,6 @@
 #define PERIOD_TASK_RATE_MONOTONIC     2
 #define PERIOD_TASK_RELATIVE           3
 
-
-
 // TASK 1
 //
 // * Absolute timing for task 1
@@ -33,7 +31,6 @@ rtems_task Task_Absolute_Period(
 )
 {
   rtems_time_of_day time;
-  rtems_status_code status;
   uint32_t          ticks_since_boot;
   uint32_t          count;
 
@@ -41,7 +38,7 @@ rtems_task Task_Absolute_Period(
   rtems_cpu_usage_reset();
 
   while( 1 ) {
-    status = rtems_clock_get_tod( &time );
+    (void) rtems_clock_get_tod( &time );
     count++;
 
     // sets end criteria for demo application (60 seconds)
@@ -70,7 +67,7 @@ rtems_task Task_Absolute_Period(
     time.ticks  = 0;    // 'ticks' is don't care.  rtems_task_wake_when() has a
                         // granularity of 1 second and zeroes time.ticks
 
-    status = rtems_task_wake_when( &time );
+    (void) rtems_task_wake_when( &time );
 
     // dump CPU usage every 5th period
     if( 0 == (count % 5) ) {
@@ -100,7 +97,7 @@ rtems_task Task_Rate_Monotonic_Period(
   count = 0;
 
   while( 1 ) {
-    status = rtems_clock_get_tod( &time );
+    (void) rtems_clock_get_tod( &time );
     count++;
 
     printf( "\n\nTask 2 - activating every %d second using rate monotonic manager to schedule (rtems_rate_monotonic_period)\n", PERIOD_TASK_RATE_MONOTONIC);
@@ -158,11 +155,10 @@ rtems_task Task_Relative_Period(
 )
 {
   rtems_time_of_day time;
-  rtems_status_code status;
   uint32_t          ticks_since_boot;
 
   while( 1 ) {
-    status = rtems_clock_get_tod( &time );
+    (void) rtems_clock_get_tod( &time );
 
     printf(
       "\n\nTask 3 - activating after every %d second using relative "
@@ -175,7 +171,7 @@ rtems_task Task_Relative_Period(
     printf(" - Ticks since boot: %" PRIu32 "\n", ticks_since_boot);
 
     // Every N3 seconds
-    status = rtems_task_wake_after(
+    (void) rtems_task_wake_after(
       rtems_clock_get_ticks_per_second() * PERIOD_TASK_RELATIVE
     );
   }

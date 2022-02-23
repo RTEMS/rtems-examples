@@ -23,7 +23,6 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  rtems_status_code status;
   rtems_time_of_day time;
   uint32_t ticks_per_second, ticks_since_boot;
 
@@ -44,32 +43,32 @@ rtems_task Init(
   time.second = 0;
   time.ticks  = 0;
 
-  status = rtems_clock_set( &time );
+  (void) rtems_clock_set( &time );
 
   Task_name[ 1 ] = rtems_build_name( 'T', 'A', '1', ' ' );
   Task_name[ 2 ] = rtems_build_name( 'T', 'A', '2', ' ' );
   Task_name[ 3 ] = rtems_build_name( 'T', 'A', '3', ' ' );
 
   // prototype: rtems_task_create( name, initial_priority, stack_size, initial_modes, attribute_set, *id );
-  status = rtems_task_create(
+  (void) rtems_task_create(
     Task_name[ 1 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
     RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 1 ]
   );
-  status = rtems_task_create(
+  (void) rtems_task_create(
     Task_name[ 2 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
     RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 2 ]
   );
-  status = rtems_task_create(
+  (void) rtems_task_create(
     Task_name[ 3 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
     RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 3 ]
   );
 
   // prototype: rtems_task_start( id, entry_point, argument );
-  status = rtems_task_start( Task_id[ 1 ], Task_Absolute_Period, 1 );
-  status = rtems_task_start( Task_id[ 2 ], Task_Rate_Monotonic_Period, 2 );
-  status = rtems_task_start( Task_id[ 3 ], Task_Relative_Period, 3 );
+  (void) rtems_task_start( Task_id[ 1 ], Task_Absolute_Period, 1 );
+  (void) rtems_task_start( Task_id[ 2 ], Task_Rate_Monotonic_Period, 2 );
+  (void) rtems_task_start( Task_id[ 3 ], Task_Relative_Period, 3 );
 
 
   // delete init task after starting the three working tasks
-  status = rtems_task_delete( RTEMS_SELF );
+  (void) rtems_task_delete( RTEMS_SELF );
 }

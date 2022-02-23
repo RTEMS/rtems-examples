@@ -33,9 +33,7 @@ rtems_timer_service_routine test_signal_from_isr(
   void     *arg
 )
 {
-  rtems_status_code     status;
-
-  status = rtems_signal_send( main_task, 0x0a0b0c0d );
+  (void) rtems_signal_send( main_task, 0x0a0b0c0d );
 
   signal_sent = TRUE;
 }

@@ -42,8 +42,8 @@ rtems_task Init(
     sec  = t1 / 1000000;
 
     printf(
-      "TEST:rtems=%u.%09u   t=%u.%03u.%03u   dt=%u\n",
-      uptime[i].tv_sec, uptime[i].tv_nsec, sec, msec, usec, (t1-t0)
+      "TEST:rtems=%lld.%09ld   t=%u.%03u.%03u   dt=%u\n",
+      (long long) uptime[i].tv_sec, uptime[i].tv_nsec, sec, msec, usec, (t1-t0)
     );
     t0 = t1;
   }

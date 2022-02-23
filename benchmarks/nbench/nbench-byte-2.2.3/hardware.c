@@ -28,11 +28,13 @@ static void output_string(const char *buffer, const int write_to_file,
 *******************
 ** Removes a trailing newline character if present
 */
+/*
 static void removeNewLine(char * s) {
   if(strlen(s)>0 && s[strlen(s)-1] == '\n') {
     s[strlen(s)-1] = '\0';
   }
 }
+*/
 
 
 /***************
@@ -180,7 +182,9 @@ void hardware(const int write_to_file, FILE *global_ofile) {
   char os[BUF_SIZ];
   char model[BUF_SIZ];
   char cache[BUF_SIZ];
+#ifndef NO_UNAME
   char os_command[] = "uname -s -r";
+#endif
 #ifdef NO_UNAME
   os[0] = '\0';
 #else

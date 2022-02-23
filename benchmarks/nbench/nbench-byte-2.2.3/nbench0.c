@@ -331,6 +331,7 @@ output_string("* Trademarks are property of their respective holder.\n");
 }
 
 //exit(0);
+return 0;
 }
 
 /**************

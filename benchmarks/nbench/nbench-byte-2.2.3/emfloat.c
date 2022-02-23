@@ -647,6 +647,7 @@ case NORMAL_NORMAL:
                 z->exp= locx.exp;
         }
         else
+        { 
                 if (exponent_difference > 0)
                 {
                         /*
@@ -715,11 +716,13 @@ case NORMAL_NORMAL:
                                 z->sign = 0; /* positive */
                         }
                         else
+                        {
                                 if (locx.type == IFPF_IS_NORMAL ||
                                          locy.type == IFPF_IS_NORMAL)
                                 {
                                         normalize(z);
                                 }
+                        }
                 }
                 else
                 {
@@ -742,8 +745,11 @@ case NORMAL_NORMAL:
                                 z->type = IFPF_IS_NORMAL;
                         }
                         else
+                        {
                                 if (z->mantissa[0] & 0x8000)
                                         z->type = IFPF_IS_NORMAL;
+                        }
+                }
         }
         break;
 

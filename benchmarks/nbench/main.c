@@ -68,7 +68,6 @@ rtems_task Init(rtems_task_argument arg)
 {
   rtems_status_code   sc;
   rtems_id            task_id_nbench;
-  char               *args[1] = {"./nbench"};
   rtems_interval      tickspersec;
 
   /*
@@ -90,7 +89,7 @@ rtems_task Init(rtems_task_argument arg)
 
   tickspersec = rtems_clock_get_ticks_per_second();
 
-  printf("clocks per sec: %ld\n", tickspersec);
+  printf("clocks per sec: %u\n", tickspersec);
   printf("Starting Shell\n");
 
   rtems_shell_main_loop(NULL);

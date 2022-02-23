@@ -15,5 +15,7 @@ ifeq ($(RTEMS_HAS_POSIX_API),yes)
   SUBDIRS += psx_rwlock_report
   SUBDIRS += psx_sched_report
   SUBDIRS += psx_sigint
+  SUBDIRS += psx_task_restart
+  SUBDIRS += psx_thread_restart
   SUBDIRS += livermore
 endif

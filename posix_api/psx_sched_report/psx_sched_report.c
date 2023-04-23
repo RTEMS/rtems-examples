@@ -25,7 +25,7 @@ void print_sched_info(
   printf( "Information on %s\n", s );
   min = sched_get_priority_min( policy );
   max = sched_get_priority_max( policy );
-  (void) sched_rr_get_interval( 1, &t );
+  (void) sched_rr_get_interval( getpid(), &t );
   levels = abs(max - min + 1);
   printf( "\tSupports %d priority levels (%d - %d)\n", levels, min, max  );
   if ( levels >= 32 )

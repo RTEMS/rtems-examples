@@ -5,9 +5,6 @@
 VPATH=.
 PGM=${ARCH}/umon.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = test.c ## monlib.c tfsDriver.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

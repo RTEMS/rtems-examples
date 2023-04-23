@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/ratemon1.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = init.c #task.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

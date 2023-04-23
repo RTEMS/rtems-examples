@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/nanoseconds_tick_wrap.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = init.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/complex1.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = periodic.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

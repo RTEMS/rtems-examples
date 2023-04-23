@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/posix_condvar.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = test.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

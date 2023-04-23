@@ -5,9 +5,6 @@
 EXEC=uboot_getenv.exe
 PGM=${ARCH}/$(EXEC)
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = test.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

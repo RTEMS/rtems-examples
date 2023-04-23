@@ -5,9 +5,6 @@
 VPATH=.:nbench-byte-2.2.3
 PGM=${ARCH}/nbench.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = main.c \
 emfloat.c \

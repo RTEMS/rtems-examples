@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/overwrite.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = overwrite.c rtems_init.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

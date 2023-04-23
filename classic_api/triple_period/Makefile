@@ -1,8 +1,5 @@
 PGM=${ARCH}/triple_period.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names, if any, go here -- minus the .c
 CSRCS = init.c tasks.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/crc.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = crc_32.c init.c fs-root-tar.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

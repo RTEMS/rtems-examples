@@ -9,9 +9,6 @@
 EXEC=cxx_throw.exe
 PGM=${ARCH}/$(EXEC)
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = 
 COBJS_ = $(CSRCS:.c=.o)

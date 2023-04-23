@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/fat_ramdisk.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = init.c FilesystemImage.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

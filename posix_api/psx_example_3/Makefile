@@ -8,9 +8,6 @@
 
 PGM=${ARCH}/psx_example_3.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = test3.c
 COBJS_ = $(CSRCS:.c=.o)

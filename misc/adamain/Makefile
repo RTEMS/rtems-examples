@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/adamain.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = adacode.c rtems_init.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

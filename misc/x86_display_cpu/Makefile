@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/display_cpu.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 SRCS = test.c
 OBJS = $(SRCS:%.[cS]=${ARCH}/%.o)

@@ -4,9 +4,6 @@
 
 PGM=${ARCH}/qemu_vfat.exe
 
-# optional managers required
-MANAGERS=all
-
 # C source names
 CSRCS = init.c start_test.c
 COBJS = $(CSRCS:%.c=${ARCH}/%.o)

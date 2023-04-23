@@ -6,5 +6,4 @@
 import rtems_waf.rtems as rtems
 
 def build(bld):
-    if rtems.check_posix(bld):
-        bld.recurse('pthread')
+    bld.recurse('pthread')

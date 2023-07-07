@@ -1,0 +1,15 @@
+# Copyright 2023 Joel Sherrill (joel@rtems.org)
+#
+# This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.
+#
+
+# Waf build script for an RTEMS Hello
+import rtems_waf.rtems as rtems
+
+def build(bld):
+    rtems.build(bld)
+    #if rtems.check_inc(bld, ['rtems/regulator.h']):
+    if bld.check(header_name='rtems/regulator.h', features='c', mandatory = False):
+        bld(features = 'c cprogram',
+            target = 'regulator_example.exe',
+            source = ['regulator_example.c','rtems_config.c'])

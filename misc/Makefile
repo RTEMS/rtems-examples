@@ -8,3 +8,9 @@ SUBDIRS=minimum bspcmdline extract_example nanosecond_tick_wrap userdrv
 ifeq ($(RTEMS_HAS_POSIX_API),yes)
 # SUBDIRS += adamain
 endif
+
+# If regulator.h is not present, do not build that example
+ifneq (,$(RTEMS_MAKEFILE_PATH).lib/include/rtems/regulator.h)
+  SUBDIRS += regulator
+endif
+

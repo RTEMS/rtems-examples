@@ -14,6 +14,7 @@ def build(bld):
     bld.recurse('bspcmdline')
     bld.recurse('nanosecond_tick_wrap')
     bld.recurse('qemu_vfat')
+    bld.recurse('regulator')
     bld.recurse('applib')
     bld.recurse('userdrv')
     #if rtems.check_posix(bld):

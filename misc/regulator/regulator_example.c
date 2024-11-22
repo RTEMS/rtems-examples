@@ -131,9 +131,9 @@ static void example_send_messages(void)
     .deliverer_context = NULL,
     .maximum_message_size = MAXIMUM_MESSAGE_LENGTH,
     .maximum_messages = 10,
-    .output_thread_priority = 16,
-    .output_thread_stack_size = 0,
-    .output_thread_period = RTEMS_MILLISECONDS_TO_TICKS(1000),
+    .delivery_thread_priority = 16,
+    .delivery_thread_stack_size = 0,
+    .delivery_thread_period = RTEMS_MILLISECONDS_TO_TICKS(1000),
     .maximum_to_dequeue_per_period = 3
   };
 

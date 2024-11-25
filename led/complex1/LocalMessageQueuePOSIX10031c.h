@@ -100,6 +100,7 @@ namespace OSWrapper {
           if ( inactiveM.empty() ) {
             m = new MessageClass();
           } else {
+            m = inactiveM.front();
             inactiveM.pop_front();
           }
         unlock();

@@ -14,12 +14,12 @@ void * print_hello(void * arg)
   printf("<child>: Hello World! task with max priority \n");
   clock_gettime( CLOCK_REALTIME, &now );
 
-  printf("\nnow tv_sec = %d, tv_nsec = %d\n", now.tv_sec, now.tv_nsec);
+  printf("\nnow tv_sec = %lld, tv_nsec = %ld\n", now.tv_sec, now.tv_nsec);
 
   timeout.tv_sec  = now.tv_sec + 3;
   timeout.tv_nsec = now.tv_nsec;
 
-  printf("timeout tv_sec = %d, tv_nsec = %d\n", timeout.tv_sec, timeout.tv_nsec);
+  printf("timeout tv_sec = %lld, tv_nsec = %ld\n", timeout.tv_sec, timeout.tv_nsec);
   printf("The task is coming to enter in a timed wait\n");
   pthread_cond_timedwait(&cond, &mutex, &timeout);
   printf("The task is coming out from the timed wait \n");

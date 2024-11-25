@@ -13,6 +13,7 @@
 #include <sched.h>
 /* FreeBSD 10 needs this for struct timespec which seems wrong */
 #include <time.h>
+#include <unistd.h>
 
 void print_sched_info(
   char *s,

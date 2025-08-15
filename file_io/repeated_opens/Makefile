@@ -6,7 +6,7 @@
 #  RTEMS_MAKEFILE_PATH is typically set in an environment variable
 #
 
-EXEC=test.exe
+EXEC=repeated_opens.exe
 PGM=${ARCH}/$(EXEC)
 
 # C source names

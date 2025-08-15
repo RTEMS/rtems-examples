@@ -2,7 +2,7 @@
 #  RTEMS_MAKEFILE_PATH is typically set in an environment variable
 #
 
-PGM=${ARCH}/ticker.exe
+PGM=${ARCH}/ticker_trace.exe
 
 # C source names
 CSRCS = init.c

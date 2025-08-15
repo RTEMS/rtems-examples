@@ -4,5 +4,5 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'test.exe',
+        target = 'repeated_opens.exe',
         source = ['test.c'])

@@ -69,8 +69,6 @@ rtems_task Init(
   rtems_task_argument ignored
 )
 {
-  int ret;
-
   puts( "\n\n*** ramdisk/fat example ***" );
 
   printf("Unpacking tar filesystem\nThis may take awhile...\n");

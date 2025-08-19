@@ -221,8 +221,13 @@ static ulong DoAssignIteration(farlong *arraybase,
 static void LoadAssignArrayWithRand(farlong *arraybase,
 		ulong numarrays);
 static void LoadAssign(farlong arraybase[][ASSIGNCOLS]);
+#ifdef __rtems__
+static void CopyToAssign(farlong arrayfrom[ASSIGNROWS][ASSIGNCOLS],
+		long arrayto[ASSIGNROWS][ASSIGNCOLS]);
+#else
 static void CopyToAssign(farlong arrayfrom[][ASSIGNCOLS],
 		long arrayto[][ASSIGNCOLS]);
+#endif
 static void Assignment(farlong arraybase[][ASSIGNCOLS]);
 static void calc_minimum_costs(long tableau[][ASSIGNCOLS]);
 static int first_assignments(long tableau[][ASSIGNCOLS],

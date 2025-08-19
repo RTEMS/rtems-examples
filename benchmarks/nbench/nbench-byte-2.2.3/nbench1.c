@@ -2487,7 +2487,11 @@ return(low16(1-t1));
 *****************
 ** Compute IDEA encryption subkeys Z
 */
+#ifdef __rtems__
+static void en_key_idea(u16 userkey[8], IDEAkey Z)
+#else
 static void en_key_idea(u16 *userkey, u16 *Z)
+#endif
 {
 int i,j;
 

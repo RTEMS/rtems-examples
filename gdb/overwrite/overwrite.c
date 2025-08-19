@@ -7,6 +7,13 @@
 #include <stdint.h>
 #include <string.h>
 
+/*
+ * The entire point of this example is to write past the end of the
+ * array bounds.
+ */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
+
 typedef struct {
   uint32_t    TooShortArray[8];
   uint32_t    RandomVariable;

@@ -17,7 +17,7 @@ static mtx_t    buffer_mutex;
 static cnd_t    buffer_cnd;
 static int      buffer_value;
 
-static int buffer_init(void)
+static void buffer_init(void)
 {
   int     rc;
 
@@ -94,7 +94,6 @@ static void buffer_put(int value)
 
 int Thread1_Body(void *arg)
 {
-  int     rc;
   int     value;
 
   (void) arg;

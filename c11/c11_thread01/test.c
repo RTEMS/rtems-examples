@@ -35,7 +35,7 @@ int Thread1_Body(void *arg)
 
   initialize_subsystem();
 
-  printf("Thread1(0x%08lx)\n", *t);
+  printf("Thread1(0x%08lx)\n", (unsigned long) *t);
   assert(thrd_current() == thread1);
 
   puts("Thread1 - yield" );
@@ -57,7 +57,7 @@ int Thread2_Body(void *arg)
 
   initialize_subsystem();
 
-  printf("Thread2(0x%08lx)\n", *t);
+  printf("Thread2(0x%08lx)\n", (unsigned long) *t);
   assert(thrd_current() == thread2);
 
   puts("Thread2 - exit" );

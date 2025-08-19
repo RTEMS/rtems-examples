@@ -42,7 +42,7 @@ int Thread1_Body(void *arg)
   int         rc;
   tss_data_t *td;
 
-  printf("Thread1(0x%08lx)\n", *t);
+  printf("Thread1(0x%08lx)\n", (unsigned long) *t);
   assert(thrd_current() == thread1);
 
   puts("Thread1 - Assign TSS value for self");
@@ -66,7 +66,7 @@ int Thread2_Body(void *arg)
   int         rc;
   tss_data_t *td;
 
-  printf("Thread2(0x%08lx)\n", *t);
+  printf("Thread2(0x%08lx)\n", (unsigned long) *t);
   assert(thrd_current() == thread2);
 
   puts("Thread2 - Assign TSS value for self");

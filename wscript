@@ -33,7 +33,7 @@ def configure(conf):
 
 def build(bld):
     rtems.build(bld)
-    bld.env.CFLAGS += ['-O2','-g']
+    bld.env.CFLAGS += ['-O2','-g','-Wall']
     bld.recurse('hello')
     bld.recurse('gdb')
     bld.recurse('filesystem/fat_ramdisk')

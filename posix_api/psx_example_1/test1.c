@@ -11,8 +11,10 @@ void * print_hello(void * arg)
   return NULL;
 }
 
-void *POSIX_Init()
+void *POSIX_Init(void *arg)
 {
+  (void) arg;
+
   pthread_t child1;
   pthread_t child2;
   int status;

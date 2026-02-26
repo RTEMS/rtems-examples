@@ -14,12 +14,14 @@ void * print_hello(void * arg)
   printf("<child>: Hello World! task with max priority \n");
   clock_gettime( CLOCK_REALTIME, &now );
 
-  printf("\nnow tv_sec = %lld, tv_nsec = %ld\n", now.tv_sec, now.tv_nsec);
+  printf("\nnow tv_sec = %lld, tv_nsec = %ld\n",
+    (long long) now.tv_sec, now.tv_nsec);
 
   timeout.tv_sec  = now.tv_sec + 3;
   timeout.tv_nsec = now.tv_nsec;
 
-  printf("timeout tv_sec = %lld, tv_nsec = %ld\n", timeout.tv_sec, timeout.tv_nsec);
+  printf("timeout tv_sec = %lld, tv_nsec = %ld\n",
+    (long long) timeout.tv_sec, timeout.tv_nsec);
   printf("The task is coming to enter in a timed wait\n");
   pthread_cond_timedwait(&cond, &mutex, &timeout);
   printf("The task is coming out from the timed wait \n");
@@ -84,9 +86,12 @@ int main(int argc, char **argv)
 #if defined(__rtems__)
 #include <bsp.h>
 
-static void *POSIX_Init()
+static void *POSIX_Init(void *arg)
 {
-  return (void *)main(0, NULL);
+  (void) arg;
+
+  (void) main(0, NULL);
+  return NULL;
 }
 
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER

@@ -7,6 +7,7 @@
  *  http://www.rtems.com/license/LICENSE.
  */
 
+#include <inttypes.h>
 #include <stdlib.h>
 
 #include <bsp.h>
@@ -28,7 +29,7 @@ rtems_task Test_task(
       printk( "*** END OF LOW MEMORY CLOCK TICK TEST (delay) ***\n" );
       rtems_shutdown_executive( 0 );
     }
-    printk( "TA%d - rtems_clock_uptime - %lld:%ld\n", 
+    printk( "TA%" PRIuPTR " - rtems_clock_uptime - %zd:%ld\n", 
       task_index, uptime.tv_sec, uptime.tv_nsec 
     );
   }

@@ -44,7 +44,6 @@ static void *POSIX_Init(void *arg)
   return NULL;
 }
 
-
 /* configuration information */
 
 #include <bsp.h>

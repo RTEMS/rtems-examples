@@ -375,7 +375,11 @@ static void do_out_error(int patt);
 static void worst_pass_error();
 static void do_mid_error();
 static void adjust_out_wts();
+#ifdef __rtems__
+static void adjust_mid_wts(int patt);
+#else
 static void adjust_mid_wts();
+#endif
 static void do_back_pass(int patt);
 static void move_wt_changes();
 static int check_out_error();

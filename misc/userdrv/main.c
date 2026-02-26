@@ -62,9 +62,9 @@ int main(
   const char string_to_write[] = "Application data to write with driver.";
   size_t     to_write = strlen(string_to_write);
 
-  printf( "\nwrite(%d, %s)\n", to_write, string_to_write );
+  printf( "\nwrite(%zd, %s)\n", to_write, string_to_write );
   bytes = write(drv, string_to_write, to_write); 
-  printf("  write() returned bytes written=%d\n", bytes);
+  printf("  write() returned bytes written=%zd\n", bytes);
   assert(bytes == to_write);
 
 // TBD write should be returning number written
@@ -73,10 +73,10 @@ int main(
   char   inbuf[80];
   size_t bufsize = 80;
 
-  printf( "\nread(%d)\n", bufsize);
+  printf( "\nread(%zd)\n", bufsize);
   bytes = read(drv, inbuf, bufsize);
-  printf("  read() returned bytes read=%d\n", bytes);
-  printf("  %d bytes: %s\n", bytes, inbuf);
+  printf("  read() returned bytes read=%zd\n", bytes);
+  printf("  %zd bytes: %s\n", bytes, inbuf);
 
 // TBD write should be returning number written
 

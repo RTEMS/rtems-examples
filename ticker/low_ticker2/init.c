@@ -29,8 +29,8 @@ rtems_task Test_task(
       printk( "*** END OF LOW MEMORY CLOCK TICK TEST (delay) ***\n" );
       rtems_shutdown_executive( 0 );
     }
-    printk( "TA%" PRIuPTR " - rtems_clock_uptime - %zd:%ld\n", 
-      task_index, uptime.tv_sec, uptime.tv_nsec 
+    printk( "TA%" PRIuPTR " - rtems_clock_uptime - %" PRId64 ":%ld\n", 
+      task_index,(int64_t)uptime.tv_sec, uptime.tv_nsec 
     );
   }
 }

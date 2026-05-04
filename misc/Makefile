@@ -5,13 +5,14 @@ include $(RTEMS_SHARE)/make/directory.cfg
 SUBDIRS=minimum bspcmdline extract_example nanosecond_tick_wrap \
   qemu_vfat userdrv
 
-# If the POSIX API isn't enabled, we can't build these
-ifeq ($(RTEMS_HAS_POSIX_API),yes)
+# This has a surrogate "ada_main" in C so GNAT isn't needed.
+#
+# Note: There is not a way to know if RTEMS Ada support is included
+#       so we do not build this by default.
 # SUBDIRS += adamain
-endif
 
 # If regulator.h is not present, do not build that example
-ifneq (,$(RTEMS_MAKEFILE_PATH).lib/include/rtems/regulator.h)
+ifneq (,$(RTEMS_MAKEFILE_PATH)/lib/include/rtems/regulator.h)
   SUBDIRS += regulator
 endif
 

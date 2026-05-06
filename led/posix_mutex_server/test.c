@@ -1,5 +1,5 @@
 /*
- *  Simple test program -- simplified version of sample test hello.
+ *  Simple test program -- LED Blinker Using Mutexes
  */
 
 #include <bsp.h>

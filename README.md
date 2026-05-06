@@ -47,7 +47,7 @@ Steps
   3. Unpack this package somewhere, anywhere on your disk and change into the top
      level directory.
 
-  4. Populate the git submodule:
+  4. Populate the waf git submodule:
 
      ```shell
      $ git submodule init

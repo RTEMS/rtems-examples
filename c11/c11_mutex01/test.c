@@ -26,7 +26,7 @@ int Thread1_Body(void *arg)
   rc = mtx_trylock(&mutex1);
   assert(rc == thrd_busy);
 
-  puts("Thread1 - mtx_timedlock(mutex1, 2 second) - thrd_timeout");
+  puts("Thread1 - mtx_timedlock(mutex1, 1 second) - thrd_timeout");
   delay.tv_sec = time(NULL) + 1;
   delay.tv_nsec = 0;
   rc = mtx_timedlock(&mutex1, &delay);

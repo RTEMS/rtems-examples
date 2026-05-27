@@ -7,6 +7,7 @@ import rtems_waf.rtems as rtems
 
 def build(bld):
     bld.recurse(['ticker',
+                 'ticker_posix',
                  'ticker_stackchk',
                  'ticker_trace',
                  'low_ticker',

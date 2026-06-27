@@ -38,6 +38,16 @@ rtems_task Test_task(
   }
 }
 
+/*
+ * On at least the SPARC, printf() implicitly uses floating point. This
+ * accounts for that usage.
+ */
+#if defined(sparc)
+#define DEFAULT_TASK_ATTRIBUTES RTEMS_FLOATING_POINT
+#else
+#define DEFAULT_TASK_ATTRIBUTES RTEMS_DEFAULT_ATTRIBUTES
+#endif
+
 rtems_task Init(
   rtems_task_argument argument
 )
@@ -62,15 +72,15 @@ rtems_task Init(
 
   (void) rtems_task_create(
     Task_name[ 1 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
-    RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 1 ]
+    DEFAULT_TASK_ATTRIBUTES, &Task_id[ 1 ]
   );
   (void) rtems_task_create(
     Task_name[ 2 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
-    RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 2 ]
+    DEFAULT_TASK_ATTRIBUTES, &Task_id[ 2 ]
   );
   (void) rtems_task_create(
     Task_name[ 3 ], 1, RTEMS_MINIMUM_STACK_SIZE * 2, RTEMS_DEFAULT_MODES,
-    RTEMS_DEFAULT_ATTRIBUTES, &Task_id[ 3 ]
+    DEFAULT_TASK_ATTRIBUTES, &Task_id[ 3 ]
   );
 
   (void) rtems_task_start( Task_id[ 1 ], Test_task, 1 );

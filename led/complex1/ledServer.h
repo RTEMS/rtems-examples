@@ -4,9 +4,11 @@
 #ifndef __LED_SERVER_h
 #define __LED_SERVER_h
 
+#define _GNU_SOURCE
 #include "MessageQueueT.h"
 
 #include <unistd.h>
+#include <pthread.h>
 #include <time.h>
 
 #include "../led.h"
@@ -108,13 +110,17 @@ namespace Examples {
     public:
       LEDServer()
       {
-        int status;
+        int rc;
 
         mQueue = new LEDQ_t( std::string("LEDQ"), (unsigned int) 10 );
-        status =
-          pthread_create( &mThread, NULL, LEDServerThread, (void *)this );
-        if ( status ) {
+        rc = pthread_create( &mThread, NULL, LEDServerThread, (void *)this );
+        if ( rc ) {
           std::cerr << "LEDServer: pthread_create failed "
+                    << rc << std::endl;
+        }
+        rc = ::pthread_setname_np( mThread, "LEDs" );
+        if ( rc ) {
+          std::cerr << "LEDServer: pthread_setname_np failed "
                     << status << std::endl;
         }
       }

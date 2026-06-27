@@ -24,14 +24,26 @@ rtems_task PeriodicThreads_Body(
 {
   /* int i; */
   int t = index + 1;
+  rtems_status_code s;
+  rtems_name name;
+  char buf[6];
 
   fprintf( stderr, "Periodic task %d starting\n", t );
+
+  sprintf( buf, "PE%02x", index );
+  name = rtems_build_name( buf[0], buf[1], buf[2], buf[3] );
+  s = rtems_rate_monotonic_create( name, &PeriodicThreads_Periods[index] );
+  if ( s ) {
+    fprintf( stderr, "PeriodicThreads -- period create failed\n" );
+    return;
+  }
+
   /* this doesn't seem to dirty the stack :( */
   factorial(t * 100);
   while (1) {
     rtems_rate_monotonic_period( PeriodicThreads_Periods[index], t * 2 );
     /* for (i=0 ; i<(100000 * t) ; i++ ) ;  */
-    rtems_task_wake_after( t * 2 );
+    rtems_task_wake_after( t );
   }
 }
 
@@ -56,18 +68,10 @@ void PeriodicThreads_Initialize(void)
   PeriodicThreads_running = FALSE;
 
   for( i=0 ; i<PeriodicThreads_Count ; i++ ) {
-    sprintf( buf, "PE%02x", i );
-    name = rtems_build_name( buf[0], buf[1], buf[2], buf[3] );
-    s = rtems_rate_monotonic_create( name, &PeriodicThreads_Periods[i] );
-    if ( s ) {
-      fprintf( stderr, "PeriodicThreads -- period create failed\n" );
-      return;
-    }
-
     sprintf( buf, "TA%02x", i );
     name = rtems_build_name( buf[0], buf[1], buf[2], buf[3] );
     s = rtems_task_create( name, 2, RTEMS_MINIMUM_STACK_SIZE * 4,
-       RTEMS_DEFAULT_MODES, RTEMS_DEFAULT_ATTRIBUTES, &PeriodicThreads_Ids[i] );
+       RTEMS_DEFAULT_MODES, RTEMS_FLOATING_POINT, &PeriodicThreads_Ids[i] );
     if ( s ) {
       fprintf( stderr, "PeriodicThreads -- task create failed\n" );
       return;

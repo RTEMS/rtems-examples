@@ -30,7 +30,7 @@ void * print_hello(void * arg)
 
 void * print_hello_a(void * arg)
 {
-  printf(" <child>: Hello World! Task with lowest priority ");
+  printf(" <child>: Hello World! Task with lowest priority\n");
   return NULL;
 }
 

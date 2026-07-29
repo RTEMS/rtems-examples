@@ -7,7 +7,7 @@ SUBDIRS=delay event_server msg_server sem_server ratemon1 ratemon2 \
 
 # These use POSIX
 SUBDIRS += posix_cond_server posix_delay_sleep posix_delay_nanosleep \
-  posix_mutex_server ratemon_cond_server
+  posix_message_server posix_mutex_server ratemon_cond_server
 
 # This test requires POSIX and C++
 ifneq ($(CXX_FOR_TARGET),)

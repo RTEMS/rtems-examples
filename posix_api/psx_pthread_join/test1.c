@@ -1,3 +1,10 @@
+/* SPDX-License-Identifier: BSD-2-Clause */
+
+/*
+ * This is an example of using pthread_join() to synchronize with an
+ * exiting POSIX thread.
+ */
+
 #include <sched.h>
 #include <bsp.h>
 #include <stdlib.h>

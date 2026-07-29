@@ -7,9 +7,9 @@ import rtems_waf.rtems as rtems
 
 def build(bld):
     if rtems.check_posix(bld):
-        bld.recurse('psx_example_1')
-        bld.recurse('psx_example_2')
-        bld.recurse('psx_example_3')
+        bld.recurse('psx_pthread_join')
+        bld.recurse('psx_pthread_join_condvar')
+        bld.recurse('psx_pthread_priority')
         bld.recurse('psx_barrier_report')
         bld.recurse('psx_condvar_report')
         bld.recurse('psx_mqueue_report')

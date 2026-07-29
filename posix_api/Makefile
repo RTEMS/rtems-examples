@@ -3,9 +3,9 @@ include $(RTEMS_CUSTOM)
 include $(RTEMS_SHARE)/make/directory.cfg
 
 # These use POSIX
-SUBDIRS  = psx_example_1
-SUBDIRS += psx_example_2
-SUBDIRS += psx_example_3
+SUBDIRS  = psx_pthread_join
+SUBDIRS += psx_pthread_join_condvar
+SUBDIRS += psx_pthread_priority
 SUBDIRS += psx_barrier_report
 SUBDIRS += psx_condvar_report
 SUBDIRS += psx_mqueue_report

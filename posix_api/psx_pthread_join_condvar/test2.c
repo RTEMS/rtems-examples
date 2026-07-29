@@ -1,3 +1,11 @@
+/* SPDX-License-Identifier: BSD-2-Clause */
+
+/*
+ * This is an example of using pthread_join() to synchronize with an
+ * exiting POSIX thread which waits for a condition variable to be
+ * signaled with a timeout of two seconds.
+ */
+
 #include <sys/time.h>
 #include <pthread.h>
 #include <stdlib.h>

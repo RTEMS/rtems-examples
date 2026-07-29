@@ -1,3 +1,11 @@
+/* SPDX-License-Identifier: BSD-2-Clause */
+
+/*
+ * This is an example of using setting pthread priority. There are two threads
+ * which will execute in priority order and then exit. The initialization
+ * thread joins with both before exiting.
+ */
+
 #include <sched.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,7 +19,7 @@ void * print_hello(void * arg)
   struct timespec now;
   struct timespec timeout;
 
-  printf("<child>: Hello World! task with max priority \n");
+  puts("<child>: Hello World! task with max priority");
   clock_gettime( CLOCK_REALTIME, &now );
 
   printf("\nnow tv_sec = %lld, tv_nsec = %ld\n",
@@ -22,18 +30,17 @@ void * print_hello(void * arg)
 
   printf("timeout tv_sec = %lld, tv_nsec = %ld\n",
     (long long) timeout.tv_sec, timeout.tv_nsec);
-  printf("The task is coming to enter in a timed wait\n");
+  puts("The task is coming to enter in a timed wait");
   pthread_cond_timedwait(&cond, &mutex, &timeout);
-  printf("The task is coming out from the timed wait \n");
+  puts("The task is coming out from the timed wait");
   return NULL;
 }
 
 void * print_hello_a(void * arg)
 {
-  printf(" <child>: Hello World! Task with lowest priority\n");
+  puts("<child>: Task with lowest priority");
   return NULL;
 }
-
 
 int main(int argc, char **argv)
 {
@@ -50,7 +57,7 @@ int main(int argc, char **argv)
   pthread_mutex_init( &mutex, NULL );
   pthread_cond_init( &cond, NULL );
 
-  printf("<main> Enter in the main \n");
+  printf("*** POSIX Set Thread Priority Example ***\n");
 
   printf("Creating first task \n");
   param.sched_priority = sched_get_priority_max(SCHED_FIFO);
@@ -58,28 +65,27 @@ int main(int argc, char **argv)
   if ( pthread_create( &child1, &attr, print_hello, NULL) || 
        pthread_setschedparam(child1, SCHED_FIFO, &param) ) {
     printf(
-      "Thread cannot be created or you have not enough privileges \n"
+      "Thread cannot be created or you do not have privileges\n"
       "    to set priority!!!!\n");
     exit(1);
   }
 
-  printf("First Task created \n");
-  printf("Creating second task \n");
+  puts("Creating second task");
   param.sched_priority = sched_get_priority_max(SCHED_FIFO) - 1;
   pthread_attr_setschedparam(&attr, &param);
   if ( pthread_create( &child2, &attr, print_hello_a, NULL) || 
        pthread_setschedparam(child2, SCHED_FIFO, &param) ) {
-    printf(
+    puts(
       "Thread cannot be created or you have not enough privileges \n"
-      "    to set priority!!!!\n");
+      "    to set priority!!!!");
     exit(1);
   }
-  printf("Second task created \n");
 
-  printf("<main> Out of the main\n");
+  puts("<main> Wait for threads to exit");
   pthread_join( child1, NULL );
   pthread_join( child2, NULL );
 
+  puts("*** END OF POSIX Thread Priority Exapmle ***");
   exit(0);
 }
 

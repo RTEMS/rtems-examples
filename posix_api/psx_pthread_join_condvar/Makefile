@@ -6,10 +6,10 @@
 #  RTEMS_MAKEFILE_PATH is typically set in an environment variable
 #
 
-PGM=${ARCH}/psx_example_1.exe
+PGM=${ARCH}/psx_pthread_join_condvar.exe
 
 # C source names
-CSRCS = test1.c
+CSRCS = test2.c
 COBJS_ = $(CSRCS:.c=.o)
 COBJS = $(COBJS_:%=${ARCH}/%)
 

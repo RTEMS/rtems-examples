@@ -29,7 +29,6 @@ void *Init(
 /*
  * This application has no device drivers.
  */
-/* NOTICE: the clock driver is explicitly disabled */
 #define CONFIGURE_APPLICATION_DOES_NOT_NEED_CLOCK_DRIVER
 
 /*

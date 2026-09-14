@@ -37,7 +37,6 @@ static void *POSIX_Init(void *arg)
 
 #include <bsp.h> /* for device driver prototypes */
 
-/* NOTICE: the clock driver is explicitly disabled */
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 

@@ -38,7 +38,6 @@ rtems_task test_regulator(rtems_task_argument);
 
 #include <bsp.h> /* for device driver prototypes */
 
-/* NOTICE: the clock driver is explicitly disabled */
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 

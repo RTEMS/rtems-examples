@@ -53,7 +53,7 @@
 struct mq_attr Attr = {
   .mq_flags = 0,
   .mq_maxmsg = 10,
-  .mq_msgsize = 4,
+  .mq_msgsize = sizeof(uint32_t),
   .mq_curmsgs = 0
 };
 
@@ -140,7 +140,7 @@ static void *POSIX_Init(
 
 #define CONFIGURE_MAXIMUM_POSIX_MESSAGE_QUEUES 1
 #define CONFIGURE_MESSAGE_BUFFER_MEMORY \
-           CONFIGURE_MESSAGE_BUFFERS_FOR_QUEUE(1, sizeof(uint32_t))
+           CONFIGURE_MESSAGE_BUFFERS_FOR_QUEUE(10, sizeof(uint32_t))
 
 #define CONFIGURE_POSIX_INIT_THREAD_TABLE
 #define CONFIGURE_MAXIMUM_POSIX_THREADS 20

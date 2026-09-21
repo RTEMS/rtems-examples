@@ -22,8 +22,6 @@ rtems_task Test_task(
 
   ticks = task_index * 5 * rtems_clock_get_ticks_per_second();
   for ( ; ; ) {
-    (void) rtems_task_wake_after( ticks );
-
     (void) rtems_clock_get_uptime( &uptime );
     if ( uptime.tv_sec >= 35 ) {
       printk( "*** END OF LOW MEMORY CLOCK TICK TEST (delay) ***\n" );
@@ -32,6 +30,8 @@ rtems_task Test_task(
     printk( "TA%" PRIuPTR " - rtems_clock_uptime - %" PRId64 ":%ld\n", 
       task_index,(int64_t)uptime.tv_sec, uptime.tv_nsec 
     );
+
+    (void) rtems_task_wake_after( ticks );
   }
 }
 

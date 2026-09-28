@@ -11,4 +11,4 @@ def build(bld):
 
     bld(features = 'c cprogram',
         target = 'ticker_posix.exe',
-        source = ['init.c', 'rtems_config.c'])
+        source = ['test.c', 'rtems_config.c'])

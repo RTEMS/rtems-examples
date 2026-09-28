@@ -26,7 +26,7 @@ static char *argv_list[] = {
 
 static void *POSIX_Init(void *arg)
 {
-  (void> arg;  /* deliberately ignored */
+  (void) arg;  /* deliberately ignored */
 
   int rc;
 
